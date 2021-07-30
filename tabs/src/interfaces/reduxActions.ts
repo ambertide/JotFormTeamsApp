@@ -3,7 +3,7 @@
  * it is significantly better to write every actions
  * as an interface.
  */
-import { User } from "../api/User";
+import { User } from "../api/JFApi";
 
 export interface authAction {
   type: "AUTH_SUCCESS" | "AUTH_FAIL";

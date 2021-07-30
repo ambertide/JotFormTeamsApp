@@ -1,4 +1,4 @@
-import { User } from "../../api/User";
+import { User } from "../../api/JFApi";
 import { authAction } from "../../interfaces/reduxActions";
 
 export default function authReducer(state = new User(false, ""), action: authAction) {

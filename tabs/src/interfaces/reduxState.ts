@@ -1,4 +1,4 @@
-import { User } from "../api/User";
+import { User } from "../api/JFApi";
 
 export default interface reduxState {
   auth: User;

@@ -10,6 +10,7 @@
     "dependencies": {
         "axios": "^0.21.1",
         "eslint": "^7.31.0",
+        "immutable": "^4.0.0-rc.14",
         "react-redux": "^7.2.4",
         "redux": "^4.1.0",
         "redux-saga": "^1.1.3"

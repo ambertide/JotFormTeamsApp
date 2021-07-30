@@ -14,7 +14,6 @@ import { useCallback } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import JFLogo from "./../../assets/images/jflogo.png";
-
 export default function Login() {
   const dispatch = useDispatch();
   const [username, setUsername] = useState("");

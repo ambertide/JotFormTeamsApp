@@ -10,14 +10,29 @@ export class User {
 }
 
 export async function login(username: string, password: string): Promise<User> {
-  const response = await axios({
-    method: "post",
-    url: "api.jotform.com/user",
-    data: {
-      username: username,
-      password: password,
+  window.JF.initialize({
+    accessType: "full",
+    appName: "JotForm Polls",
+  });
+  window.JF.login(
+    () => {
+      const apiKey = window.JF.getAPIKey();
+      console.log(apiKey);
+    },
+    () => {},
+    () => {},
+    true
+  );
+
+  /**
+  debugger;
+  axios({
+    method: "get",
+    url: "https://api.jotform.com/user/forms",
+    params: {
+      apikey: apiKey,
     },
   });
-  console.log(response);
-  return new User(true, response.data);
+  */
+  return new User(true, "");
 }

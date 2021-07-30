@@ -6,8 +6,8 @@
 import { User } from "../api/User";
 
 export interface authAction {
-  type: "AUTH_SUCCESS";
-  newUser: User;
+  type: "AUTH_SUCCESS" | "AUTH_FAIL";
+  newUser?: User;
 }
 
 export interface authRequestAction {

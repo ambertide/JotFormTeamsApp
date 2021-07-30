@@ -18,17 +18,11 @@ import Login from "./Login/Login";
  */
 export default function App() {
   const user = useSelector((state: reduxState) => state.auth);
-  const history = useHistory();
-  useEffect(() => {
-    if (user.isAuth) {
-      history.push("/login");
-    }
-  }, [user]);
   return (
     <Provider theme={teamsTheme} styles={{ backgroundColor: "#eeeeee" }}>
       <Router>
         <Route exact path="/">
-          <Redirect to="/tab" />
+          {user.isAuth ? <Redirect to="/tab" /> : <Redirect to="/login" />}
         </Route>
 
         <Switch>

@@ -10,29 +10,16 @@ export class User {
 }
 
 export async function login(username: string, password: string): Promise<User> {
-  window.JF.initialize({
-    accessType: "full",
-    appName: "JotForm Polls",
-  });
-  window.JF.login(
-    () => {
-      const apiKey = window.JF.getAPIKey();
-      console.log(apiKey);
-    },
-    () => {},
-    () => {},
-    true
-  );
-
-  /**
-  debugger;
-  axios({
-    method: "get",
-    url: "https://api.jotform.com/user/forms",
+  const response = await axios({
+    method: "post",
+    url: "https://api.jotform.com/user/login",
     params: {
-      apikey: apiKey,
+      username: username,
+      password: password,
+      appName: "JotForm Teams Integration",
+      access: "full",
     },
   });
-  */
-  return new User(true, "");
+  const userAPIKey = response.data.appKey;
+  return new User(true, userAPIKey);
 }

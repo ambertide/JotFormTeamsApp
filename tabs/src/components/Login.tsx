@@ -37,6 +37,7 @@ export default function Login(props: LoginProps) {
     <Segment
       styles={{
         maxWidth: "fit-content",
+        overflowX: "hidden",
       }}
     >
       <Flex vAlign="center">
@@ -84,11 +85,6 @@ export default function Login(props: LoginProps) {
               }}
             />
             <Text
-              styles={{
-                position: "absolute",
-                maxWidth: "390px",
-                marginTop: "180px",
-              }}
               align="end"
               content="Sign in to your JotForm account to create forms and share them on the fly during your meetings."
             />

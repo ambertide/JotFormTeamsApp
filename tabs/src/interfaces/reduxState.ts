@@ -1,9 +1,9 @@
 import { List } from "immutable";
 import { User } from "../api/JFApi";
-import JotFormTable from "./JotFormTable";
+import JotFormForm from "./JotFormForm";
 
 export default interface reduxState {
   auth: User;
-  forms: List<JotFormTable>;
+  forms: List<JotFormForm>;
   error: string;
 }

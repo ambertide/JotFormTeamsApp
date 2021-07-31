@@ -1,6 +1,6 @@
 import axios from "axios";
 import { List } from "immutable";
-import JotFormTable from "interfaces/JotFormTable";
+import JotFormForm from "interfaces/JotFormTable";
 export class User {
   isAuth: boolean;
   APIKey: string;
@@ -26,7 +26,7 @@ export async function login(username: string, password: string): Promise<User> {
   return new User(true, userAPIKey);
 }
 
-export async function getTables(appKey: string): Promise<List<JotFormTable>> {
+export async function getTables(appKey: string): Promise<List<JotFormForm>> {
   const response = await axios({
     method: "get",
     url: "https://api.jotform.com/user/forms",

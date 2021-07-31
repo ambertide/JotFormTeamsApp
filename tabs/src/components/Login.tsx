@@ -12,10 +12,20 @@ import {
 } from "@fluentui/react-northstar";
 import { useCallback } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import JFLogo from "./../../assets/images/jflogo.png";
-export default function Login() {
-  const dispatch = useDispatch();
+import JFLogo from "assets/images/jflogo.png";
+interface LoginProps {
+  /**
+   * Callback function that stores the passed credentials in a global state.
+   */
+  onSubmit: (username: string, password: string) => void;
+  /**
+   * When true, only the login fields are shown.
+   */
+  isLite?: boolean;
+}
+
+export default function Login(props: LoginProps) {
+  const { onSubmit, isLite } = props;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const handleUsername = useCallback((event: any) => setUsername(event.target.value || ""), []);
@@ -23,17 +33,13 @@ export default function Login() {
   return (
     <Segment
       styles={{
-        maxWidth: "700px",
+        maxWidth: "fit-content",
       }}
     >
       <Flex vAlign="center">
         <Flex column>
           <Header content="Sign In" />
-          <Form
-            onSubmit={() => {
-              dispatch({ type: "AUTH_REQUEST", username: username, password: password });
-            }}
-          >
+          <Form onSubmit={(event) => onSubmit(username, password)}>
             <FormInput
               onChange={handleUsername}
               label="JotForm Username"
@@ -57,30 +63,34 @@ export default function Login() {
             </Flex>
           </Form>
         </Flex>
-        <Divider
-          styles={{
-            height: "250px",
-            marginLeft: "30px",
-          }}
-          vertical
-        />
-        <Flex column vAlign="center">
-          <Image
-            src={JFLogo}
+        {!isLite ? (
+          <Divider
             styles={{
-              height: "100px",
+              height: "250px",
+              marginLeft: "30px",
             }}
+            vertical
           />
-          <Text
-            styles={{
-              position: "absolute",
-              maxWidth: "390px",
-              marginTop: "180px",
-            }}
-            align="end"
-            content="Sign in to your JotForm account to create forms and share them on the fly during your meetings."
-          />
-        </Flex>
+        ) : null}
+        {!isLite ? (
+          <Flex column vAlign="center">
+            <Image
+              src={JFLogo}
+              styles={{
+                height: "100px",
+              }}
+            />
+            <Text
+              styles={{
+                position: "absolute",
+                maxWidth: "390px",
+                marginTop: "180px",
+              }}
+              align="end"
+              content="Sign in to your JotForm account to create forms and share them on the fly during your meetings."
+            />
+          </Flex>
+        ) : null}
       </Flex>
     </Segment>
   );

@@ -5,6 +5,11 @@ import FormList from "components/FormList";
 export default {
   title: "FormList",
   component: FormList,
+  argTypes: {
+    forms: {
+      control: { disable: true },
+    },
+  },
 } as ComponentMeta<typeof FormList>;
 
 const Template: ComponentStory<typeof FormList> = (args: any) => <FormList {...args} />;
@@ -23,7 +28,7 @@ TabFormsList.args = {
       count: 23,
     },
     {
-      id: "2334",
+      id: "2335",
       title: "Another Example Form",
       url: "https://example.com",
       status: "DISABLED" as const,

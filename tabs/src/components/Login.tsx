@@ -82,9 +82,13 @@ export default function Login(props: LoginProps) {
               src={JFLogo}
               styles={{
                 height: "100px",
+                width: "400px",
               }}
             />
             <Text
+              style={{
+                maxWidth: "400px",
+              }}
               align="end"
               content="Sign in to your JotForm account to create forms and share them on the fly during your meetings."
             />

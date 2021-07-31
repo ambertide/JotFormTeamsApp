@@ -24,6 +24,9 @@ interface LoginProps {
   isLite?: boolean;
 }
 
+/**
+ * Used to Log in the user to their JotForm account.
+ */
 export default function Login(props: LoginProps) {
   const { onSubmit, isLite } = props;
   const [username, setUsername] = useState("");

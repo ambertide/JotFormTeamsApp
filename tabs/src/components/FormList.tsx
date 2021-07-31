@@ -11,6 +11,9 @@ interface FormProps {
   forms: I.List<JotFormForm>;
 }
 
+/**
+ * Lists the forms belonging to a user.
+ */
 export default function FormList(props: FormProps) {
   const { forms } = props;
   const [listItems, setListItems] = useState<I.List<ListItem>>(I.List());

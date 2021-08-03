@@ -1,9 +1,9 @@
 import { List } from "immutable";
 import { User } from "../api/JFApi";
-import JotFormForm from "./JotFormForm";
+import JotFormMetadata from "./JotFormMetadata";
 
 export default interface reduxState {
   auth: User;
-  forms: List<JotFormForm>;
+  forms: List<JotFormMetadata>;
   error: string;
 }

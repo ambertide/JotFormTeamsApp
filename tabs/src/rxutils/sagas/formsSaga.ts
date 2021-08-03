@@ -8,7 +8,6 @@ function* getUserForms(action: formsRequestAction): any {
     const forms = yield call(getTables, action.apiKey);
     yield put({ type: "FORMS_FETCHED", newForms: forms });
   } catch (e) {
-    console.log(e);
     yield put({ type: "CONN_ERR", message: e.message });
   }
 }

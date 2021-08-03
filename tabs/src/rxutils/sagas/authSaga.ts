@@ -8,7 +8,6 @@ function* loginUser(action: authRequestAction): any {
     const user = yield call(login, action.username, action.password);
     yield put({ type: "AUTH_SUCCESS", newUser: user });
   } catch (e) {
-    console.log(e);
     yield put({ type: "AUTH_FAIL", message: e.message });
   }
 }

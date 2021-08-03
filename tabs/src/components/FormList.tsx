@@ -3,18 +3,37 @@ import { ToDoListIcon } from "@fluentui/react-icons-northstar";
 import I from "immutable";
 import { useState, useEffect } from "react";
 import { AddIcon } from "@fluentui/react-icons-northstar";
-import JotFormForm from "interfaces/JotFormForm";
+import JotFormMetadata from "interfaces/JotFormMetadata";
 import ListItem from "interfaces/ListItem";
 
-interface FormProps {
-  forms: I.List<JotFormForm>;
+interface FormListProps {
+  /**
+   * An immutable list of form information.
+   */
+  forms: I.List<JotFormMetadata>;
+  /**
+   * Whether or not the component should be displayed in lite mode.
+   */
+  isLite: boolean;
+  /**
+   * Text to be shown on the button.
+   */
+  buttonText: string;
+  /**
+   * onClick callback of the button.
+   */
+  buttonOnClick: () => void;
+  /**
+   * Icon of the button on lite mode.
+   */
+  buttonIcon: JSX.Element;
 }
 
 /**
  * Lists the forms belonging to a user.
  */
-export default function FormList(props: FormProps) {
-  const { forms } = props;
+export default function FormList(props: FormListProps) {
+  const { forms, isLite, buttonOnClick, buttonIcon, buttonText } = props;
   const [listItems, setListItems] = useState<I.List<ListItem>>(I.List());
   useEffect(() => {
     setListItems(
@@ -22,27 +41,44 @@ export default function FormList(props: FormProps) {
         return {
           key: form.id,
           header: form.title,
-          headerMedia: form.updated_at,
+          headerMedia: isLite ? "" : form.updated_at,
           media: <Avatar icon={<ToDoListIcon />} square />,
         };
       })
     );
-  }, [forms]);
+  }, [forms, isLite]);
   return (
-    <Segment style={{ height: "100%" }}>
-      <Flex column>
+    <Segment style={{ height: "80%", width: "90%" }} className={isLite ? "lite" : ""}>
+      <Flex column styles={{ maxHeight: "100%" }}>
         <Flex styles={{ width: "100%" }} vAlign="center">
           <Header as="h2" content="Your Forms" />
-          <Button icon={<AddIcon />} iconOnly title="Add Form" style={{ marginLeft: "auto" }} />
+          {isLite ? (
+            <Button
+              icon={buttonIcon}
+              iconOnly
+              title={buttonText}
+              style={{ marginLeft: "auto" }}
+              onClick={buttonOnClick}
+            />
+          ) : (
+            <Button
+              content={buttonText}
+              title={buttonText}
+              style={{ marginLeft: "auto" }}
+              onClick={buttonOnClick}
+            />
+          )}
         </Flex>
         <Divider />
-        <List
-          styles={{
-            width: "100%",
-          }}
-          navigable
-          items={listItems.toArray()}
-        />
+        <Flex styles={{ overflowY: "auto", maxHeight: "100%" }}>
+          <List
+            styles={{
+              width: "100%",
+            }}
+            navigable
+            items={listItems.toArray()}
+          />
+        </Flex>
       </Flex>
     </Segment>
   );

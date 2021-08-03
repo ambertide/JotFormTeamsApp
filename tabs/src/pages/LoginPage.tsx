@@ -1,3 +1,4 @@
+import { Flex } from "@fluentui/react-northstar";
 import Login from "components/Login";
 import reduxState from "interfaces/reduxState";
 import { useCallback } from "react";
@@ -11,5 +12,9 @@ export default function LoginPage() {
     },
     [dispatch]
   );
-  return <Login onSubmit={dispatchLoginCredentials} />;
+  return (
+    <Flex styles={{ backgroundColor: "#eeeeee" }} hAlign="center">
+      <Login onSubmit={dispatchLoginCredentials} />
+    </Flex>
+  );
 }

@@ -1,4 +1,4 @@
-export default interface JotFormForm {
+export default interface JotFormMetadata {
   id: string;
   title: string;
   url: string;

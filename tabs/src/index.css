@@ -11,3 +11,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #eeeeee;
 }
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  padding-top: 5%;
+}
+
+.mainProvider {
+  width: 100%;
+}

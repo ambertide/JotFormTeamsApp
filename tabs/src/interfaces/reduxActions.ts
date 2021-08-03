@@ -5,7 +5,8 @@
  */
 import { List } from "immutable";
 import { User } from "../api/JFApi";
-import JotFormForm from "./JotFormForm";
+import { JotFormData } from "./JotFormData";
+import JotFormMetadata from "./JotFormMetadata";
 
 export interface authAction {
   type: "AUTH_SUCCESS" | "AUTH_FAIL";
@@ -20,7 +21,7 @@ export interface authRequestAction {
 
 export interface formsAction {
   type: "FORMS_FETCHED";
-  newForms: List<JotFormForm>;
+  newForms: List<JotFormMetadata>;
 }
 
 export interface formsRequestAction {
@@ -31,4 +32,10 @@ export interface formsRequestAction {
 export interface errorAction {
   type: "CONN_ERR";
   errorMessage: string;
+}
+
+export interface createFormRequestAction {
+  type: "FORM_CREATE_REQUEST";
+  apiKey: string;
+  formData: JotFormData;
 }

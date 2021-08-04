@@ -7,7 +7,7 @@ export default function authReducer(state = new User(false, ""), action: authAct
     case "AUTH_SUCCESS":
       return action.newUser;
     case "AUTH_FAIL":
-      toast("Authentication failed.", { type: "error" });
+      toast("Wrong email or password.", { type: "error" });
       return state;
     default:
       return state;

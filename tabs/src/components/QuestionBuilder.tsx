@@ -8,19 +8,22 @@ import {
   FormDropdown,
   FormInput,
 } from "@fluentui/react-northstar";
-import { Component, useState } from "react";
+import { useState } from "react";
 import I from "immutable";
 import { useCallback } from "react";
 import TextBoxFragment from "./QuestionFragments/TextBoxFragment";
 import FullNameFragment from "./QuestionFragments/FullNameFragment";
+import SelectionFragment from "./QuestionFragments/SelectionFragment";
 import { JotFormQuestionData } from "interfaces/JotFormData";
 
-type QuestionType = "control_textbox" | "control_fullname";
-type QuestionTypeName = "Text Box" | "Full Name";
-const questionTypeNames = ["Text Box", "Full Name"];
+type QuestionType = "control_textbox" | "control_fullname" | "control_radio" | "control_checkbox";
+type QuestionTypeName = "Text Box" | "Full Name" | "Single Choice" | "Multiple Choice";
+const questionTypeNames = ["Text Box", "Full Name", "Single Choice", "Multiple Choice"];
 const questionTypes = I.Map<QuestionTypeName, QuestionType>({
   "Text Box": "control_textbox",
   "Full Name": "control_fullname",
+  "Single Choice": "control_radio",
+  "Multiple Choice": "control_checkbox",
 });
 interface QuestionBuilderProps {
   /**
@@ -57,18 +60,16 @@ export default function QuestionBuilder(props: QuestionBuilderProps) {
         return <FullNameFragment addPropertyToQuestion={addPropertyToQuestion} />;
       case "control_textbox":
         return <TextBoxFragment addPropertyToQuestion={addPropertyToQuestion} />;
+      case "control_radio":
+      case "control_checkbox":
+        return <SelectionFragment addPropertyToQuestion={addPropertyToQuestion} />;
       default:
         return null;
     }
   };
   return (
     <Flex column>
-      <Form
-        onSubmit={() => {
-          onSaveQuestion(questionProperties.toObject() as unknown as JotFormQuestionData);
-        }}
-        className={isLite ? "lite" : ""}
-      >
+      <Form className={isLite ? "lite" : ""}>
         <FormInput
           label="Question title"
           id="QuestionTitle"
@@ -107,7 +108,13 @@ export default function QuestionBuilder(props: QuestionBuilderProps) {
         />
         {getQuestionFragment(questionType)}
         <Flex gap="gap.smaller">
-          <FormButton content="Add" primary />
+          <FormButton
+            content="Add"
+            primary
+            onClick={() => {
+              onSaveQuestion(questionProperties.toObject() as unknown as JotFormQuestionData);
+            }}
+          />
           <Button content={secondaryButtonTitle} onClick={onClickSecondary} />
         </Flex>
       </Form>

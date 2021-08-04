@@ -2,7 +2,6 @@ import { Avatar, Divider, Flex, Header, List, Segment, Button } from "@fluentui/
 import { ToDoListIcon } from "@fluentui/react-icons-northstar";
 import I from "immutable";
 import { useState, useEffect } from "react";
-import { AddIcon } from "@fluentui/react-icons-northstar";
 import JotFormMetadata from "interfaces/JotFormMetadata";
 import ListItem from "interfaces/ListItem";
 

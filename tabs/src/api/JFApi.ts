@@ -1,7 +1,9 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { List } from "immutable";
+import { LoginResponse } from "interfaces/JotFormApiResponses";
 import { JotFormData } from "interfaces/JotFormData";
 import JotFormMetadata from "interfaces/JotFormMetadata";
+import { LoginException } from "./exceptions";
 export class User {
   isAuth: boolean;
   APIKey: string;
@@ -13,24 +15,22 @@ export class User {
 }
 
 export async function login(username: string, password: string): Promise<User> {
-  try {
-    const response = await axios({
-      method: "post",
-      url: "https://api.jotform.com/user/login",
-      params: {
-        username: username,
-        password: password,
-        appName: "JotForm Teams Integration",
-        access: "full",
-      },
-    });
-
-    const userAPIKey = response.data.content.appKey;
-    return new User(true, userAPIKey);
-  } catch (error) {
-    console.log(error);
-    return new User(false, "");
+  const response: AxiosResponse<LoginResponse> = await axios({
+    method: "post",
+    url: "https://api.jotform.com/user/login",
+    params: {
+      username: username,
+      password: password,
+      appName: "JotForm Teams Integration",
+      access: "full",
+    },
+  });
+  if (response.data.responseCode === 401) {
+    throw new LoginException("An error has occurred with login.");
   }
+  const userAPIKey = response.data.content.appKey;
+  console.log(userAPIKey);
+  return new User(true, userAPIKey);
 }
 
 export async function getTables(appKey: string): Promise<List<JotFormMetadata>> {

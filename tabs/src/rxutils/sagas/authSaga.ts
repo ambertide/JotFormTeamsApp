@@ -1,6 +1,7 @@
+import { LoginException } from "api/exceptions";
 import { call, put, takeEvery } from "redux-saga/effects";
 import { login } from "../../api/JFApi";
-import { authRequestAction } from "../../interfaces/reduxActions";
+import { authRequestAction, errorAction } from "../../interfaces/reduxActions";
 
 // Intercepts the login user requests to send API request.
 function* loginUser(action: authRequestAction): any {
@@ -8,7 +9,11 @@ function* loginUser(action: authRequestAction): any {
     const user = yield call(login, action.username, action.password);
     yield put({ type: "AUTH_SUCCESS", newUser: user });
   } catch (e) {
-    yield put({ type: "AUTH_FAIL", message: e.message });
+    if (e.name === "LoginException") {
+      yield put({ type: "AUTH_FAIL", message: e.message });
+    } else {
+      yield put<errorAction>({ type: "CONN_ERR", errorMessage: e.message });
+    }
   }
 }
 

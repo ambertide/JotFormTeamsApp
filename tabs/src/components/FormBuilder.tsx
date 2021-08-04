@@ -8,7 +8,8 @@ import {
   Avatar,
   TrashCanIcon,
   Input,
-  Divider,
+  CheckmarkCircleIcon,
+  RadioButtonIcon,
 } from "@fluentui/react-northstar";
 import { JotFormData, JotFormQuestionData, StringAsNumber } from "interfaces/JotFormData";
 import { useState, useEffect } from "react";
@@ -27,6 +28,10 @@ function getQuestionIcon(questionType: string) {
       return <MenuIcon />;
     case "control_textbox":
       return <FormatIcon />;
+    case "control_radio":
+      return <RadioButtonIcon />;
+    case "control_checkbox":
+      return <CheckmarkCircleIcon />;
   }
 }
 
@@ -84,17 +89,15 @@ export default function FormBuilder(props: FormBuilderProps) {
       }}
       className={isLite ? "lite" : ""}
     >
-      <Flex column gap="gap.medium">
+      <Flex column gap="gap.smaller">
         <Input
           styles={{ marginLeft: "20px" }}
-          label="Form Title"
+          id="FormTitle"
           value={formTitle}
           onChange={(event, data) => {
             setFormTitle(data?.value || "");
           }}
         />
-        <Divider styles={{ width: "75%" }} />
-
         <List
           items={listItems
             .push(

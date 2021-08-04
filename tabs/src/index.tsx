@@ -8,10 +8,10 @@ import TabConfig from "pages/TabConfig";
 import FormsPage from "pages/FormsPage";
 import { ToastContainer } from "react-toastify";
 import { Provider as NorthstarProvider, teamsTheme, Loader, Box } from "@fluentui/react-northstar";
-import FormBuilderPage from "pages/FormBuilderPage";
-import "react-toastify/dist/ReactToastify.css";
 import ErrorBoundary from "utils/ErrorBoundary";
 import { PersistGate } from "redux-persist/integration/react";
+import FormBuilderPage from "pages/FormBuilderPage";
+import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.render(
   <Provider store={store}>

@@ -20,6 +20,14 @@ import QuestionBuilder from "./QuestionBuilder";
 interface FormBuilderProps {
   isLite: boolean;
   onSaveForm: (formData: JotFormData) => void;
+  /**
+   * Text on the button in top right.
+   */
+  buttonContent: string;
+  /**
+   * Action taken upon clicking the button in top right.
+   */
+  buttonOnClick: () => void;
 }
 
 function getQuestionIcon(questionType: string) {
@@ -50,7 +58,7 @@ function convertQuestions(
 }
 
 export default function FormBuilder(props: FormBuilderProps) {
-  const { onSaveForm, isLite } = props;
+  const { onSaveForm, isLite, buttonOnClick, buttonContent } = props;
   const [formTitle, setFormTitle] = useState<string>("My Form");
   const [questions, setQuestions] = useState(I.List<JotFormQuestionData>());
   const [listItems, setListItems] = useState(I.List<ListItem | JSX.Element>());
@@ -92,14 +100,17 @@ export default function FormBuilder(props: FormBuilderProps) {
       className={isLite ? "lite" : ""}
     >
       <Flex column gap="gap.smaller">
-        <Input
-          styles={{ marginLeft: "20px" }}
-          id="FormTitle"
-          value={formTitle}
-          onChange={(event, data) => {
-            setFormTitle(data?.value || "");
-          }}
-        />
+        <Flex styles={{ width: "100%" }}>
+          <Input
+            styles={{ marginLeft: "20px" }}
+            id="FormTitle"
+            value={formTitle}
+            onChange={(event, data) => {
+              setFormTitle(data?.value || "");
+            }}
+          />
+          <Button content={buttonContent} onClick={buttonOnClick} styles={{ marginLeft: "auto" }} />
+        </Flex>
         <List
           items={listItems
             .push(

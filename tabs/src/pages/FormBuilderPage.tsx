@@ -29,7 +29,12 @@ export default function FormBuilderPage() {
   );
   return (
     <Flex styles={{ width: "100%" }} hAlign="center">
-      <FormBuilder isLite={false} onSaveForm={dispatchSaveForm} />
+      <FormBuilder
+        isLite={false}
+        onSaveForm={dispatchSaveForm}
+        buttonOnClick={navigateToMainPage}
+        buttonContent="Return to Main Page"
+      />
     </Flex>
   );
 }

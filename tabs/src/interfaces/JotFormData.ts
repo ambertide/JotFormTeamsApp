@@ -4,6 +4,7 @@ export type JFBoolean = "Yes" | "No";
 export type StringAsNumber = `${number}`;
 
 export type BasicQuestion = {
+  type: string;
   text: string;
   required: JFBoolean;
 };

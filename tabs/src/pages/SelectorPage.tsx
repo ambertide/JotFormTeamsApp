@@ -3,12 +3,6 @@ import ButtonWithImage from "components/ButtonWithImage";
 import { History } from "history";
 import useNavigation from "hooks/useNavigation";
 
-function navigateToPage(page: string, history: History): () => void {
-  return function () {
-    history.push(page);
-  };
-}
-
 export default function SelectorPage() {
   const navigateToForms = useNavigation("/forms");
   const navigateToCreate = useNavigation("/create");

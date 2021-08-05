@@ -1,8 +1,7 @@
 import { Flex } from "@fluentui/react-northstar";
 import Login from "components/Login";
-import reduxState from "interfaces/reduxState";
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export default function LoginPage() {
   const dispatch = useDispatch();

@@ -9,7 +9,7 @@ import {
 // Intercepts the login user requests to send API request.
 function* createNewForm(action: createFormRequestAction): any {
   try {
-    const response = yield call(postForm, action.apiKey, action.formData);
+    yield call(postForm, action.apiKey, action.formData);
     yield put<formsRequestAction>({ type: "FORMS_REQUEST", apiKey: action.apiKey });
   } catch (e) {
     yield put<errorAction>({ type: "CONN_ERR", errorMessage: e.message });

@@ -31,3 +31,20 @@ interface LoginContent {
 export interface LoginResponse extends BaseResponse {
   content: LoginContent;
 }
+
+interface UserFormContent {
+  id: string;
+  username: string;
+  title: string;
+  height: string;
+  url: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+  new: string;
+  count: string;
+}
+
+export interface UserFormResponse extends BaseResponse {
+  content: UserFormContent[];
+}

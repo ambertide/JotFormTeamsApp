@@ -1,4 +1,3 @@
-import { LoginException } from "api/exceptions";
 import { call, put, takeEvery } from "redux-saga/effects";
 import { login } from "../../api/JFApi";
 import { authRequestAction, errorAction } from "../../interfaces/reduxActions";

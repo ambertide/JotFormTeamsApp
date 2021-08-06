@@ -27,9 +27,6 @@
             "request": "launch",
             "url": "https://teams.microsoft.com/l/app/${localTeamsAppId}?installAppPackage=true&webjoin=true&${account-hint}",
             "preLaunchTask": "Start Frontend",
-            "cascadeTerminateToConfigurations": [
-                "Start and Attach to Bot"
-            ],
             "presentation": {
                 "group": "all",
                 "hidden": true
@@ -41,34 +38,17 @@
             "request": "launch",
             "url": "https://teams.microsoft.com/l/app/${localTeamsAppId}?installAppPackage=true&webjoin=true&${account-hint}",
             "preLaunchTask": "Start Frontend",
-            "cascadeTerminateToConfigurations": [
-                "Start and Attach to Bot"
-            ],
             "presentation": {
                 "group": "all",
                 "hidden": true
             }
         },
-        {
-            "name": "Start and Attach to Bot",
-            "type": "pwa-node",
-            "request": "attach",
-            "port": 9239,
-            "restart": true,
-            "preLaunchTask": "Start Bot",
-            "presentation": {
-                "group": "all",
-                "hidden": true
-            },
-            "internalConsoleOptions": "neverOpen"
-        }
     ],
     "compounds": [
         {
             "name": "Debug (Edge)",
             "configurations": [
                 "Start and Attach to Frontend (Edge)",
-                "Start and Attach to Bot"
             ],
             "preLaunchTask": "Pre Debug Check",
             "presentation": {
@@ -81,7 +61,6 @@
             "name": "Debug (Chrome)",
             "configurations": [
                 "Start and Attach to Frontend (Chrome)",
-                "Start and Attach to Bot"
             ],
             "preLaunchTask": "Pre Debug Check",
             "presentation": {

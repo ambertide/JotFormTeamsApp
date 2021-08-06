@@ -20,7 +20,7 @@ TeamsProvider.microsoftTeamsLib = teams;
 const config = {
   clientId: "f33b568f-ba01-477c-a45a-bac73d5fffa4", //TODO: Possibly hide this.
   authPopupUrl: "index.html#/auth",
-  scopes: ["Team.ReadBasic.All", "Channel.ReadBasic.All", "ChannelMessage.Send"],
+  scopes: ["Team.ReadBasic.All", "Channel.ReadBasic.All", "ChannelMessage.Send", "AccessReview.Read.All"],
 };
 Providers.globalProvider = new TeamsProvider(config);
 Providers.onProviderUpdated((event) => {

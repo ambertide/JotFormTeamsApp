@@ -1,6 +1,12 @@
 import axios, { AxiosResponse } from "axios";
 import { List } from "immutable";
-import { LoginResponse } from "interfaces/JotFormApiResponses";
+import {
+  LoginResponse,
+  UserFormContent,
+  SpecificFormResponse,
+  UserContent,
+  UserResponse,
+} from "interfaces/JotFormApiResponses";
 import { JotFormData } from "interfaces/JotFormData";
 import JotFormMetadata from "interfaces/JotFormMetadata";
 import { LoginException } from "./exceptions";
@@ -66,4 +72,22 @@ export async function postForm(apiKey: string, formData: JotFormData): Promise<v
   await axios.put("https://api.jotform.com/form", JSONFormData, {
     params: { apiKey: apiKey },
   });
+}
+
+export async function getForm(apiKey: string, formID: string): Promise<UserFormContent> {
+  const response = await axios.get<SpecificFormResponse>(`https://api.jotform.com/form/${formID}`, {
+    params: {
+      apiKey: apiKey,
+    },
+  });
+  return response.data.content;
+}
+
+export async function getUser(apiKey: string): Promise<UserContent> {
+  const response = await axios.get<UserResponse>(`https://api.jotform.com/user`, {
+    params: {
+      apiKey,
+    },
+  });
+  return response.data.content;
 }

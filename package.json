@@ -10,6 +10,7 @@
     "dependencies": {
         "@microsoft/mgt": "^2.2.1",
         "@microsoft/mgt-react": "^2.2.1",
+        "adaptivecards-templating": "^2.1.0",
         "axios": "^0.21.1",
         "eslint": "^7.31.0",
         "immutable": "^4.0.0-rc.14",

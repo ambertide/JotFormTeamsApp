@@ -29,7 +29,7 @@ interface FormListProps {
   /**
    * URL of the poll.
    */
-  onFormSelect: (formUrl: string) => void;
+  onFormSelect: (formID: string) => void;
 }
 
 /**
@@ -47,7 +47,7 @@ export default function FormList(props: FormListProps) {
           headerMedia: isLite ? "" : form.updated_at,
           media: <Avatar icon={<ToDoListIcon />} square />,
           onClick: () => {
-            onFormSelect(form.url);
+            onFormSelect(form.id);
           },
         };
       })

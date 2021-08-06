@@ -9,24 +9,29 @@ import { useState } from "react";
 import Modal from "react-modal";
 import { getChannelsInTeam, postMessageToChannel } from "api/AzureADApi";
 import { toast } from "react-toastify";
+import { RequestSendPollAction } from "interfaces/reduxActions";
 
 export default function FormsPage() {
   const forms = useSelector((auth: reduxState) => auth.forms);
   const user = useSelector((auth: reduxState) => auth.auth);
-  const [selectedFormURL, setSelectedFormURL] = useState("");
+  const [selectedFormID, setSelectedFormID] = useState("");
   const [isOpen, setIsOpen] = useState(false); // Sidepanel.
   const dispatch = useDispatch();
   const navigateToMainPage = useNavigation("/tab");
   const teams = useSelector((state: reduxState) => state.teams);
   const onChannelSelect = useCallback(
     (teamID: string, channelID: string) => {
-      postMessageToChannel(teamID, channelID, selectedFormURL).then(() => {
-        toast("Message sent!", { type: "success" });
+      dispatch<RequestSendPollAction>({
+        type: "SEND_POLL_REQUEST",
+        channelID,
+        teamID,
+        formID: selectedFormID,
+        apiKey: user.APIKey,
       });
-      setSelectedFormURL("");
+      setSelectedFormID("");
       setIsOpen(false);
     },
-    [selectedFormURL, setSelectedFormURL, setIsOpen]
+    [selectedFormID, setSelectedFormID, setIsOpen, user, dispatch]
   );
   useEffect(() => {
     dispatch({ type: "FORMS_REQUEST", apiKey: user.APIKey });
@@ -54,8 +59,8 @@ export default function FormsPage() {
           buttonOnClick={navigateToMainPage}
           buttonIcon={<ArrowLeftIcon />}
           buttonText={"Return to Main Page"}
-          onFormSelect={(formURL: string) => {
-            setSelectedFormURL(formURL);
+          onFormSelect={(formID: string) => {
+            setSelectedFormID(formID);
             setIsOpen(true);
           }}
         />

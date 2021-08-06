@@ -6,6 +6,7 @@ import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/es/persistReducer";
 import azureADReducer from "./azureADReducer";
 import azureTeamsReducer from "./azureTeamsReducer";
+import successReducer from "./successReducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   error: errorReducer,
   azureToken: azureADReducer,
   teams: azureTeamsReducer,
+  success: successReducer,
 });
 
 const persistConfig = {

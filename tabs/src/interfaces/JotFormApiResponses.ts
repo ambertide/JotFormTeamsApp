@@ -32,7 +32,7 @@ export interface LoginResponse extends BaseResponse {
   content: LoginContent;
 }
 
-interface UserFormContent {
+export interface UserFormContent {
   id: string;
   username: string;
   title: string;
@@ -47,4 +47,34 @@ interface UserFormContent {
 
 export interface UserFormResponse extends BaseResponse {
   content: UserFormContent[];
+}
+
+export interface SpecificFormResponse extends BaseResponse {
+  content: UserFormContent;
+}
+
+export interface UserContent {
+  username: string;
+  name: string;
+  email: string;
+  website: string;
+  time_zone: string;
+  account_type: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+  usage: string;
+  industry: string;
+  securityAnswer: string;
+  company: string;
+  securityQuestion: string;
+  webhooks: string;
+  doNotClone: string;
+  folderLayout: string;
+  language: string;
+  avatarUrl: string;
+}
+
+export interface UserResponse extends BaseResponse {
+  content: UserContent;
 }

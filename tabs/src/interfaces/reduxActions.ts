@@ -63,3 +63,16 @@ export interface AzureFetchedTeamsListAction {
 export interface AzureRequestTeamsListAction {
   type: "AZURE_TEAMS_REQUEST";
 }
+
+export interface RequestSendPollAction {
+  type: "SEND_POLL_REQUEST";
+  apiKey: string;
+  formID: string;
+  channelID: string;
+  teamID: string;
+}
+
+export interface SuccessAction {
+  type: "SUCCESS";
+  message: string;
+}

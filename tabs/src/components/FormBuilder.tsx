@@ -116,7 +116,6 @@ export default function FormBuilder(props: FormBuilderProps) {
             .push(
               <QuestionBuilder
                 onSaveQuestion={(question) => {
-                  console.log(question);
                   setQuestions((previousQuestions) => previousQuestions.push(question));
                 }}
                 secondaryButtonTitle="Save Form"

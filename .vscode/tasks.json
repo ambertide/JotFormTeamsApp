@@ -5,6 +5,7 @@
             "label": "Pre Debug Check",
             "dependsOn": [
                 "dependency check",
+                "start ngrok",
                 "prepare dev env"
             ],
             "dependsOrder": "sequence"
@@ -18,9 +19,22 @@
             "dependsOrder": "parallel"
         },
         {
+            "label": "Start Bot",
+            "dependsOn": "teamsfx: bot start"
+        },
+        {
             "label": "dependency check",
             "type": "shell",
             "command": "echo ${command:fx-extension.validate-dependencies}"
+        },
+        {
+            "label": "start ngrok",
+            "type": "teamsfx",
+            "command": "ngrok start",
+            "isBackground": true,
+            "dependsOn": [
+                "bot npm install"
+            ]
         },
         {
             "label": "prepare dev env",
@@ -29,6 +43,14 @@
                 "frontend npm install"
             ],
             "dependsOrder": "parallel"
+        },
+        {
+            "label": "bot npm install",
+            "type": "shell",
+            "command": "npm install",
+            "options": {
+                "cwd": "${workspaceFolder}/bot"
+            }
         },
         {
             "label": "prepare local environment",

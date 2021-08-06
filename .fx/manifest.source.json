@@ -23,7 +23,37 @@
         "full": "Full description of JotFormTeamsIntegration."
     },
     "accentColor": "#FFFFFF",
-    "bots": [],
+    "bots": [
+        {
+            "botId": "{botId}",
+            "scopes": [
+                "personal",
+                "team",
+                "groupchat"
+            ],
+            "supportsFiles": false,
+            "isNotificationOnly": false,
+            "commandLists": [
+                {
+                    "scopes": [
+                        "personal",
+                        "team",
+                        "groupchat"
+                    ],
+                    "commands": [
+                        {
+                            "title": "intro",
+                            "description": "Send introduction card of this Bot"
+                        },
+                        {
+                            "title": "show",
+                            "description": "Show user profile by calling Microsoft Graph API with SSO"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
     "composeExtensions": [],
     "configurableTabs": [
         {
@@ -32,9 +62,6 @@
             "scopes": [
                 "team",
                 "groupchat"
-            ],
-            "context": [
-        "meetingSidePanel"
             ]
         }
     ],

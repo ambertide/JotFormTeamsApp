@@ -7,11 +7,13 @@
         "version": "1.0.0",
         "hostType": "Azure",
         "capabilities": [
-            "Tab"
+            "Tab",
+            "Bot"
         ],
         "azureResources": [],
         "activeResourcePlugins": [
             "fx-resource-frontend-hosting",
+            "fx-resource-bot",
             "fx-resource-aad-app-for-teams",
             "fx-resource-local-debug",
             "fx-resource-appstudio",

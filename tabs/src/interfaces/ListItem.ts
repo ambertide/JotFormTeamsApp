@@ -3,4 +3,5 @@ export default interface ListItem {
   header: string;
   headerMedia: any;
   media: any;
+  onClick?: () => void;
 }

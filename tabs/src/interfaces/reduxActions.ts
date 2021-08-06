@@ -5,6 +5,7 @@
  */
 import { List } from "immutable";
 import { User } from "../api/JFApi";
+import { AzureTeamMetadata } from "./AzureTypes";
 import { JotFormData } from "./JotFormData";
 import JotFormMetadata from "./JotFormMetadata";
 
@@ -38,4 +39,27 @@ export interface createFormRequestAction {
   type: "FORM_CREATE_REQUEST";
   apiKey: string;
   formData: JotFormData;
+}
+
+export interface AzureAction {
+  type: "AZURE_LOGIN_SUCCESS" | "AZURE_LOGIN_FAIL";
+  apiKey: string;
+}
+
+export interface AzureRequestKeyAction {
+  type: "AZURE_KEY_REQUEST";
+}
+
+export interface AzureErrorAction {
+  type: "AZURE_ERROR";
+  message: string;
+}
+
+export interface AzureFetchedTeamsListAction {
+  type: "AZURE_TEAMS_FETCHED";
+  teams: List<AzureTeamMetadata>;
+}
+
+export interface AzureRequestTeamsListAction {
+  type: "AZURE_TEAMS_REQUEST";
 }

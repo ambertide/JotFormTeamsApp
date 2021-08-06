@@ -26,13 +26,17 @@ interface FormListProps {
    * Icon of the button on lite mode.
    */
   buttonIcon: JSX.Element;
+  /**
+   * URL of the poll.
+   */
+  onFormSelect: (formUrl: string) => void;
 }
 
 /**
  * Lists the forms belonging to a user.
  */
 export default function FormList(props: FormListProps) {
-  const { forms, isLite, buttonOnClick, buttonIcon, buttonText } = props;
+  const { forms, isLite, onFormSelect, buttonOnClick, buttonIcon, buttonText } = props;
   const [listItems, setListItems] = useState<I.List<ListItem>>(I.List());
   useEffect(() => {
     setListItems(
@@ -42,6 +46,9 @@ export default function FormList(props: FormListProps) {
           header: form.title,
           headerMedia: isLite ? "" : form.updated_at,
           media: <Avatar icon={<ToDoListIcon />} square />,
+          onClick: () => {
+            onFormSelect(form.url);
+          },
         };
       })
     );

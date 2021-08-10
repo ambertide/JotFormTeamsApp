@@ -7,6 +7,7 @@ import {
   Button,
   Avatar,
   TrashCanIcon,
+  Divider,
   Input,
   CheckmarkCircleIcon,
   RadioButtonIcon,
@@ -114,6 +115,7 @@ export default function FormBuilder(props: FormBuilderProps) {
         <List
           items={listItems
             .push(
+              <Divider />,
               <QuestionBuilder
                 onSaveQuestion={(question) => {
                   setQuestions((previousQuestions) => previousQuestions.push(question));

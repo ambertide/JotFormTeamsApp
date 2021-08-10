@@ -9,6 +9,6 @@ export async function sendPollToTeam(
 ) {
   const formData = await getForm(apiKey, formID);
   const userData = await getUser(apiKey);
-  const adaptiveCard = generateAdaptiveCard(userData, formData);
+  const adaptiveCard = generateAdaptiveCard(userData, formData, apiKey);
   await postAdaptiveCardToChannel(teamID, channelID, adaptiveCard);
 }

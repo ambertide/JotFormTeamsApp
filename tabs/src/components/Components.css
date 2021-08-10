@@ -10,3 +10,7 @@
   font-size: large;
   background-color: transparent;
 }
+
+.ui-dropdown__selected-items {
+  overflow: hidden;
+}

@@ -1,7 +1,7 @@
-import { Avatar, Segment } from "@fluentui/react-northstar";
+import { Segment } from "@fluentui/react-northstar";
 import { CalendarAgendaIcon } from "@fluentui/react-icons-northstar";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import ButtonWithImage from "components/ButtonWithImage";
+import ButtonWithImage from "components/Extensions/ButtonWithImage";
 
 export default {
   title: "Extensions/ButtonWithImage",

@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import FormBuilder from "components/FormBuilder";
 
 export default {
-  title: "FormBuilder",
+  title: "Tab/FormBuilder",
   component: FormBuilder,
 } as ComponentMeta<typeof FormBuilder>;
 

@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import QuestionBuilder from "components/QuestionBuilder";
 
 export default {
-  title: "QuestionBuilder",
+  title: "Tab/QuestionBuilder",
   component: QuestionBuilder,
 } as ComponentMeta<typeof QuestionBuilder>;
 

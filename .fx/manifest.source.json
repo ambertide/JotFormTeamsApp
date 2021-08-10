@@ -41,7 +41,7 @@
     }
   ],
   "permissions": ["identity", "messageTeamMembers"],
-  "validDomains": [],
+  "validDomains": ["6c82a0ea6594.ngrok.io"],
   "webApplicationInfo": {
     "id": "{appClientId}",
     "resource": "{webApplicationInfoResource}"

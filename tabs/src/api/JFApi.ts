@@ -1,11 +1,15 @@
 import axios, { AxiosResponse } from "axios";
 import { List } from "immutable";
+import { PostSubmissionRequest } from "interfaces/JotFormApiRequests";
 import {
   LoginResponse,
   UserFormContent,
   SpecificFormResponse,
   UserContent,
   UserResponse,
+  QuestionResponse,
+  FormQuestionsResponse,
+  SubmissionResponse,
 } from "interfaces/JotFormApiResponses";
 import { JotFormData } from "interfaces/JotFormData";
 import JotFormMetadata from "interfaces/JotFormMetadata";
@@ -83,6 +87,21 @@ export async function getForm(apiKey: string, formID: string): Promise<UserFormC
   return response.data.content;
 }
 
+export async function getFormQuestions(
+  apiKey: string,
+  formID: string
+): Promise<QuestionResponse[]> {
+  const response = await axios.get<FormQuestionsResponse>(
+    `https://api.jotform.com/form/${formID}/questions`,
+    {
+      params: {
+        apiKey: apiKey,
+      },
+    }
+  );
+  return Object.values(response.data.content);
+}
+
 export async function getUser(apiKey: string): Promise<UserContent> {
   const response = await axios.get<UserResponse>(`https://api.jotform.com/user`, {
     params: {
@@ -90,4 +109,18 @@ export async function getUser(apiKey: string): Promise<UserContent> {
     },
   });
   return response.data.content;
+}
+
+export async function postSubmission(
+  apiKey: string,
+  formID: string,
+  submission: PostSubmissionRequest
+): Promise<boolean> {
+  console.log(submission);
+  const response = await axios.put<SubmissionResponse>(
+    `https://api.jotform.com/form/${formID}/submissions`,
+    submission,
+    { params: { apiKey } }
+  );
+  return response && response.status === 200;
 }

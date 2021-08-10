@@ -28,3 +28,7 @@ body,
 .mainProvider {
   width: 100%;
 }
+
+.ui-dropdown__selected-items {
+  overflow: hidden;
+}

@@ -4,7 +4,7 @@ import I from "immutable";
 import { AzureTeamMetadata, AzureChannelMetadata } from "interfaces/AzureTypes";
 
 export default {
-  title: "TeamSelector",
+  title: "Tab/TeamSelector",
   component: TeamSelector,
   argTypes: {
     onChannelSelect: {

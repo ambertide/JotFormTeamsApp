@@ -4,7 +4,7 @@ import { Segment } from "@fluentui/react-northstar";
 import I from "immutable";
 
 export default {
-  title: "ChoiceAdder",
+  title: "Extensions/ChoiceAdder",
   component: ChoiceAdder,
 } as ComponentMeta<typeof ChoiceAdder>;
 

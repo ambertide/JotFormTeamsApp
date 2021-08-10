@@ -4,7 +4,7 @@ import FormList from "components/FormList";
 import { ArrowLeftIcon } from "@fluentui/react-northstar";
 
 export default {
-  title: "FormList",
+  title: "Tab/FormList",
   component: FormList,
   argTypes: {
     forms: {

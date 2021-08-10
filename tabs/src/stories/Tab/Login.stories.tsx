@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Login from "components/Login";
 
 export default {
-  title: "Login",
+  title: "Tab/Login",
   component: Login,
 } as ComponentMeta<typeof Login>;
 

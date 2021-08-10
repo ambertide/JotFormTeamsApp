@@ -1,6 +1,5 @@
 import { Segment, Flex, ContentIcon, EditIcon } from "@fluentui/react-northstar";
-import ButtonWithImage from "components/ButtonWithImage";
-import { History } from "history";
+import ButtonWithImage from "components/Extensions/ButtonWithImage";
 import useNavigation from "hooks/useNavigation";
 
 export default function SelectorPage() {

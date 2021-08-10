@@ -9,6 +9,7 @@ import { Dialog } from "@fluentui/react-northstar";
 import useNavigation from "hooks/useNavigation";
 import { Login } from "@microsoft/mgt-react";
 import { useEffect } from "react";
+import * as microsoftTeams from "@microsoft/teams-js";
 /**
  * The main app which handles the initialization and routing
  * of the app.

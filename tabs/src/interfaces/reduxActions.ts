@@ -76,3 +76,7 @@ export interface SuccessAction {
   type: "SUCCESS";
   message: string;
 }
+
+export interface LogoutAction {
+  type: "AUTH_LOGOUT";
+}

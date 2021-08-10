@@ -43,7 +43,7 @@ export default function Login(props: LoginProps) {
       <Flex vAlign="center">
         <Flex column>
           <Header content="Sign In" />
-          <Form onSubmit={(event) => onSubmit(username, password)}>
+          <Form>
             <FormInput
               onChange={handleUsername}
               label="JotForm Username"
@@ -62,8 +62,13 @@ export default function Login(props: LoginProps) {
               showSuccessIndicator={false}
             />
             <Flex gap="gap.small" hAlign="end">
-              <FormButton content="Sign In" primary />
-              <Button content="Sign Up" />
+              <FormButton content="Sign In" primary onClick={() => onSubmit(username, password)} />
+              <Button
+                content="Sign Up"
+                onClick={() => {
+                  window.open("https://www.jotform.com/signup");
+                }}
+              />
             </Flex>
           </Form>
         </Flex>

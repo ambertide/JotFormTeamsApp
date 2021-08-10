@@ -38,6 +38,13 @@
       "contentUrl": "{baseUrl}/index.html#/tab",
       "websiteUrl": "{baseUrl}/index.html#/tab",
       "scopes": ["personal"]
+    },
+    {
+      "entityId": "view",
+      "name": "View Submissions",
+      "contentUrl": "{baseUrl}/index.html#/results",
+      "websiteUrl": "{baseUrl}/index.html#/results",
+      "scopes": ["personal"]
     }
   ],
   "permissions": ["identity", "messageTeamMembers"],

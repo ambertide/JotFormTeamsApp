@@ -91,7 +91,6 @@ export default function RadioGroupCustom(props: RadioGroupCustomProps) {
   return (
     <FormRadioGroup
       vertical
-      key={qid}
       id={qid}
       label={questionText}
       items={selectableItems}

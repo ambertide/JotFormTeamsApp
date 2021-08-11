@@ -4,15 +4,10 @@ import { PollRestricted, QuestionResponse } from "interfaces/JotFormApiResponses
 import { Dispatch, MutableRefObject, SetStateAction, useRef, useState } from "react";
 import {
   Button,
-  Flex,
   Form,
-  FormCheckbox,
-  FormDropdown,
   FormFieldCustom,
   FormInput,
   FormLabel,
-  FormRadioGroup,
-  Input,
   Segment,
 } from "@fluentui/react-northstar";
 import CheckboxGroup from "components/Extensions/CheckboxGroup";
@@ -22,6 +17,7 @@ import { SubmissionFieldAnswer } from "interfaces/JotFormApiRequests";
 import { useCallback } from "react";
 import { useMemo } from "react";
 import FullNameInputGroup from "components/Extensions/FullNameInputGroup";
+import * as fields from "./Fields";
 
 interface PollProps {
   /**
@@ -34,7 +30,7 @@ interface PollProps {
   onSubmit: (data: I.Map<string, string | SubmissionFieldAnswer>) => void;
 }
 
-const generateQuestionField = (
+const GenerateQuestionField = (
   question: PollRestricted, // Use to set answer.
   answers: MutableRefObject<I.Map<string, string | SubmissionFieldAnswer>> // This is the one with the answers.
 ) => {
@@ -42,62 +38,11 @@ const generateQuestionField = (
   const onChangeCallback = (value: string | SubmissionFieldAnswer) => {
     answers.current = answers.current.set(qid, value);
   };
-  switch (question.type) {
-    case "control_textbox":
-      return (
-        <FormInput
-          id={question.qid}
-          key={question.qid}
-          label={question.text}
-          required={question.required === "Yes"}
-          onChange={(event, data) => onChangeCallback(data?.value || "")}
-        />
-      );
-    case "control_fullname":
-      return (
-        <FormFieldCustom id={question.qid} key={question.qid}>
-          <FormLabel content={question.text} />
-          <FullNameInputGroup
-            showMiddleName={question.middle === "Yes"}
-            showPrefix={question.prefix === "Yes"}
-            showSuffix={question.suffix === "Yes"}
-            onChange={onChangeCallback}
-          />
-        </FormFieldCustom>
-      );
-    case "control_radio":
-      deconstructSpecial(question);
-      const items: any[] = question.options.split("|");
-      return (
-        <RadioGroupCustom
-          options={items}
-          questionText={question.text}
-          qid={question.qid}
-          onChangeCallback={onChangeCallback}
-          allowOther={question.allowOther === "Yes"}
-          otherText={question.otherText}
-        />
-      );
-    case "control_checkbox":
-      deconstructSpecial(question);
-      const checkboxItems = question.options.split("|").map((item: string) => {
-        const shortName = item.split(" ")[0];
-        return {
-          keyID: shortName,
-          text: item,
-        };
-      });
-      return (
-        <FormFieldCustom id={question.qid} key={question.qid}>
-          <FormLabel content={question.text} />
-          <CheckboxGroup
-            items={I.List(checkboxItems)}
-            onChange={(value) => onChangeCallback(value)}
-            allowOther={question.allowOther === "Yes"}
-            otherText={question.otherText}
-          />
-        </FormFieldCustom>
-      );
+  const fieldsMap = I.Map(fields);
+  const ReactElement = fieldsMap.get(question.type.split("_", 2)[1], null);
+  if (ReactElement) {
+    // @ts-ignore: Unreachable code error
+    return <ReactElement question={question} onChangeCallback={onChangeCallback} />;
   }
 };
 
@@ -107,7 +52,7 @@ export default function Poll(props: PollProps) {
   const questionFields = useMemo(
     () =>
       questions
-        ?.map((question) => generateQuestionField(question as PollRestricted, answers))
+        ?.map((question) => GenerateQuestionField(question as PollRestricted, answers))
         .toArray(),
     [questions, answers]
   );

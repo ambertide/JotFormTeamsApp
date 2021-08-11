@@ -13,6 +13,7 @@ import {
 } from "interfaces/JotFormApiResponses";
 import { JotFormData } from "interfaces/JotFormData";
 import JotFormMetadata from "interfaces/JotFormMetadata";
+import { addDecorativeFields } from "utils/JFUtils";
 import { LoginException } from "./exceptions";
 export class User {
   isAuth: boolean;
@@ -68,12 +69,8 @@ export async function getTables(appKey: string): Promise<List<JotFormMetadata>> 
 }
 
 export async function postForm(apiKey: string, formData: JotFormData): Promise<void> {
-  const JSONFormData = {
-    properties: { title: formData.properties.title },
-    questions: formData.questions.toObject(),
-  };
-  console.log(JSONFormData);
-  await axios.put("https://api.jotform.com/form", JSONFormData, {
+  addDecorativeFields(formData);
+  await axios.put("https://api.jotform.com/form", formData, {
     params: { apiKey: apiKey },
   });
 }
@@ -116,7 +113,6 @@ export async function postSubmission(
   formID: string,
   submission: PostSubmissionRequest
 ): Promise<boolean> {
-  console.log(submission);
   const response = await axios.put<SubmissionResponse>(
     `https://api.jotform.com/form/${formID}/submissions`,
     submission,

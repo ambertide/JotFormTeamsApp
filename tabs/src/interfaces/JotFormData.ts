@@ -6,7 +6,7 @@ export type StringAsNumber = `${number}`;
 export type BasicQuestion = {
   type: string;
   text: string;
-  required: JFBoolean;
+  required?: JFBoolean;
 };
 
 export interface TextBoxQuestion extends BasicQuestion {
@@ -38,11 +38,21 @@ export interface CheckboxQuestion extends BaseChoiceQuestion {
   type: "control_checkbox";
 }
 
+export interface HeaderQuestion extends BasicQuestion {
+  type: "control_head";
+}
+
+export interface SubmitQuestion extends BasicQuestion {
+  type: "control_button";
+}
+
 export type JotFormQuestionData =
   | FullNameQuestion
   | TextBoxQuestion
   | RadioQuestion
-  | CheckboxQuestion;
+  | CheckboxQuestion
+  | HeaderQuestion
+  | SubmitQuestion;
 
 type JotFormProperties = {
   title: string;

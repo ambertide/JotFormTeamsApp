@@ -1,4 +1,5 @@
 import { call, put, takeEvery } from "redux-saga/effects";
+import { showError } from "utils/messaging";
 import { getTables } from "../../api/JFApi";
 import { formsRequestAction } from "../../interfaces/reduxActions";
 
@@ -8,7 +9,7 @@ function* getUserForms(action: formsRequestAction): any {
     const forms = yield call(getTables, action.apiKey);
     yield put({ type: "FORMS_FETCHED", newForms: forms });
   } catch (e) {
-    yield put({ type: "CONN_ERR", message: e.message });
+    showError(e.message);
   }
 }
 

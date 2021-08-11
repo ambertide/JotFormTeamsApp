@@ -1,19 +1,18 @@
 import reduxState from "interfaces/reduxState";
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import FormList from "components/FormList";
-import TeamSelector from "components/TeamSelector";
+import { FormList } from "components/Tab";
+import { TeamSelector } from "components/Tab";
 import { ArrowLeftIcon, Flex } from "@fluentui/react-northstar";
 import useNavigation from "hooks/useNavigation";
 import { useState } from "react";
-import Modal from "react-modal";
-import { getChannelsInTeam, postMessageToChannel } from "api/AzureADApi";
-import { toast } from "react-toastify";
+import { getChannelsInTeam } from "api/AzureADApi";
 import { RequestSendPollAction } from "interfaces/reduxActions";
+import { selectJFApiKey } from "rxutils/selectors";
 
 export default function FormsPage() {
   const forms = useSelector((auth: reduxState) => auth.forms);
-  const user = useSelector((auth: reduxState) => auth.auth);
+  const JFApiKey = useSelector(selectJFApiKey);
   const [selectedFormID, setSelectedFormID] = useState("");
   const [isOpen, setIsOpen] = useState(false); // Sidepanel.
   const dispatch = useDispatch();
@@ -26,17 +25,17 @@ export default function FormsPage() {
         channelID,
         teamID,
         formID: selectedFormID,
-        apiKey: user.APIKey,
+        apiKey: JFApiKey,
       });
       setSelectedFormID("");
       setIsOpen(false);
     },
-    [selectedFormID, setSelectedFormID, setIsOpen, user, dispatch]
+    [selectedFormID, setSelectedFormID, setIsOpen, JFApiKey, dispatch]
   );
   useEffect(() => {
-    dispatch({ type: "FORMS_REQUEST", apiKey: user.APIKey });
+    dispatch({ type: "FORMS_REQUEST", apiKey: JFApiKey });
     dispatch({ type: "AZURE_TEAMS_REQUEST" });
-  }, [dispatch, user.APIKey]);
+  }, [dispatch, JFApiKey]);
   return (
     <>
       {isOpen ? (

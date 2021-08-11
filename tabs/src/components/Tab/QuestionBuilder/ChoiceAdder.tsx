@@ -1,6 +1,6 @@
 import { Grid, Segment, Pill, Flex, Input, Button, AddIcon } from "@fluentui/react-northstar";
 import I from "immutable";
-import "../Components.css";
+import "./../../Components.css";
 import { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -23,7 +23,7 @@ export default function ChoiceAdder(props: ChoiceAdderProps) {
     setQuestionProperty((previousQuestionProperties) =>
       previousQuestionProperties.set("options", choices.join("|"))
     );
-  }, [choices]);
+  }, [choices, setQuestionProperty, setCurrentChoice]);
   return (
     <Segment styles={{ maxWidth: "350px" }} color="red">
       <Flex column gap="gap.smaller">

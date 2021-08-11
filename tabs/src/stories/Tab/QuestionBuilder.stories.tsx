@@ -1,6 +1,6 @@
 import { Segment } from "@fluentui/react-northstar";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import QuestionBuilder from "components/QuestionBuilder";
+import QuestionBuilder from "components/Tab/QuestionBuilder";
 
 export default {
   title: "Tab/QuestionBuilder",

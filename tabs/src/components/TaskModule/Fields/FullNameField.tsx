@@ -1,7 +1,6 @@
 import { FormFieldCustom, FormLabel } from "@fluentui/react-northstar";
 import FullNameInputGroup from "components/Extensions/FullNameInputGroup";
-import { FullNameAnswer } from "interfaces/JotFormApiRequests";
-import { FullNameQuestionResponse } from "interfaces/JotFormApiResponses";
+import { FullNameAnswer, FullNameQuestionResponse } from "interfaces/JotFormTypes";
 import React from "react";
 
 interface Props {
@@ -9,7 +8,7 @@ interface Props {
   onChangeCallback: (value: FullNameAnswer) => void;
 }
 
-export function FullNameField({ question, onChangeCallback }: Props) {
+function FullNameField({ question, onChangeCallback }: Props) {
   return (
     <FormFieldCustom id={question.qid}>
       <FormLabel content={question.text} />
@@ -23,4 +22,6 @@ export function FullNameField({ question, onChangeCallback }: Props) {
   );
 }
 
-//export default React.memo(FullNameField);
+const MemoizedFullNameField = React.memo(FullNameField);
+
+export { MemoizedFullNameField };

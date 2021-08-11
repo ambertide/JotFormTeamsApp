@@ -1,16 +1,16 @@
-import { SelectQuestionResponse } from "interfaces/JotFormApiResponses";
-import * as React from "react";
+import { SelectQuestionResponse } from "interfaces/JotFormTypes";
 import I from "immutable";
 import { deconstructSpecial } from "utils/JFUtils";
 import CheckboxGroup from "components/Extensions/CheckboxGroup";
 import { FormFieldCustom, FormLabel } from "@fluentui/react-northstar";
+import React from "react";
 
 interface Props {
   question: SelectQuestionResponse;
   onChangeCallback: (value: I.List<string>) => void;
 }
 
-export function CheckboxField({ question, onChangeCallback }: Props) {
+function CheckboxField({ question, onChangeCallback }: Props) {
   deconstructSpecial(question);
   const checkboxItems = question.options.split("|").map((item: string) => {
     const shortName = item.split(" ")[0];
@@ -31,3 +31,7 @@ export function CheckboxField({ question, onChangeCallback }: Props) {
     </FormFieldCustom>
   );
 }
+
+const MemoizedCheckboxField = React.memo(CheckboxField);
+
+export { MemoizedCheckboxField };

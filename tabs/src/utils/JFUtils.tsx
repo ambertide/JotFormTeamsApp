@@ -1,10 +1,10 @@
-import { SelectQuestionResponse } from "interfaces/JotFormApiResponses";
 import {
   HeaderQuestion,
   JotFormData,
   JotFormQuestionData,
   SubmitQuestion,
-} from "interfaces/JotFormData";
+  SelectQuestionResponse,
+} from "interfaces/JotFormTypes";
 import I from "immutable";
 
 /**

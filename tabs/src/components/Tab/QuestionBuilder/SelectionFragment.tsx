@@ -2,7 +2,7 @@ import { FormCheckbox, FormDropdown, FormInput } from "@fluentui/react-northstar
 import QuestionFragmentProps from "interfaces/QuestionFragmentProps";
 import { useState } from "react";
 import I from "immutable";
-import { RadioQuestion } from "interfaces/JotFormData";
+import { RadioQuestion } from "interfaces/JotFormTypes";
 import { useEffect } from "react";
 import ChoiceAdder from "./ChoiceAdder";
 

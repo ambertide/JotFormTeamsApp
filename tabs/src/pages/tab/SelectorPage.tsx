@@ -2,6 +2,7 @@ import { Segment, Flex, ContentIcon, Button, EditIcon } from "@fluentui/react-no
 import ButtonWithImage from "components/Extensions/ButtonWithImage";
 import useNavigation from "hooks/useNavigation";
 import { useDispatch } from "react-redux";
+import { showInfo } from "utils/messaging";
 
 export default function SelectorPage() {
   const navigateToForms = useNavigation("/forms");
@@ -11,7 +12,10 @@ export default function SelectorPage() {
     <Flex hAlign="center" fill>
       <Segment styles={{ width: "90%", height: "90%" }}>
         <Button
-          onClick={() => dispatch({ type: "AUTH_LOGOUT" })}
+          onClick={() => {
+            showInfo("Logged out of your account.");
+            dispatch({ type: "AUTH_LOGOUT" });
+          }}
           content="Log Out"
           styles={{ position: "absolute", right: "6%" }}
         />

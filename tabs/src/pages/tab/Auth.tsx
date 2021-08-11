@@ -1,5 +1,5 @@
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Providers, TeamsProvider } from "@microsoft/mgt";
+import { TeamsProvider } from "@microsoft/mgt";
 import { useEffect } from "react";
 import { Header } from "@fluentui/react-northstar";
 

@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import FormBuilder from "components/FormBuilder";
+import { FormBuilder } from "components/Tab";
 
 export default {
   title: "Tab/FormBuilder",

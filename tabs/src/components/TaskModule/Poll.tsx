@@ -1,22 +1,8 @@
-import { JotFormQuestionData } from "interfaces/JotFormData";
 import I from "immutable";
-import { PollRestricted, QuestionResponse } from "interfaces/JotFormApiResponses";
-import { Dispatch, MutableRefObject, SetStateAction, useRef, useState } from "react";
-import {
-  Button,
-  Form,
-  FormFieldCustom,
-  FormInput,
-  FormLabel,
-  Segment,
-} from "@fluentui/react-northstar";
-import CheckboxGroup from "components/Extensions/CheckboxGroup";
-import RadioGroupCustom from "components/Extensions/RadioGroupCustom";
-import { deconstructSpecial } from "utils/JFUtils";
-import { SubmissionFieldAnswer } from "interfaces/JotFormApiRequests";
-import { useCallback } from "react";
+import { PollRestricted, QuestionResponse, SubmissionFieldAnswer } from "interfaces/JotFormTypes";
+import { MutableRefObject, useRef } from "react";
+import { Button, Form, Segment } from "@fluentui/react-northstar";
 import { useMemo } from "react";
-import FullNameInputGroup from "components/Extensions/FullNameInputGroup";
 import * as fields from "./Fields";
 
 interface PollProps {

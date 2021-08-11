@@ -1,4 +1,4 @@
-import { Flex, FormRadioGroup, Input, RadioGroup } from "@fluentui/react-northstar";
+import { Flex, FormRadioGroup, Input } from "@fluentui/react-northstar";
 import { useEffect, useState } from "react";
 
 interface RadioGroupCustomProps {

@@ -1,13 +1,13 @@
 import { FormInput } from "@fluentui/react-northstar";
-import { TextBoxQuestionResponse } from "interfaces/JotFormApiResponses";
-import * as React from "react";
+import { TextBoxQuestionResponse } from "interfaces/JotFormTypes";
+import React from "react";
 
 interface Props {
   question: TextBoxQuestionResponse;
   onChangeCallback: (value: string) => void;
 }
 
-export function TextBoxField({ question, onChangeCallback }: Props) {
+function TextBoxField({ question, onChangeCallback }: Props) {
   return (
     <FormInput
       id={question.qid}
@@ -18,4 +18,6 @@ export function TextBoxField({ question, onChangeCallback }: Props) {
   );
 }
 
-//export default React.memo(TextBoxField);
+const MemoizedTextBoxField = React.memo(TextBoxField);
+
+export { MemoizedTextBoxField };

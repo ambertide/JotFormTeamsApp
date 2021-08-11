@@ -1,7 +1,7 @@
 import { List } from "immutable";
-import { User } from "../api/JFApi";
+import User from "interfaces/User";
 import { AzureTeamMetadata } from "./AzureTypes";
-import JotFormMetadata from "./JotFormMetadata";
+import { JotFormMetadata } from "./JotFormTypes";
 
 export default interface reduxState {
   auth: User;

@@ -1,5 +1,5 @@
 import RadioGroupCustom from "components/Extensions/RadioGroupCustom";
-import { SelectQuestionResponse } from "interfaces/JotFormApiResponses";
+import { SelectQuestionResponse } from "interfaces/JotFormTypes";
 import * as React from "react";
 import { deconstructSpecial } from "utils/JFUtils";
 
@@ -8,7 +8,7 @@ interface Props {
   onChangeCallback: (value: string) => void;
 }
 
-export function ControlRadioField({ question, onChangeCallback }: Props) {
+function ControlRadioField({ question, onChangeCallback }: Props) {
   deconstructSpecial(question);
   const items: any[] = question.options.split("|");
   return (
@@ -23,4 +23,6 @@ export function ControlRadioField({ question, onChangeCallback }: Props) {
   );
 }
 
-//export default React.memo(ControlRadioField);
+const MemoizedControlRadioField = React.memo(ControlRadioField);
+
+export { MemoizedControlRadioField };

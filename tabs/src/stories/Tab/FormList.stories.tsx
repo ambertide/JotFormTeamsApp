@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import I from "immutable";
-import FormList from "components/FormList";
+import { FormList } from "components/Tab";
 import { ArrowLeftIcon } from "@fluentui/react-northstar";
 
 export default {

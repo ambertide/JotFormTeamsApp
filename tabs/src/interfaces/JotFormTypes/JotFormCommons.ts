@@ -62,3 +62,13 @@ export interface JotFormData {
   properties: JotFormProperties;
   questions: I.Map<StringAsNumber, JotFormQuestionData>;
 }
+
+export interface JotFormMetadata {
+  id: string;
+  title: string;
+  url: string;
+  status: "ENABLED" | "DISABLED";
+  created_at: string;
+  updated_at: string;
+  count: number;
+}

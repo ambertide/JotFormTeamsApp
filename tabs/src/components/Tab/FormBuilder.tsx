@@ -12,7 +12,7 @@ import {
   CheckmarkCircleIcon,
   RadioButtonIcon,
 } from "@fluentui/react-northstar";
-import { JotFormData, JotFormQuestionData, StringAsNumber } from "interfaces/JotFormData";
+import { JotFormData, JotFormQuestionData, StringAsNumber } from "interfaces/JotFormTypes";
 import { useState, useEffect } from "react";
 import I from "immutable";
 import ListItem from "interfaces/ListItem";
@@ -90,7 +90,7 @@ export default function FormBuilder(props: FormBuilderProps) {
         };
       })
     );
-  }, [questions, setListItems]);
+  }, [questions, setListItems, isLite]);
   return (
     <Segment
       styles={{

@@ -1,14 +1,16 @@
 import { sendPollToTeam } from "api/JFPollApi";
-import { call, put, takeEvery } from "redux-saga/effects";
-import { errorAction, RequestSendPollAction, SuccessAction } from "../../interfaces/reduxActions";
+import { call, takeEvery } from "redux-saga/effects";
+import { showError, showSuccess } from "utils/messaging";
+import { RequestSendPollAction } from "../../interfaces/reduxActions";
 
 // Intercepts the login user requests to send API request.
 function* sendPoll(action: RequestSendPollAction): any {
+  // TODO: Remove this alltogether?
   try {
     yield call(sendPollToTeam, action.teamID, action.channelID, action.formID, action.apiKey);
-    yield put<SuccessAction>({ type: "SUCCESS", message: "Poll sent!" });
+    showSuccess("Poll sent!");
   } catch (e) {
-    yield put<errorAction>({ type: "CONN_ERR", errorMessage: e });
+    showError(e.message);
   }
 }
 

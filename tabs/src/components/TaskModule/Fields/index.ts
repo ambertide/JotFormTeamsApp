@@ -1,4 +1,4 @@
-export { CheckboxField as checkbox } from "./CheckboxField";
-export { ControlRadioField as radio } from "./ControlRadioField";
-export { FullNameField as fullname } from "./FullNameField";
-export { TextBoxField as textbox } from "./TextBoxField";
+export { MemoizedCheckboxField as checkbox } from "./CheckboxField";
+export { MemoizedControlRadioField as radio } from "./ControlRadioField";
+export { MemoizedFullNameField as fullname } from "./FullNameField";
+export { MemoizedTextBoxField as textbox } from "./TextBoxField";

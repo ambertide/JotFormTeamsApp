@@ -1,22 +1,19 @@
 import ReactDOM from "react-dom";
-import App from "./pages/App";
 import "./index.css";
 import { Provider } from "react-redux";
 import { store, persistor } from "./rxutils";
 import { Route, Switch, HashRouter as Router } from "react-router-dom";
-import TabConfig from "pages/TabConfig";
-import FormsPage from "pages/FormsPage";
-import Auth from "pages/Auth";
+import { TabConfig } from "pages/teams";
+import { Auth, FormsPage, FormBuilderPage, App } from "pages/tab";
 import { ToastContainer } from "react-toastify";
 import { Provider as NorthstarProvider, teamsTheme, Loader, Box } from "@fluentui/react-northstar";
 import ErrorBoundary from "utils/ErrorBoundary";
 import { PersistGate } from "redux-persist/integration/react";
-import FormBuilderPage from "pages/FormBuilderPage";
 import "react-toastify/dist/ReactToastify.css";
 import * as teams from "@microsoft/teams-js";
 import { Providers, TeamsProvider, ProviderState } from "@microsoft/mgt";
-import PollPage from "pages/PollPage";
-import SubmittedPage from "pages/SubmittedPage";
+import { SubmittedPage, PollPage } from "pages/task_module";
+import { showError } from "utils/messaging";
 
 TeamsProvider.microsoftTeamsLib = teams;
 const config = {
@@ -31,9 +28,14 @@ const config = {
 };
 Providers.globalProvider = new TeamsProvider(config);
 Providers.onProviderUpdated((event) => {
-  if (Providers.globalProvider.state === ProviderState.SignedIn) {
+  if (
+    Providers.globalProvider.state === ProviderState.SignedIn &&
+    store.getState().auth.get("AzureADToken") === ""
+  ) {
+    // If we logged in but did not acquire the token, acquire the token.
     store.dispatch({ type: "AZURE_KEY_REQUEST" } as any);
   } else if (Providers.globalProvider.state === ProviderState.SignedOut) {
+    showError("Unable to login to Azure AD.");
     store.dispatch({ type: "AZURE_LOGIN_FAIL", apiKey: "" });
   }
 });

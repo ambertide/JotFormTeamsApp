@@ -1,5 +1,5 @@
 import { Flex } from "@fluentui/react-northstar";
-import Login from "components/Login";
+import { Login } from "components/Tab";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 

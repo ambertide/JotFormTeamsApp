@@ -6,7 +6,6 @@ import {
   AzureListTeamsResponse,
   AzureTeamMetadata,
 } from "interfaces/AzureTypes";
-import { generateGUID } from "@microsoft/teams-js";
 export async function getUserToken(): Promise<string> {
   const token = await Providers.globalProvider.getAccessToken();
   return token;
@@ -41,7 +40,7 @@ export async function postAdaptiveCardToChannel(
 ): Promise<void> {
   const attachment_id = "4523423432432423432423";
   const chatMessage = {
-    body: { contentType: "html", content: `<attachment id=\"${attachment_id}\"></attachment>` },
+    body: { contentType: "html", content: `<attachment id="${attachment_id}"></attachment>` },
     attachments: [
       {
         id: attachment_id,
@@ -50,7 +49,5 @@ export async function postAdaptiveCardToChannel(
       },
     ],
   };
-  const response = await Providers.client
-    .api(`/teams/${teamID}/channels/${channelID}/messages`)
-    .post(chatMessage);
+  await Providers.client.api(`/teams/${teamID}/channels/${channelID}/messages`).post(chatMessage);
 }

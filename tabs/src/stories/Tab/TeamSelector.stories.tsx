@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import TeamSelector from "components/TeamSelector";
+import { TeamSelector } from "components/Tab";
 import I from "immutable";
 import { AzureTeamMetadata, AzureChannelMetadata } from "interfaces/AzureTypes";
 

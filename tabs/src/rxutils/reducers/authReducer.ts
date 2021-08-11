@@ -1,20 +1,20 @@
-import { User } from "../../api/JFApi";
-import { LogoutAction, authAction } from "../../interfaces/reduxActions";
-import { toast } from "react-toastify";
+import I from "immutable";
+import User from "interfaces/User";
+import { LogoutAction, AuthAction, AzureAction } from "interfaces/reduxActions";
 
 export default function authReducer(
-  state = new User(false, ""),
-  action: authAction | LogoutAction
+  state: User = I.Map({ JFApiKey: "", AzureADToken: "" }),
+  action: AuthAction | LogoutAction | AzureAction
 ) {
   switch (action.type) {
     case "AUTH_SUCCESS":
-      return action.newUser;
-    case "AUTH_FAIL":
-      toast("Wrong email or password.", { type: "error" });
-      return state;
+      return state.set("JFApiKey", action.JFAppKey);
+    case "AZURE_LOGIN_SUCCESS":
+      return state.set("AzureADToken", action.apiKey);
     case "AUTH_LOGOUT":
-      toast("Logged out of your account.", { type: "info" });
-      return new User(false, "");
+      return state.set("JFApiKey", "");
+    case "AUTH_FAIL":
+    case "AZURE_LOGIN_FAIL":
     default:
       return state;
   }

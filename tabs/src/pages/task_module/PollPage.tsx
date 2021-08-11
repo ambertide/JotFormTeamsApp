@@ -1,15 +1,14 @@
 import I from "immutable";
 import { Flex, Header, Loader, Segment } from "@fluentui/react-northstar";
-import { QuestionResponse } from "interfaces/JotFormApiResponses";
-import { useHistory, useParams } from "react-router-dom";
+import { QuestionResponse, SubmissionFieldAnswer } from "interfaces/JotFormTypes";
 import { useState } from "react";
 import Poll from "components/TaskModule/Poll";
 import { useEffect } from "react";
 import { getFormQuestions, postSubmission } from "api/JFApi";
 import * as teams from "@microsoft/teams-js";
 import { useCallback } from "react";
-import { SubmissionFieldAnswer } from "interfaces/JotFormApiRequests";
 import useNavigation from "hooks/useNavigation";
+import { useParams } from "react-router-dom";
 
 interface PollURLParams {
   formID: string;
@@ -55,7 +54,7 @@ export default function PollPage() {
           navigateToError();
         });
     },
-    [postSubmission, apiKey, formID]
+    [apiKey, formID, navigateToError, navigateToFailure, navigateToSuccess]
   );
   useEffect(() => {
     getFormQuestions(apiKey, formID)

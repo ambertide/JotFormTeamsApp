@@ -1,6 +1,5 @@
 import RadioGroupCustom from "components/Extensions/RadioGroupCustom";
 import { Segment } from "@fluentui/react-northstar";
-import I from "immutable";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 export default {

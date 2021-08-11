@@ -1,4 +1,4 @@
-import "./Components.css";
+import "./../../Components.css";
 import {
   Button,
   Flex,
@@ -11,10 +11,10 @@ import {
 import { useState } from "react";
 import I from "immutable";
 import { useCallback } from "react";
-import TextBoxFragment from "./QuestionFragments/TextBoxFragment";
-import FullNameFragment from "./QuestionFragments/FullNameFragment";
-import SelectionFragment from "./QuestionFragments/SelectionFragment";
-import { JotFormQuestionData } from "interfaces/JotFormData";
+import TextBoxFragment from "./TextBoxFragment";
+import FullNameFragment from "./FullNameFragment";
+import SelectionFragment from "./SelectionFragment";
+import { JotFormQuestionData } from "interfaces/JotFormTypes";
 
 type QuestionType = "control_textbox" | "control_fullname" | "control_radio" | "control_checkbox";
 type QuestionTypeName = "Text Box" | "Full Name" | "Single Choice" | "Multiple Choice";

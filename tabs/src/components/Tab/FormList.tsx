@@ -2,7 +2,7 @@ import { Avatar, Divider, Flex, Header, List, Segment, Button } from "@fluentui/
 import { ToDoListIcon } from "@fluentui/react-icons-northstar";
 import I from "immutable";
 import { useState, useEffect } from "react";
-import JotFormMetadata from "interfaces/JotFormMetadata";
+import { JotFormMetadata } from "interfaces/JotFormTypes";
 import ListItem from "interfaces/ListItem";
 
 interface FormListProps {
@@ -52,7 +52,7 @@ export default function FormList(props: FormListProps) {
         };
       })
     );
-  }, [forms, isLite]);
+  }, [forms, isLite, onFormSelect]);
   return (
     <Segment style={{ height: "80%", width: "90%" }} className={isLite ? "lite" : ""}>
       <Flex column styles={{ maxHeight: "100%" }}>

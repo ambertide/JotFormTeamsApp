@@ -1,7 +1,6 @@
-import { teamsDarkTheme, teamsTheme } from "@fluentui/react-northstar";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import Login from "components/Login";
+import { Login } from "components/Tab";
 
 export default {
   title: "Tab/Login",

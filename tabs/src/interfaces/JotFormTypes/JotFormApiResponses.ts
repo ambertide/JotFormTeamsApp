@@ -1,4 +1,4 @@
-import { JFBoolean } from "./JotFormData";
+import { JFBoolean } from "./JotFormCommons";
 
 export interface BaseResponse {
   responseCode: number;

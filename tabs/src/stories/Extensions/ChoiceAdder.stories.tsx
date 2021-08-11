@@ -1,6 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import ChoiceAdder from "components/QuestionFragments/ChoiceAdder";
-import { Segment } from "@fluentui/react-northstar";
+import ChoiceAdder from "components/Tab/QuestionBuilder/ChoiceAdder";
 import I from "immutable";
 
 export default {

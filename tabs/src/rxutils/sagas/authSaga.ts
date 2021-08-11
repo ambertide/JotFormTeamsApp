@@ -1,17 +1,19 @@
 import { call, put, takeEvery } from "redux-saga/effects";
+import { showError } from "utils/messaging";
 import { login } from "../../api/JFApi";
-import { authRequestAction, errorAction } from "../../interfaces/reduxActions";
+import { AuthAction, authRequestAction } from "../../interfaces/reduxActions";
 
 // Intercepts the login user requests to send API request.
 function* loginUser(action: authRequestAction): any {
   try {
-    const user = yield call(login, action.username, action.password);
-    yield put({ type: "AUTH_SUCCESS", newUser: user });
+    const userAppKey = yield call(login, action.username, action.password);
+    yield put<AuthAction>({ type: "AUTH_SUCCESS", JFAppKey: userAppKey });
   } catch (e) {
     if (e.name === "LoginException") {
-      yield put({ type: "AUTH_FAIL", message: e.message });
+      showError("Wrong email or password.");
+      yield put({ type: "AUTH_FAIL", JFAppKey: "" });
     } else {
-      yield put<errorAction>({ type: "CONN_ERR", errorMessage: e.message });
+      showError(e.message);
     }
   }
 }

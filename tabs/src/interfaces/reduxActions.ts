@@ -4,14 +4,12 @@
  * as an interface.
  */
 import { List } from "immutable";
-import { User } from "../api/JFApi";
 import { AzureTeamMetadata } from "./AzureTypes";
-import { JotFormData } from "./JotFormData";
-import JotFormMetadata from "./JotFormMetadata";
+import { JotFormData, JotFormMetadata } from "./JotFormTypes";
 
-export interface authAction {
+export interface AuthAction {
   type: "AUTH_SUCCESS" | "AUTH_FAIL";
-  newUser?: User;
+  JFAppKey: string;
 }
 
 export interface authRequestAction {
@@ -28,11 +26,6 @@ export interface formsAction {
 export interface formsRequestAction {
   type: "FORMS_REQUEST";
   apiKey: string;
-}
-
-export interface errorAction {
-  type: "CONN_ERR";
-  errorMessage: string;
 }
 
 export interface createFormRequestAction {
@@ -70,11 +63,6 @@ export interface RequestSendPollAction {
   formID: string;
   channelID: string;
   teamID: string;
-}
-
-export interface SuccessAction {
-  type: "SUCCESS";
-  message: string;
 }
 
 export interface LogoutAction {

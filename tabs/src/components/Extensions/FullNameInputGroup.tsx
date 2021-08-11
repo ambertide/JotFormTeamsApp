@@ -1,7 +1,7 @@
 import { Dropdown, Input, Flex, Box } from "@fluentui/react-northstar";
-import { FullNameAnswer } from "interfaces/JotFormApiRequests";
+import { FullNameAnswer } from "interfaces/JotFormTypes/JotFormApiRequests";
 import I from "immutable";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useCallback } from "react";
 import "../Components.css";
 

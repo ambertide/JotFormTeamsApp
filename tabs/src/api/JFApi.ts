@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from "axios";
 import { List } from "immutable";
-import { PostSubmissionRequest } from "interfaces/JotFormApiRequests";
 import {
   LoginResponse,
   UserFormContent,
@@ -10,22 +9,14 @@ import {
   QuestionResponse,
   FormQuestionsResponse,
   SubmissionResponse,
-} from "interfaces/JotFormApiResponses";
-import { JotFormData } from "interfaces/JotFormData";
-import JotFormMetadata from "interfaces/JotFormMetadata";
+  JotFormData,
+  JotFormMetadata,
+  PostSubmissionRequest,
+} from "interfaces/JotFormTypes";
 import { addDecorativeFields } from "utils/JFUtils";
 import { LoginException } from "./exceptions";
-export class User {
-  isAuth: boolean;
-  APIKey: string;
 
-  constructor(isAuth: boolean = false, APIKey: string = "") {
-    this.isAuth = isAuth;
-    this.APIKey = APIKey;
-  }
-}
-
-export async function login(username: string, password: string): Promise<User> {
+export async function login(username: string, password: string): Promise<string> {
   const response: AxiosResponse<LoginResponse> = await axios({
     method: "post",
     url: "https://api.jotform.com/user/login",
@@ -39,9 +30,7 @@ export async function login(username: string, password: string): Promise<User> {
   if (response.data.responseCode === 401) {
     throw new LoginException("An error has occurred with login.");
   }
-  const userAPIKey = response.data.content.appKey;
-  console.log(userAPIKey);
-  return new User(true, userAPIKey);
+  return response.data.content.appKey;
 }
 
 export async function getTables(appKey: string): Promise<List<JotFormMetadata>> {

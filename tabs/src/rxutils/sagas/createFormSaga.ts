@@ -1,10 +1,7 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { postForm } from "api/JFApi";
-import {
-  createFormRequestAction,
-  errorAction,
-  formsRequestAction,
-} from "../../interfaces/reduxActions";
+import { createFormRequestAction, formsRequestAction } from "../../interfaces/reduxActions";
+import { showError } from "utils/messaging";
 
 // Intercepts the login user requests to send API request.
 function* createNewForm(action: createFormRequestAction): any {
@@ -12,7 +9,7 @@ function* createNewForm(action: createFormRequestAction): any {
     yield call(postForm, action.apiKey, action.formData);
     yield put<formsRequestAction>({ type: "FORMS_REQUEST", apiKey: action.apiKey });
   } catch (e) {
-    yield put<errorAction>({ type: "CONN_ERR", errorMessage: e.message });
+    showError(e.message);
   }
 }
 

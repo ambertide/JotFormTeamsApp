@@ -17,6 +17,9 @@ export interface TextBoxQuestion extends BasicQuestion {
 
 export interface FullNameQuestion extends BasicQuestion {
   type: "control_fullname";
+  prefix?: JFBoolean;
+  middle?: JFBoolean;
+  suffix?: JFBoolean;
 }
 
 export interface BaseChoiceQuestion extends BasicQuestion {

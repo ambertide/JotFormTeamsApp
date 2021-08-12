@@ -11,10 +11,27 @@ type ItemType = {
 };
 
 interface CheckboxGroupProps {
+  /**
+   * List of items.
+   */
   items: I.List<ItemType>;
+  /**
+   * Callback to be called when a checkbox is checked.
+   */
   onChange: (value: I.List<string>) => void;
+  /**
+   * If the other option is available.
+   */
   allowOther?: boolean;
+  /**
+   * Text to be shown in the other field.
+   */
   otherText?: string;
+  /**
+   * A parallel list to the items list that indicate whether or not
+   * a specific item is checked.
+   */
+  itemsPreset?: I.List<boolean>;
 }
 
 function CheckboxGroupOther(props: {
@@ -47,14 +64,14 @@ function CheckboxGroupOther(props: {
 }
 
 export default function CheckboxGroup(props: CheckboxGroupProps) {
-  const { items, onChange, allowOther, otherText = "Other" } = props;
+  const { items, onChange, allowOther, itemsPreset, otherText = "Other" } = props;
   const [effectiveOtherText, setEffectiveOtherText] = useState(""); // Effect of the other text to selected.
   const itemKeyToLabel = useRef(
     items.reduce((reducer, value) => reducer.set(value.keyID, value.text), I.Map<string, string>())
   );
   const [selections, setSelections] = useState(
     items.reduce(
-      (reduction, value, key) => reduction.set(value.keyID, false),
+      (reduction, value, key) => reduction.set(value.keyID, itemsPreset?.get(key, false) || false),
       I.Map<string, boolean>({})
     )
   ); // qid => answer.

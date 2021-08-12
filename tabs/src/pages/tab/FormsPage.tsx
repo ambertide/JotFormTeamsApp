@@ -3,7 +3,7 @@ import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FormList } from "components/Tab";
 import { TeamSelector } from "components/Tab";
-import { ArrowLeftIcon, Flex } from "@fluentui/react-northstar";
+import { ArrowLeftIcon, Flex, Loader } from "@fluentui/react-northstar";
 import useNavigation from "hooks/useNavigation";
 import { useState } from "react";
 import { getChannelsInTeam } from "api/AzureADApi";
@@ -52,17 +52,21 @@ export default function FormsPage() {
         />
       ) : null}
       <Flex hAlign="center" fill>
-        <FormList
-          forms={forms}
-          isLite={false}
-          buttonOnClick={navigateToMainPage}
-          buttonIcon={<ArrowLeftIcon />}
-          buttonText={"Return to Main Page"}
-          onFormSelect={(formID: string) => {
-            setSelectedFormID(formID);
-            setIsOpen(true);
-          }}
-        />
+        {forms.isEmpty() ? (
+          <Loader />
+        ) : (
+          <FormList
+            forms={forms}
+            isLite={false}
+            buttonOnClick={navigateToMainPage}
+            buttonIcon={<ArrowLeftIcon />}
+            buttonText={"Return to Main Page"}
+            onFormSelect={(formID: string) => {
+              setSelectedFormID(formID);
+              setIsOpen(true);
+            }}
+          />
+        )}
       </Flex>
     </>
   );

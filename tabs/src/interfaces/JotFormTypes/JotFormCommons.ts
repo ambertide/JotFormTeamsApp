@@ -12,7 +12,7 @@ export type BasicQuestion = {
 export interface TextBoxQuestion extends BasicQuestion {
   type: "control_textbox";
   validation: "None" | "Email" | "AlphaNumeric" | "Alphabetic" | "Numeric" | "URL";
-  size: StringAsNumber;
+  maxsize: StringAsNumber;
 }
 
 export interface FullNameQuestion extends BasicQuestion {

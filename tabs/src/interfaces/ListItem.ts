@@ -1,7 +1,7 @@
 export default interface ListItem {
   key: string;
   header: string;
-  headerMedia: any;
+  headerMedia?: any;
   media: any;
   onClick?: () => void;
 }

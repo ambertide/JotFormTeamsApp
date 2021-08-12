@@ -2,21 +2,28 @@ import { FormCheckbox, FormDropdown, FormInput } from "@fluentui/react-northstar
 import QuestionFragmentProps from "interfaces/QuestionFragmentProps";
 import { useState } from "react";
 import I from "immutable";
-import { RadioQuestion } from "interfaces/JotFormTypes";
+import { CheckboxQuestion, RadioQuestion } from "interfaces/JotFormTypes";
 import { useEffect } from "react";
 import ChoiceAdder from "./ChoiceAdder";
 
 type RadioQKeys = keyof RadioQuestion;
 type RadioQValues = RadioQuestion[RadioQKeys];
 
+interface SelectionFragmentProps extends QuestionFragmentProps {
+  initialState?: CheckboxQuestion | RadioQuestion;
+}
+
 /**
  * Used to build a question of type
  * control_fullname.
  */
-export default function SelectionFragment(props: QuestionFragmentProps) {
-  const { addPropertyToQuestion } = props;
+export default function SelectionFragment(props: SelectionFragmentProps) {
+  const { addPropertyToQuestion, initialState } = props;
   const [radioProperties, setRadioProperties] = useState(
-    I.Map<RadioQKeys, RadioQValues>({ allowOther: "No", special: "None" })
+    I.Map<RadioQKeys, RadioQValues>({
+      allowOther: initialState?.allowOther || "No",
+      special: initialState?.special || "None",
+    })
   );
   useEffect(() => {
     radioProperties.forEach((value, key) => {
@@ -39,6 +46,7 @@ export default function SelectionFragment(props: QuestionFragmentProps) {
       />
       <FormInput
         label="Other Text"
+        defaultValue={initialState?.otherText}
         disabled={radioProperties.get("allowOther") === "No"}
         onChange={(event, data) => {
           setRadioProperties((previousProperties) =>
@@ -57,7 +65,10 @@ export default function SelectionFragment(props: QuestionFragmentProps) {
           );
         }}
       />
-      <ChoiceAdder setQuestionProperty={setRadioProperties} initialChoices={I.List()} />
+      <ChoiceAdder
+        setQuestionProperty={setRadioProperties}
+        initialChoices={I.List(initialState?.options?.split("|") || [])}
+      />
     </>
   );
 }

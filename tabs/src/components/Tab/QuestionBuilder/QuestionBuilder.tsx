@@ -14,7 +14,12 @@ import { useCallback } from "react";
 import TextBoxFragment from "./TextBoxFragment";
 import FullNameFragment from "./FullNameFragment";
 import SelectionFragment from "./SelectionFragment";
-import { JotFormQuestionData } from "interfaces/JotFormTypes";
+import {
+  CheckboxQuestion,
+  JotFormQuestionData,
+  RadioQuestion,
+  TextBoxQuestion,
+} from "interfaces/JotFormTypes";
 
 type QuestionType = "control_textbox" | "control_fullname" | "control_radio" | "control_checkbox";
 type QuestionTypeName = "Text Box" | "Full Name" | "Single Choice" | "Multiple Choice";
@@ -25,7 +30,19 @@ const questionTypes = I.Map<QuestionTypeName, QuestionType>({
   "Single Choice": "control_radio",
   "Multiple Choice": "control_checkbox",
 });
+
+const questionTypesReverseLookup = I.Map<QuestionType, QuestionTypeName>({
+  control_textbox: "Text Box",
+  control_fullname: "Full Name",
+  control_radio: "Single Choice",
+  control_checkbox: "Multiple Choice",
+});
 interface QuestionBuilderProps {
+  /**
+   * Represents the initial parameters given to the question, this
+   * will populate the fields.
+   */
+  initialState?: JotFormQuestionData;
   /**
    * Callback used to save the question to the global state.
    */
@@ -36,14 +53,33 @@ interface QuestionBuilderProps {
   onClickSecondary: () => void;
   /** True if the component is in lite mode. */
   isLite: boolean;
+  /**
+   * Text of the primary button.
+   */
+  buttonTitle?: string;
 }
 
 export default function QuestionBuilder(props: QuestionBuilderProps) {
-  const { onSaveQuestion, secondaryButtonTitle, onClickSecondary, isLite } = props;
-  const [questionType, setQuestionType] = useState<QuestionType>("control_textbox");
-  const [questionName, setQuestionName] = useState<QuestionTypeName>("Text Box");
+  const {
+    onSaveQuestion,
+    secondaryButtonTitle,
+    onClickSecondary,
+    isLite,
+    initialState,
+    buttonTitle = "Add Question",
+  } = props;
+  const [questionType, setQuestionType] = useState<QuestionType>(
+    (initialState?.type as any) || "control_textbox"
+  );
+  const [questionName, setQuestionName] = useState<QuestionTypeName>(
+    questionTypesReverseLookup.get(questionType, "Text Box")
+  );
   const [questionProperties, setQuestionProperties] = useState<I.Map<string, string | number>>(
-    I.Map<string, string | number>({ required: "No", text: "My Question", type: "control_textbox" })
+    I.Map<string, string | number>(
+      initialState
+        ? (initialState as any)
+        : { required: "No", text: "My Question", type: "control_textbox" }
+    )
   );
   const addPropertyToQuestion = useCallback(
     // Adds a property to the active question.
@@ -57,12 +93,27 @@ export default function QuestionBuilder(props: QuestionBuilderProps) {
   const getQuestionFragment = (questionType: QuestionType) => {
     switch (questionType) {
       case "control_fullname":
-        return <FullNameFragment addPropertyToQuestion={addPropertyToQuestion} />;
+        return (
+          <FullNameFragment
+            addPropertyToQuestion={addPropertyToQuestion}
+            initialState={initialState}
+          />
+        );
       case "control_textbox":
-        return <TextBoxFragment addPropertyToQuestion={addPropertyToQuestion} />;
+        return (
+          <TextBoxFragment
+            addPropertyToQuestion={addPropertyToQuestion}
+            initialState={initialState as TextBoxQuestion}
+          />
+        );
       case "control_radio":
       case "control_checkbox":
-        return <SelectionFragment addPropertyToQuestion={addPropertyToQuestion} />;
+        return (
+          <SelectionFragment
+            addPropertyToQuestion={addPropertyToQuestion}
+            initialState={initialState as RadioQuestion | CheckboxQuestion}
+          />
+        );
       default:
         return null;
     }
@@ -102,6 +153,7 @@ export default function QuestionBuilder(props: QuestionBuilderProps) {
         />
         <FormCheckbox
           label="Required"
+          checked={questionProperties.get("required", "No") === "Yes"}
           onChange={(event, data) => {
             addPropertyToQuestion("required", data?.checked ? "Yes" : "No");
           }}
@@ -109,7 +161,7 @@ export default function QuestionBuilder(props: QuestionBuilderProps) {
         {getQuestionFragment(questionType)}
         <Flex gap="gap.smaller">
           <FormButton
-            content="Add"
+            content={buttonTitle}
             primary
             onClick={() => {
               onSaveQuestion(questionProperties.toObject() as unknown as JotFormQuestionData);

@@ -6,7 +6,6 @@ import {
   FormatIcon,
   Button,
   Avatar,
-  TrashCanIcon,
   Divider,
   Input,
   CheckmarkCircleIcon,
@@ -63,29 +62,17 @@ export default function FormBuilder(props: FormBuilderProps) {
   const [formTitle, setFormTitle] = useState<string>("My Form");
   const [questions, setQuestions] = useState(I.List<JotFormQuestionData>());
   const [listItems, setListItems] = useState(I.List<ListItem | JSX.Element>());
+  // Represents the question currently selected, -1 for new question.
+  const [selectedQuestion, setSelectedQuestion] = useState(-1);
   useEffect(() => {
     setListItems(
       questions.map((question, index) => {
         return {
           key: `question${index}`,
           header: question.text,
-          headerMedia: isLite ? (
-            <Button
-              content="Remove Question"
-              onClick={() => {
-                setQuestions((previousQuestions) => previousQuestions.remove(index));
-              }}
-            />
-          ) : (
-            <Button
-              icon={<TrashCanIcon />}
-              iconOnly
-              title="Remove Question"
-              onClick={() => {
-                setQuestions((previousQuestions) => previousQuestions.remove(index));
-              }}
-            />
-          ),
+          onClick: () => {
+            setSelectedQuestion(index);
+          },
           media: <Avatar icon={getQuestionIcon(question.type)} square />,
         };
       })
@@ -113,24 +100,53 @@ export default function FormBuilder(props: FormBuilderProps) {
           <Button content={buttonContent} onClick={buttonOnClick} styles={{ marginLeft: "auto" }} />
         </Flex>
         <List
-          items={listItems
-            .push(
-              <Divider />,
-              <QuestionBuilder
-                onSaveQuestion={(question) => {
-                  setQuestions((previousQuestions) => previousQuestions.push(question));
-                }}
-                secondaryButtonTitle="Save Form"
-                onClickSecondary={() => {
-                  onSaveForm({
-                    properties: { title: formTitle },
-                    questions: convertQuestions(questions),
-                  });
-                }}
-                isLite={isLite}
-              />
-            )
-            .toArray()}
+          items={
+            selectedQuestion === -1 // If currently no question is selected, put the Question builder to the last.
+              ? listItems // And configure it to create a new question.
+                  .push(
+                    <Divider />,
+                    <QuestionBuilder
+                      onSaveQuestion={(question) => {
+                        setQuestions((previousQuestions) => previousQuestions.push(question));
+                      }}
+                      secondaryButtonTitle="Save Form"
+                      onClickSecondary={() => {
+                        onSaveForm({
+                          properties: { title: formTitle },
+                          questions: convertQuestions(questions),
+                        });
+                      }}
+                      isLite={isLite}
+                    />
+                  )
+                  .toArray()
+              : listItems
+                  .remove(selectedQuestion)
+                  .insert(selectedQuestion, <Divider />)
+                  .insert(
+                    selectedQuestion,
+                    <QuestionBuilder
+                      initialState={questions.get(selectedQuestion)}
+                      isLite={isLite}
+                      secondaryButtonTitle="Delete Question"
+                      onClickSecondary={() => {
+                        setQuestions((previousQuestions) =>
+                          previousQuestions.remove(selectedQuestion)
+                        ); // Delete the question.
+                        setSelectedQuestion(-1); // Unselect it.
+                      }}
+                      onSaveQuestion={(question) => {
+                        setQuestions((previousQuestions) =>
+                          previousQuestions.set(selectedQuestion, question)
+                        );
+                        setSelectedQuestion(-1);
+                      }}
+                      buttonTitle="Modify Question"
+                    />
+                  )
+                  .insert(selectedQuestion, <Divider />)
+                  .toArray()
+          }
         />
       </Flex>
     </Segment>

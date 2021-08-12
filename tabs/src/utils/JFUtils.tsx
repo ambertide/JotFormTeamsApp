@@ -6,6 +6,8 @@ import {
   SelectQuestionResponse,
 } from "interfaces/JotFormTypes";
 import I from "immutable";
+import { ValidationType, ValidatorFunction, ValidatorStore } from "interfaces/ValidationTypes";
+import validator from "validator";
 
 /**
  * In radio and checkbox question types, deconstruct special values to normal
@@ -57,4 +59,29 @@ export function addDecorativeFields(formData: JotFormData) {
     .set("0", headerData) // Put the header in front.
     .set(`${maxKey + 2}`, submitButton); // Put the submit to the last.
 }
-export function removeDecorativeFields() {}
+
+const validatorStore: ValidatorStore = {
+  None: (validatee: string) => true,
+  Email: validator.isEmail,
+  URL: validator.isURL,
+  AlphaNumeric: validator.isAlphanumeric,
+  Alphabetic: validator.isAlpha,
+  Numeric: validator.isNumeric,
+};
+
+function dispatchValidator(validationType: ValidationType): ValidatorFunction {
+  return validatorStore[validationType];
+}
+
+/**
+ * Given a string and the type of validation to be performed,
+ * perform the validation and return a boolean value indicating
+ * whether the string is valid.
+ * @param validatee String to be validated.
+ * @param validationType Type of validation to be performed.
+ * @returns Whether the string is valid.
+ */
+export function validateString(validatee: string, validationType: ValidationType): boolean {
+  const validator = dispatchValidator(validationType);
+  return validator(validatee);
+}

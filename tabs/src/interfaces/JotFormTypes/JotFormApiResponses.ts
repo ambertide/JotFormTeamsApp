@@ -1,3 +1,4 @@
+import { ValidationType } from "interfaces/ValidationTypes";
 import { JFBoolean } from "./JotFormCommons";
 
 export interface BaseResponse {
@@ -115,7 +116,7 @@ export interface TextBoxQuestionResponse extends QuestionResponse {
   size?: string;
   text: string;
   type: "control_textbox";
-  validation: "None" | "Email" | "AlphaNumeric" | "Alphabetic" | "Numeric" | "URL";
+  validation: ValidationType;
 }
 
 export interface SelectQuestionResponse extends QuestionResponse {

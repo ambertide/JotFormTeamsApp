@@ -1,4 +1,5 @@
 import I from "immutable";
+import { ValidationType } from "interfaces/ValidationTypes";
 
 export type JFBoolean = "Yes" | "No";
 export type StringAsNumber = `${number}`;
@@ -11,7 +12,7 @@ export type BasicQuestion = {
 
 export interface TextBoxQuestion extends BasicQuestion {
   type: "control_textbox";
-  validation: "None" | "Email" | "AlphaNumeric" | "Alphabetic" | "Numeric" | "URL";
+  validation: ValidationType;
   maxsize: StringAsNumber;
 }
 

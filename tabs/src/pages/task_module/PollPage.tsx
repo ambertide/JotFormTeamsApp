@@ -22,7 +22,6 @@ export default function PollPage() {
   const navigateToFailure = useNavigation("/submitted/fail");
   const navigateToError = useNavigation("/submitted/error");
   const [formQuestions, setFormQuestions] = useState<I.List<QuestionResponse>>();
-  const [hasErrorOccurred, setHasErrorOccurred] = useState(false);
   const onSubmit = useCallback(
     (answers: I.Map<string, string | SubmissionFieldAnswer>) => {
       const formattedAnswers = [
@@ -57,9 +56,7 @@ export default function PollPage() {
     [apiKey, formID, navigateToError, navigateToFailure, navigateToSuccess]
   );
   useEffect(() => {
-    getFormQuestions(apiKey, formID)
-      .then((questions) => setFormQuestions(I.List(questions)))
-      .catch((err) => setHasErrorOccurred(true));
+    getFormQuestions(apiKey, formID).then((questions) => setFormQuestions(I.List(questions)));
   }, [setFormQuestions, formID, apiKey]);
   return (
     <Flex column styles={{ position: "absolute", top: 0, width: "100%" }}>

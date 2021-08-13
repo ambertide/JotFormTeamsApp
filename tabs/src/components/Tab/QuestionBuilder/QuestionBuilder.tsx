@@ -16,6 +16,7 @@ import FullNameFragment from "./FullNameFragment";
 import SelectionFragment from "./SelectionFragment";
 import {
   CheckboxQuestion,
+  FullNameQuestion,
   JotFormQuestionData,
   RadioQuestion,
   TextBoxQuestion,
@@ -96,7 +97,7 @@ export default function QuestionBuilder(props: QuestionBuilderProps) {
         return (
           <FullNameFragment
             addPropertyToQuestion={addPropertyToQuestion}
-            initialState={initialState}
+            initialState={initialState as FullNameQuestion}
           />
         );
       case "control_textbox":

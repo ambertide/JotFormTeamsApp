@@ -81,8 +81,8 @@ export default function FormBuilder(props: FormBuilderProps) {
   return (
     <Segment
       styles={{
-        width: "60%",
-        maxHeight: "600px",
+        height: "90%",
+        width: "90%",
         overflowY: "auto",
       }}
       className={isLite ? "lite" : ""}

@@ -54,7 +54,7 @@ export default function FormList(props: FormListProps) {
     );
   }, [forms, isLite, onFormSelect]);
   return (
-    <Segment style={{ height: "80%", width: "90%" }} className={isLite ? "lite" : ""}>
+    <Segment style={{ height: "90%", width: "90%" }} className={isLite ? "lite" : ""}>
       <Flex column styles={{ maxHeight: "100%" }}>
         <Flex styles={{ width: "100%" }} vAlign="center">
           <Header as="h2" content="Your Forms" />

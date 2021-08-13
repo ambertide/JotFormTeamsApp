@@ -28,7 +28,7 @@ export default function FormBuilderPage() {
     [dispatch, JFApiKey, navigateToMainPage]
   );
   return !successfulCreation ? (
-    <Flex styles={{ width: "100%" }} hAlign="center">
+    <Flex styles={{ width: "100%", height: "100%" }} hAlign="center">
       <FormBuilder
         isLite={false}
         onSaveForm={dispatchSaveForm}

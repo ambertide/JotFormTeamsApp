@@ -4,20 +4,19 @@ import { QuestionResponse, SubmissionFieldAnswer } from "interfaces/JotFormTypes
 import { useState } from "react";
 import Poll from "components/TaskModule/Poll";
 import { useEffect } from "react";
-import { getFormQuestions, postSubmission } from "api/JFApi";
 import * as teams from "@microsoft/teams-js";
 import { useCallback } from "react";
 import useNavigation from "hooks/useNavigation";
 import { useParams } from "react-router-dom";
+import { getPollQuestions, postSubmissionByProxy } from "api/JFPollApi";
 
 interface PollURLParams {
-  formID: string;
-  apiKey: string;
+  uuid: string; // This is a key that uniquely identifies the user/poll pair in the proxy.
   formName: string;
 }
 
 export default function PollPage() {
-  const { formID, apiKey, formName } = useParams<PollURLParams>();
+  const { uuid, formName } = useParams<PollURLParams>();
   const navigateToSuccess = useNavigation("/submitted/success");
   const navigateToFailure = useNavigation("/submitted/fail");
   const navigateToError = useNavigation("/submitted/error");
@@ -35,7 +34,7 @@ export default function PollPage() {
           })
           .toObject(),
       ];
-      postSubmission(apiKey, formID, formattedAnswers as any)
+      postSubmissionByProxy(uuid, formattedAnswers as any)
         .then((result) => {
           setTimeout(() => {
             teams.tasks.submitTask();
@@ -53,11 +52,11 @@ export default function PollPage() {
           navigateToError();
         });
     },
-    [apiKey, formID, navigateToError, navigateToFailure, navigateToSuccess]
+    [uuid, navigateToError, navigateToFailure, navigateToSuccess]
   );
   useEffect(() => {
-    getFormQuestions(apiKey, formID).then((questions) => setFormQuestions(I.List(questions)));
-  }, [setFormQuestions, formID, apiKey]);
+    getPollQuestions(uuid).then((questions) => setFormQuestions(I.List(questions)));
+  }, [setFormQuestions, uuid]);
   return (
     <Flex column styles={{ position: "absolute", top: 0, width: "100%" }}>
       <Segment>

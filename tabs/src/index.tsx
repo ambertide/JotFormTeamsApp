@@ -70,7 +70,7 @@ ReactDOM.render(
                 <Route exact path="/auth">
                   <Auth />
                 </Route>
-                <Route path="/poll/:apiKey/:formID/:formName">
+                <Route path="/poll/:uuid/:formName">
                   <PollPage />
                 </Route>
                 <Route path="/submitted/:status">

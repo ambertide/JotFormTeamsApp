@@ -7,6 +7,8 @@ import { Dialog } from "@fluentui/react-northstar";
 import useNavigation from "hooks/useNavigation";
 import { Login } from "@microsoft/mgt-react";
 import { selectIsAzureADAuth, selectIsJFAuth } from "rxutils/selectors";
+import { useEffect } from "react";
+import { pingProxy } from "api/JFPollApi";
 /**
  * The main app which handles the initialization and routing
  * of the app.
@@ -15,6 +17,9 @@ export default function App() {
   const isJFAuth = useSelector(selectIsJFAuth);
   const isAzureADAuth = useSelector(selectIsAzureADAuth);
   const navigateToAuth = useNavigation("/auth");
+  useEffect(() => {
+    pingProxy(); // This wakes up the server, because free heroku servers sleep.
+  }, []);
   return (
     <>
       <Dialog

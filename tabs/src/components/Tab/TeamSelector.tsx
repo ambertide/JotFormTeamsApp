@@ -1,6 +1,7 @@
 import {
   ArrowLeftIcon,
   Button,
+  CloseIcon,
   ComponentSlotStyle,
   Divider,
   Flex,
@@ -31,10 +32,14 @@ interface TeamSelectorProps {
    * Extra styles to be applied to the component.
    */
   styles?: ComponentSlotStyle<SegmentProps, any>;
+  /**
+   * Callback to be executed on close.
+   */
+  onClose: () => void;
 }
 
 export default function TeamSelector(props: TeamSelectorProps) {
-  const { teams, styles, getChannels, onChannelSelect } = props;
+  const { teams, styles, getChannels, onChannelSelect, onClose } = props;
   const [selectedTeam, setSelectedTeam] = useState<string>("");
   const [channels, setChannels] = useState<I.List<AzureChannelMetadata>>(I.List());
   const cleanSelectedTeam = useCallback(() => {
@@ -55,18 +60,16 @@ export default function TeamSelector(props: TeamSelectorProps) {
       <Flex column>
         <Flex styles={{ width: "100%" }}>
           <Header as="h3" content={"Share your poll"} />
-          {selectedTeam !== "" && (
-            <Button
-              styles={{
-                marginLeft: "auto",
-                marginTop: "auto",
-                marginBottom: "auto",
-              }}
-              icon={<ArrowLeftIcon />}
-              iconOnly
-              onClick={cleanSelectedTeam}
-            />
-          )}
+          <Button
+            styles={{
+              marginLeft: "auto",
+              marginTop: "auto",
+              marginBottom: "auto",
+            }}
+            icon={selectedTeam === "" ? <CloseIcon /> : <ArrowLeftIcon />}
+            iconOnly
+            onClick={selectedTeam === "" ? onClose : cleanSelectedTeam}
+          />
         </Flex>
         <Divider content={`Select a ${selectedTeam === "" ? "Team" : "Channel"}`} />
         {selectedTeam === "" ? (

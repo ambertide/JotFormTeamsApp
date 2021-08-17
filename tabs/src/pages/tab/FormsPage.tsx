@@ -49,6 +49,10 @@ export default function FormsPage() {
             top: 0,
             right: 0,
           }}
+          onClose={() => {
+            setSelectedFormID("");
+            setIsOpen(false);
+          }}
         />
       ) : null}
       <Flex hAlign="center" fill>

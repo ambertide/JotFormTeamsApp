@@ -41,7 +41,7 @@ export default function SubmissionViewer({
       <Flex column styles={{ minHeight: "100%", maxHeight: "100%" }}>
         <Flex>
           <Header content={`${formTitle} Submissions`} />
-          <Flex style={{ marginLeft: "auto" }}>
+          <Flex style={{ marginLeft: "auto" }} gap="gap.small">
             {navButton}
             <ViewSwitcher currentState={viewType} setCurrentState={setViewType} />
           </Flex>

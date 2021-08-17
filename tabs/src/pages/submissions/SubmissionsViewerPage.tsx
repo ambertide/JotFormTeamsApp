@@ -73,7 +73,7 @@ export default function SubmissionsViewerPage() {
         formQuestions={formQuestions}
         submissions={formSubmissions}
         distributions={formDistributions}
-        navButton={<Button content="Return to Main Page" onClick={navigateToMainPage} primary />}
+        navButton={<Button content="Return to Main Page" onClick={navigateToMainPage} />}
       />
     </Flex>
   );

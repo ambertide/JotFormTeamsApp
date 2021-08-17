@@ -1,11 +1,4 @@
-import {
-  Button,
-  ContactCardIcon,
-  Flex,
-  PollIcon,
-  Segment,
-  TableIcon,
-} from "@fluentui/react-northstar";
+import { Button, ContactCardIcon, PollIcon, TableIcon } from "@fluentui/react-northstar";
 import { ViewType } from "interfaces/ViewTypes";
 import { Dispatch, SetStateAction } from "react";
 import I from "immutable";
@@ -38,6 +31,7 @@ export default function ViewSwitcher({ currentState, setCurrentState, style }: V
           iconOnly: true,
           title: state,
           onClick: () => setCurrentState(state),
+          primary: true,
         }))
         .valueSeq()
         .toArray(),

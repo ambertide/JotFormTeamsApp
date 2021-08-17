@@ -4,9 +4,9 @@
     "description": "",
     "author": "",
     "scripts": {
-    	"prepare": "husky install",
+        "prepare": "husky install",
         "test": "echo \"Error: no test specified\" && exit 1",
-	"lint": "eslint tabs/src"
+        "lint": "eslint tabs/src"
     },
     "license": "MIT",
     "dependencies": {
@@ -19,6 +19,7 @@
         "react-modal": "^3.14.3",
         "react-redux": "^7.2.4",
         "react-toastify": "^7.0.4",
+        "recharts": "^2.1.0",
         "redux": "^4.1.0",
         "redux-persist": "^6.0.0",
         "redux-saga": "^1.1.3"

@@ -61,7 +61,7 @@ export default function FormsPage() {
             buttonOnClick={navigateToMainPage}
             buttonIcon={<ArrowLeftIcon />}
             buttonText={"Return to Main Page"}
-            onFormSelect={(formID: string) => {
+            onFormSelect={(formID: string, formName: string) => {
               setSelectedFormID(formID);
               setIsOpen(true);
             }}

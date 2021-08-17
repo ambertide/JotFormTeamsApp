@@ -12,6 +12,8 @@ import {
   JotFormData,
   JotFormMetadata,
   PostSubmissionRequest,
+  FormSubmissionResponse,
+  FormSubmissionResponseContent,
 } from "interfaces/JotFormTypes";
 import { addDecorativeFields } from "utils/JFUtils";
 import { LoginException } from "./exceptions";
@@ -108,4 +110,20 @@ export async function postSubmission(
     { params: { apiKey } }
   );
   return response && response.status === 200;
+}
+
+/**
+ * Get submissions done of a form.
+ */
+export async function getFormSubmissions(
+  apiKey: string,
+  formID: string
+): Promise<FormSubmissionResponseContent[]> {
+  const response = await axios.get<FormSubmissionResponse>(
+    `https://api.jotform.com/form/${formID}/submissions`,
+    {
+      params: { apiKey },
+    }
+  );
+  return response.data.content;
 }

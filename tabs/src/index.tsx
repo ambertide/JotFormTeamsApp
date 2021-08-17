@@ -14,6 +14,8 @@ import * as teams from "@microsoft/teams-js";
 import { Providers, TeamsProvider, ProviderState } from "@microsoft/mgt";
 import { SubmittedPage, PollPage } from "pages/task_module";
 import { showError } from "utils/messaging";
+import { SubmissionSelector } from "pages/submissions";
+import SubmissionsViewerPage from "pages/submissions/SubmissionsViewerPage";
 
 TeamsProvider.microsoftTeamsLib = teams;
 const config = {
@@ -73,6 +75,12 @@ ReactDOM.render(
                 </Route>
                 <Route path="/submitted/:status">
                   <SubmittedPage />
+                </Route>
+                <Route path="/results" exact>
+                  <SubmissionSelector />
+                </Route>
+                <Route path="/results/:formID/:formName">
+                  <SubmissionsViewerPage />
                 </Route>
               </Switch>
             </Router>

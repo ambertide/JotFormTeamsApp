@@ -3,6 +3,11 @@ import { ValidationType } from "interfaces/ValidationTypes";
 
 export type JFBoolean = "Yes" | "No";
 export type StringAsNumber = `${number}`;
+export type PollQuestionType =
+  | "control_textbox"
+  | "control_fullname"
+  | "control_radio"
+  | "control_checkbox";
 
 export type BasicQuestion = {
   type: string;
@@ -76,3 +81,17 @@ export interface JotFormMetadata {
   updated_at: string;
   count: number;
 }
+
+export interface FullNameAnswer {
+  first: string;
+  last: string;
+  prefix?: string;
+  middle?: string;
+  suffix?: string;
+}
+
+interface TextAnswer {
+  text: string;
+}
+
+export type SubmissionFieldAnswer = FullNameAnswer | I.List<string> | TextAnswer;

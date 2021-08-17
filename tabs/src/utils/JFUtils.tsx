@@ -4,10 +4,12 @@ import {
   JotFormQuestionData,
   SubmitQuestion,
   SelectQuestionResponse,
+  FormSubmissionResponseContent,
 } from "interfaces/JotFormTypes";
 import I from "immutable";
 import { ValidationType, ValidatorFunction, ValidatorStore } from "interfaces/ValidationTypes";
 import validator from "validator";
+import { ProcessedFormSubmissions } from "interfaces/ViewTypes";
 
 /**
  * In radio and checkbox question types, deconstruct special values to normal
@@ -84,4 +86,35 @@ function dispatchValidator(validationType: ValidationType): ValidatorFunction {
 export function validateString(validatee: string, validationType: ValidationType): boolean {
   const validator = dispatchValidator(validationType);
   return validator(validatee);
+}
+
+/**
+ * Check if the type of the question is a poll type.
+ * Used to filter control_head an control_button
+ */
+export function isPollType(questionType: string) {
+  return questionType !== "control_head" && questionType !== "control_button";
+}
+
+export function processSubmissions(
+  submissions: FormSubmissionResponseContent[],
+  formName: string
+): ProcessedFormSubmissions {
+  return {
+    formName: formName, // Get the form name.
+    submissions: I.List(submissions).map((submission) => ({
+      submissionDate: submission.created_at,
+      ipAdress: submission.ip,
+      answers: I.Map(submission.answers).reduce((reduction, answer, qid) => {
+        // Convert each submissions answer.
+        return reduction.push({
+          // By first generating a map, and reducing it into a list.
+          qid: qid,
+          answer: answer.answer,
+          processedAnswer: answer.prettyFormat || "",
+          type: answer.type,
+        });
+      }, I.List()),
+    })),
+  };
 }

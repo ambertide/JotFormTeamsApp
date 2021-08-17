@@ -29,14 +29,18 @@ interface FormListProps {
   /**
    * URL of the poll.
    */
-  onFormSelect: (formID: string) => void;
+  onFormSelect: (formID: string, formName: string) => void;
+  /**
+   * If true, hide the button on top right.
+   */
+  hideButton?: boolean;
 }
 
 /**
  * Lists the forms belonging to a user.
  */
 export default function FormList(props: FormListProps) {
-  const { forms, isLite, onFormSelect, buttonOnClick, buttonIcon, buttonText } = props;
+  const { forms, isLite, onFormSelect, buttonOnClick, buttonIcon, buttonText, hideButton } = props;
   const [listItems, setListItems] = useState<I.List<ListItem>>(I.List());
   useEffect(() => {
     setListItems(
@@ -47,7 +51,7 @@ export default function FormList(props: FormListProps) {
           headerMedia: isLite ? "" : form.updated_at,
           media: <Avatar icon={<ToDoListIcon />} square />,
           onClick: () => {
-            onFormSelect(form.id);
+            onFormSelect(form.id, form.title);
           },
         };
       })
@@ -57,23 +61,24 @@ export default function FormList(props: FormListProps) {
     <Segment style={{ height: "90%", width: "90%" }} className={isLite ? "lite" : ""}>
       <Flex column styles={{ maxHeight: "100%" }}>
         <Flex styles={{ width: "100%" }} vAlign="center">
-          <Header as="h2" content="Your Forms" />
-          {isLite ? (
-            <Button
-              icon={buttonIcon}
-              iconOnly
-              title={buttonText}
-              style={{ marginLeft: "auto" }}
-              onClick={buttonOnClick}
-            />
-          ) : (
-            <Button
-              content={buttonText}
-              title={buttonText}
-              style={{ marginLeft: "auto" }}
-              onClick={buttonOnClick}
-            />
-          )}
+          <Header as="h2" content="Your Polls" />
+          {hideButton ||
+            (isLite ? (
+              <Button
+                icon={buttonIcon}
+                iconOnly
+                title={buttonText}
+                style={{ marginLeft: "auto" }}
+                onClick={buttonOnClick}
+              />
+            ) : (
+              <Button
+                content={buttonText}
+                title={buttonText}
+                style={{ marginLeft: "auto" }}
+                onClick={buttonOnClick}
+              />
+            ))}
         </Flex>
         <Divider />
         <Flex styles={{ overflowY: "auto", maxHeight: "100%" }}>

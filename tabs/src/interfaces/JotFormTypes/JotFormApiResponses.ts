@@ -1,5 +1,10 @@
 import { ValidationType } from "interfaces/ValidationTypes";
-import { JFBoolean } from "./JotFormCommons";
+import {
+  JFBoolean,
+  StringAsNumber,
+  PollQuestionType,
+  SubmissionFieldAnswer,
+} from "./JotFormCommons";
 
 export interface BaseResponse {
   responseCode: number;
@@ -90,6 +95,7 @@ export interface QuestionResponse {
   shrink?: string;
   qid: string;
   type: string;
+  text?: string;
 }
 
 export interface FullNameQuestionResponse extends QuestionResponse {
@@ -143,3 +149,43 @@ export interface FormQuestionsResponse extends BaseResponse {
 }
 
 export interface SubmissionResponse extends BaseResponse {}
+
+/**
+ * Returned when requesting form response.
+ */
+export interface FormSubmissionResponse extends BaseResponse {
+  resultSet: ResultSet;
+  content: FormSubmissionResponseContent[];
+}
+
+interface ResultSet {
+  offset: number;
+  limit: number;
+  count: number;
+}
+
+export interface FormSubmissionResponseContent {
+  id: string;
+  form_id: string;
+  ip: string;
+  created_at: string;
+  status: string;
+  new: string;
+  flag: string;
+  notes: string;
+  updated_at?: string;
+  answers: Answers;
+}
+
+export interface Answers {
+  [qid: string]: FormSubmissionAnswer;
+}
+
+export interface FormSubmissionAnswer {
+  name: string /** Not really important (or meaningful). Can repeat. */;
+  order: StringAsNumber /** Order of the question in the form, might be nice to sort according to. */;
+  text: string /** Text of the question. */;
+  type: PollQuestionType | string /** Type of the question. */;
+  answer?: SubmissionFieldAnswer | string[];
+  prettyFormat?: string;
+}

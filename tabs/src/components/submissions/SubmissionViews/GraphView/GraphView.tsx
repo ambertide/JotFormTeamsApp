@@ -59,7 +59,7 @@ export function GraphView({ formTitle, formQuestions, distributions }: ViewerPro
           {!distributions || distributions?.isEmpty() ? (
             <Loader />
           ) : (
-            <ResponsiveContainer height={450} width="100%">
+            <ResponsiveContainer height="100%">
               <PieChart>
                 <Pie
                   data={distributions?.get(questionID || "0")?.toArray()}

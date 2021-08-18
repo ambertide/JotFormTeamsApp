@@ -9,17 +9,13 @@ import { useCallback } from "react";
 import useNavigation from "hooks/useNavigation";
 import { useParams } from "react-router-dom";
 import { getPollQuestions, postSubmissionByProxy } from "api/JFPollApi";
-
-interface PollURLParams {
-  uuid: string; // This is a key that uniquely identifies the user/poll pair in the proxy.
-  formName: string;
-}
+import { PollURLParams } from "interfaces/PageURLParams";
 
 export default function PollPage() {
   const { uuid, formName } = useParams<PollURLParams>();
-  const navigateToSuccess = useNavigation("/poll/submitted/success");
-  const navigateToFailure = useNavigation("/poll/submitted/fail");
-  const navigateToError = useNavigation("/poll/submitted/error");
+  const navigateToSuccess = useNavigation(`/poll/${uuid}/${formName}/submitted/success`);
+  const navigateToFailure = useNavigation(`/poll/${uuid}/${formName}/submitted/fail`);
+  const navigateToError = useNavigation(`/poll/${uuid}/${formName}/submitted/error`);
   const [formQuestions, setFormQuestions] = useState<I.List<QuestionResponse>>();
   const onSubmit = useCallback(
     (answers: I.Map<string, string | SubmissionFieldAnswer>) => {
@@ -36,12 +32,12 @@ export default function PollPage() {
       ];
       postSubmissionByProxy(uuid, formattedAnswers as any)
         .then((result) => {
-          setTimeout(() => {
-            teams.tasks.submitTask();
-          }, 1000);
           if (result) {
             navigateToSuccess();
           } else {
+            setTimeout(() => {
+              teams.tasks.submitTask();
+            }, 1000);
             navigateToFailure();
           }
         })

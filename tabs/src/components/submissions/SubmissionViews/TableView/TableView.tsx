@@ -11,11 +11,11 @@ export function TableView({ formQuestions, formTitle, submissions }: ViewerProps
         .map((header) => <Text content={header} weight="bold" />)
         .toArray(),
     }),
-    [formQuestions]
+    [formQuestions, formTitle]
   );
   const rows = useMemo(() => {
     const questionIDs = formQuestions.keySeq().toList();
-    return submissions.submissions
+    return submissions?.submissions
       .map((submission, index) => ({
         key: `${submission.submissionID}`,
         items: questionIDs

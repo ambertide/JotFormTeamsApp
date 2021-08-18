@@ -5,11 +5,11 @@ import SubmittedPage from "./SubmittedPage";
 export default function PollRouter() {
   return (
     <Switch>
+      <Route path="/poll/:uuid/:formName/submitted/:status/">
+        <SubmittedPage />
+      </Route>
       <Route path="/poll/:uuid/:formName">
         <PollPage />
-      </Route>
-      <Route path="/poll/submitted/:status">
-        <SubmittedPage />
       </Route>
     </Switch>
   );

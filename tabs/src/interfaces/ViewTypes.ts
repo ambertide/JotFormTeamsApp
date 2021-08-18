@@ -35,7 +35,7 @@ export interface ViewerProps {
   /**
    * Submissions of the form processed to the desired type.
    */
-  submissions: ProcessedFormSubmissions;
+  submissions?: ProcessedFormSubmissions;
   /**
    * Distributions of the answer.
    */

@@ -15,8 +15,10 @@ import { getFormQuestions, getFormSubmissions } from "api/JFApi";
 import { isPollType, processSubmissions } from "utils/JFUtils";
 import { AnswerFrequency } from "interfaces/PollAPITypes";
 import { getPollStats, registerUser } from "api/JFPollApi";
-import { processPollDistributions } from "utils/PollUtils";
+import { processFormQuestions, processPollDistributions } from "utils/PollUtils";
 import useNavigation from "hooks/useNavigation";
+import { useCallback } from "react";
+import useFormData from "hooks/useFormData";
 
 interface SubmissionsViewURLParams {
   formID: string;
@@ -24,48 +26,27 @@ interface SubmissionsViewURLParams {
 }
 export default function SubmissionsViewerPage() {
   const { formID, formName } = useParams<SubmissionsViewURLParams>();
-  const [formQuestions, setFormQuestions] = useState(I.Map<string, string>());
-  const navigateToMainPage = useNavigation("/results");
-  const [formSubmissions, setFormSubmissions] = useState<ProcessedFormSubmissions>({
-    formName: formName,
-    submissions: I.List(),
-  });
-  const [formDistributions, setFormDistributions] = useState<FormAnswerDistribution>(
-    I.Map<string, I.List<QuestionAnswerDistribution>>()
-  );
   const apiKey = useSelector(selectJFApiKey);
-  useEffect(() => {
-    getFormQuestions(apiKey, formID).then((questions) =>
-      setFormQuestions(
-        I.List(questions).reduce(
-          (reduction, question) =>
-            isPollType(question.type) // Here we filter out the non-question questions.
-              ? reduction.set(question.qid, question.text || "") // And then for others we get qid => text.
-              : reduction,
-          I.Map<string, string>()
-        )
-      )
-    );
-  }, [setFormQuestions, apiKey, formID]); // This use effect is to get the questions.
-  useEffect(() => {
-    if (formQuestions.isEmpty()) {
-      return;
-    }
-    getFormSubmissions(apiKey, formID).then((submissions) =>
-      setFormSubmissions(processSubmissions(submissions, formName))
-    );
-  }, [setFormSubmissions, formQuestions, apiKey, formID, formName]);
-  useEffect(() => {
-    if (formQuestions.isEmpty()) {
-      return;
-    }
-    // Register the user, get the poll's stats, process them and then set the form distribution.
-    registerUser(apiKey, formID)
-      .then((uuid) =>
-        getPollStats(uuid).then((stats) => setFormDistributions(processPollDistributions(stats)))
-      )
-      .catch((e) => console.log("Err.", e));
-  }, [apiKey, formID, setFormDistributions, formQuestions]);
+  const navigateToMainPage = useNavigation("/results");
+  const getQuestions = useCallback(() => {
+    // Get questions using JF API.
+    return getFormQuestions(apiKey, formID);
+  }, [apiKey, formID]);
+  const register = useCallback(() => {
+    // Register and return user UUID.
+    return registerUser(apiKey, formID);
+  }, [apiKey, formID]);
+  const getSubmissions = useCallback(() => {
+    // Get the submissions using JF API.
+    return getFormSubmissions(apiKey, formID);
+  }, [apiKey, formID]);
+  const { formQuestions, formSubmissions, formDistributions } = useFormData(
+    formName,
+    getQuestions,
+    register,
+    getSubmissions
+  );
+
   return (
     <Flex hAlign="center" fill>
       <SubmissionViewer

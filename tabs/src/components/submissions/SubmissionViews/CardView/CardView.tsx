@@ -12,7 +12,7 @@ export function CardView({ formQuestions, formTitle, submissions }: ViewerProps)
       padding="padding.medium"
       space="evenly"
     >
-      {submissions.submissions.map((submission, index) => (
+      {submissions?.submissions.map((submission, index) => (
         <SubmissionCard
           key={`${submission.submissionDate}${submission.ipAdress}${index}`}
           formTitle={formTitle}

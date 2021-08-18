@@ -17,9 +17,9 @@ interface PollURLParams {
 
 export default function PollPage() {
   const { uuid, formName } = useParams<PollURLParams>();
-  const navigateToSuccess = useNavigation("/submitted/success");
-  const navigateToFailure = useNavigation("/submitted/fail");
-  const navigateToError = useNavigation("/submitted/error");
+  const navigateToSuccess = useNavigation("/poll/submitted/success");
+  const navigateToFailure = useNavigation("/poll/submitted/fail");
+  const navigateToError = useNavigation("/poll/submitted/error");
   const [formQuestions, setFormQuestions] = useState<I.List<QuestionResponse>>();
   const onSubmit = useCallback(
     (answers: I.Map<string, string | SubmissionFieldAnswer>) => {

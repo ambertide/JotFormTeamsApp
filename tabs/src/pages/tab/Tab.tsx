@@ -1,7 +1,7 @@
 // https://fluentsite.z22.web.core.windows.net/quick-start
 import "./../App.css";
 import { useSelector } from "react-redux";
-import LoginPage from "./LoginPage";
+import LoginPage from "../LoginPage";
 import SelectorPage from "./SelectorPage";
 import { Dialog } from "@fluentui/react-northstar";
 import useNavigation from "hooks/useNavigation";
@@ -9,11 +9,14 @@ import { Login } from "@microsoft/mgt-react";
 import { selectIsAzureADAuth, selectIsJFAuth } from "rxutils/selectors";
 import { useEffect } from "react";
 import { pingProxy } from "api/JFPollApi";
+import { Route, Switch } from "react-router-dom";
+import FormsPage from "./FormsPage";
+import FormBuilderPage from "./FormBuilderPage";
 /**
  * The main app which handles the initialization and routing
  * of the app.
  */
-export default function App() {
+export default function Tab() {
   const isJFAuth = useSelector(selectIsJFAuth);
   const isAzureADAuth = useSelector(selectIsAzureADAuth);
   const navigateToAuth = useNavigation("/auth");
@@ -28,7 +31,7 @@ export default function App() {
         open={!isAzureADAuth}
         confirmButton={<Login />}
       />
-      {isJFAuth ? <SelectorPage /> : <LoginPage />}
+      <SelectorPage />
     </>
   );
 }

@@ -68,3 +68,8 @@ export interface RequestSendPollAction {
 export interface LogoutAction {
   type: "AUTH_LOGOUT";
 }
+
+export interface ThemeChangeAction {
+  type: "THEME_CHANGE";
+  newTheme: string;
+}

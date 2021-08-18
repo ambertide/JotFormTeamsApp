@@ -2,9 +2,6 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import { Provider } from "react-redux";
 import { store, persistor } from "./rxutils";
-import { Route, Switch, HashRouter as Router } from "react-router-dom";
-import { TabConfig } from "pages/teams";
-import { Auth, FormsPage, FormBuilderPage, App } from "pages/tab";
 import { ToastContainer } from "react-toastify";
 import { Provider as NorthstarProvider, teamsTheme, Loader, Box } from "@fluentui/react-northstar";
 import ErrorBoundary from "utils/ErrorBoundary";
@@ -16,6 +13,7 @@ import { SubmittedPage, PollPage } from "pages/task_module";
 import { showError } from "utils/messaging";
 import { SubmissionSelector } from "pages/submissions";
 import SubmissionsViewerPage from "pages/submissions/SubmissionsViewerPage";
+import App from "pages/App";
 
 TeamsProvider.microsoftTeamsLib = teams;
 const config = {
@@ -53,37 +51,7 @@ ReactDOM.render(
         <Box>
           <ToastContainer />
           <ErrorBoundary>
-            <Router>
-              <Switch>
-                <Route exact path="/tab">
-                  <App />
-                </Route>
-                <Route exact path="/forms">
-                  <FormsPage />
-                </Route>
-                <Route exact path="/config">
-                  <TabConfig />
-                </Route>
-                <Route exact path="/create">
-                  <FormBuilderPage />
-                </Route>
-                <Route exact path="/auth">
-                  <Auth />
-                </Route>
-                <Route path="/poll/:uuid/:formName">
-                  <PollPage />
-                </Route>
-                <Route path="/submitted/:status">
-                  <SubmittedPage />
-                </Route>
-                <Route path="/results" exact>
-                  <SubmissionSelector />
-                </Route>
-                <Route path="/results/:formID/:formName">
-                  <SubmissionsViewerPage />
-                </Route>
-              </Switch>
-            </Router>
+            <App />
           </ErrorBoundary>
         </Box>
       </PersistGate>

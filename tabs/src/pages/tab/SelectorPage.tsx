@@ -5,8 +5,8 @@ import { useDispatch } from "react-redux";
 import { showInfo } from "utils/messaging";
 
 export default function SelectorPage() {
-  const navigateToForms = useNavigation("/forms");
-  const navigateToCreate = useNavigation("/create");
+  const navigateToForms = useNavigation("/tab/forms");
+  const navigateToCreate = useNavigation("/tab/create");
   const dispatch = useDispatch();
   return (
     <Flex hAlign="center" fill>

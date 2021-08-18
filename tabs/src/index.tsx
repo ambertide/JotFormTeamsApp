@@ -1,19 +1,18 @@
 import ReactDOM from "react-dom";
 import "./index.css";
-import { Provider } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import { store, persistor } from "./rxutils";
 import { ToastContainer } from "react-toastify";
-import { Provider as NorthstarProvider, teamsTheme, Loader, Box } from "@fluentui/react-northstar";
+import { Provider as NorthstarProvider, Loader, Box } from "@fluentui/react-northstar";
 import ErrorBoundary from "utils/ErrorBoundary";
 import { PersistGate } from "redux-persist/integration/react";
 import "react-toastify/dist/ReactToastify.css";
 import * as teams from "@microsoft/teams-js";
 import { Providers, TeamsProvider, ProviderState } from "@microsoft/mgt";
-import { SubmittedPage, PollPage } from "pages/task_module";
 import { showError } from "utils/messaging";
-import { SubmissionSelector } from "pages/submissions";
-import SubmissionsViewerPage from "pages/submissions/SubmissionsViewerPage";
 import App from "pages/App";
+import { ThemeChangeAction } from "interfaces/reduxActions";
+import { selectTeamsTheme } from "rxutils/selectors";
 
 TeamsProvider.microsoftTeamsLib = teams;
 const config = {
@@ -40,10 +39,17 @@ Providers.onProviderUpdated((event) => {
   }
 });
 
-ReactDOM.render(
-  <Provider store={store}>
+function TeamsApp() {
+  teams.initialize();
+  const dispatch = useDispatch();
+  teams.registerOnThemeChangeHandler((theme) => {
+    console.log(theme);
+    dispatch<ThemeChangeAction>({ type: "THEME_CHANGE", newTheme: theme });
+  });
+  const currentTheme = useSelector(selectTeamsTheme);
+  return (
     <NorthstarProvider
-      theme={teamsTheme}
+      theme={currentTheme}
       className="mainProvider"
       styles={{ justifyContent: "center" }}
     >
@@ -56,6 +62,12 @@ ReactDOM.render(
         </Box>
       </PersistGate>
     </NorthstarProvider>
+  );
+}
+
+ReactDOM.render(
+  <Provider store={store}>
+    <TeamsApp />
   </Provider>,
   document.getElementById("root")
 );

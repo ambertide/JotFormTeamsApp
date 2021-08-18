@@ -9,4 +9,5 @@ export default interface reduxState {
   error: string;
   azureToken: string;
   teams: List<AzureTeamMetadata>;
+  themeName: string;
 }

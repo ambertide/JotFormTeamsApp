@@ -1,4 +1,3 @@
-import PollPage from "./PollPage";
-import SubmittedPage from "./SubmittedPage";
+import PollRouter from "./PollRouter";
 
-export { PollPage, SubmittedPage };
+export { PollRouter };

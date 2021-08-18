@@ -1,6 +1,4 @@
-import { formsAction, ThemeChangeAction } from "../../interfaces/reduxActions";
-import { List } from "immutable";
-
+import { ThemeChangeAction } from "../../interfaces/reduxActions";
 export default function themeReducer(state = "teams", action: ThemeChangeAction) {
   switch (action.type) {
     case "THEME_CHANGE":

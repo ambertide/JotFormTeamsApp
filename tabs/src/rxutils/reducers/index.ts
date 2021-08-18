@@ -7,11 +7,13 @@ import I from "immutable";
 import azureTeamsReducer from "./azureTeamsReducer";
 import { createTransform } from "redux-persist";
 import User from "interfaces/User";
+import themeReducer from "./themeReducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
   forms: formsReducer,
   teams: azureTeamsReducer,
+  themeName: themeReducer,
 });
 
 const ImmutableTransform = createTransform(
@@ -27,7 +29,7 @@ const ImmutableTransform = createTransform(
 const persistConfig = {
   key: "root",
   storage: storage,
-  whitelist: ["auth"],
+  whitelist: ["auth", "themeName"],
   transforms: [ImmutableTransform],
 };
 

@@ -1,10 +1,11 @@
+import { pingProxy } from "api/JFPollApi";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { HashRouter as Router, Redirect, Route, RouteProps, Switch } from "react-router-dom";
 import { selectIsJFAuth } from "rxutils/selectors";
-import SubmissionsRouter from "./submissions/SubmissionsRouter";
-import { Auth, LoginPage } from "./tab";
-import TabRouter from "./tab/TabRouter";
-import PollRouter from "./task_module/PollRouter";
+import { SubmissionsRouter } from "./submissions";
+import { Auth, LoginPage, TabRouter } from "./tab";
+import { PollRouter } from "./task_module";
 import { TabConfig } from "./teams";
 
 // Almost verbatim form reactrouter auth workflow example.
@@ -30,26 +31,31 @@ function PrivateRoute({ children, ...rest }: RouteProps) {
 }
 
 export default function App() {
-  return (<Router>
-    <Switch>
-      <Route path="/login">
-        <LoginPage />
-      </Route>
-      <PrivateRoute path="/tab">
-        <TabRouter />
-      </PrivateRoute>
-      <PrivateRoute path="/poll">
-        <PollRouter />
-      </PrivateRoute>
-      <PrivateRoute path="/results">
-        <SubmissionsRouter />
-      </PrivateRoute>
-      <Route exact path="/config">
-        <TabConfig />
-      </Route>
-      <Route exact path="/auth">
-        <Auth />
-      </Route>
-    </Switch>
-  </Router>);
+  useEffect(() => {
+    pingProxy(); // This wakes up the server, because free heroku servers sleep.
+  }, []);
+  return (
+    <Router>
+      <Switch>
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+        <PrivateRoute path="/tab">
+          <TabRouter />
+        </PrivateRoute>
+        <PrivateRoute path="/poll">
+          <PollRouter />
+        </PrivateRoute>
+        <PrivateRoute path="/results">
+          <SubmissionsRouter />
+        </PrivateRoute>
+        <Route exact path="/config">
+          <TabConfig />
+        </Route>
+        <Route exact path="/auth">
+          <Auth />
+        </Route>
+      </Switch>
+    </Router>
+  );
 }

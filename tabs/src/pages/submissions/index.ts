@@ -1,3 +1,3 @@
-import SubmissionSelector from "./SubmissionSelector";
+import SubmissionsRouter from "./SubmissionsRouter";
 
-export { SubmissionSelector };
+export { SubmissionsRouter };

@@ -103,6 +103,7 @@ export function processSubmissions(
   return {
     formName: formName, // Get the form name.
     submissions: I.List(submissions).map((submission) => ({
+      submissionID: submission.id,
       submissionDate: submission.created_at,
       ipAdress: submission.ip,
       answers: I.Map(submission.answers).reduce((reduction, answer, qid) => {

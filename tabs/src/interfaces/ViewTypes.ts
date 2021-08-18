@@ -9,6 +9,7 @@ export interface PorcessedSubmissionAnswer {
 }
 
 export interface ProcessedFormSubmission {
+  submissionID: string;
   answers: I.List<PorcessedSubmissionAnswer> /** Sorted by question order. */;
   submissionDate: string;
   ipAdress: string;

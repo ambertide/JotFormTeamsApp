@@ -62,23 +62,22 @@ export default function FormList(props: FormListProps) {
       <Flex column styles={{ maxHeight: "100%" }}>
         <Flex styles={{ width: "100%" }} vAlign="center">
           <Header as="h2" content="Your Polls" />
-          {hideButton ||
-            (isLite ? (
-              <Button
-                icon={buttonIcon}
-                iconOnly
-                title={buttonText}
-                style={{ marginLeft: "auto" }}
-                onClick={buttonOnClick}
-              />
-            ) : (
-              <Button
-                content={buttonText}
-                title={buttonText}
-                style={{ marginLeft: "auto" }}
-                onClick={buttonOnClick}
-              />
-            ))}
+          {hideButton ? null : isLite ? (
+            <Button
+              icon={buttonIcon}
+              iconOnly
+              title={buttonText}
+              style={{ marginLeft: "auto" }}
+              onClick={buttonOnClick}
+            />
+          ) : (
+            <Button
+              content={buttonText}
+              title={buttonText}
+              style={{ marginLeft: "auto" }}
+              onClick={buttonOnClick}
+            />
+          )}
         </Flex>
         <Divider />
         <Flex styles={{ overflowY: "auto", maxHeight: "100%" }}>

@@ -33,6 +33,7 @@ ExampleSubmissionCard.args = {
     "7": "Select multiple days.",
   }),
   submission: {
+    submissionID: "1",
     ipAdress: "127.0.0.1",
     submissionDate: "2021-08-10 14:29:00",
     answers: I.List([

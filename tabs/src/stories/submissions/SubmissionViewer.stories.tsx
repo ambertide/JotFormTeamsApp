@@ -1,7 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import I from "immutable";
 import SubmissionViewer from "components/submissions/SubmissionViewer";
-import { Segment } from "@fluentui/react-northstar";
 import { processPollDistributions } from "utils/PollUtils";
 
 export default {
@@ -35,6 +34,7 @@ ExampleSubmissionView.args = {
     formName: "Example Form",
     submissions: I.List([
       {
+        submissionID: "1",
         ipAdress: "127.0.0.1",
         submissionDate: "2021-08-10 14:29:00",
         answers: I.List([
@@ -86,6 +86,7 @@ ExampleSubmissionView.args = {
         ]),
       },
       {
+        submissionID: "2",
         ipAdress: "127.0.0.1",
         submissionDate: "2021-08-10 14:30:00",
         answers: I.List([

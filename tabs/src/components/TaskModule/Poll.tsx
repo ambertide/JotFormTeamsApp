@@ -29,7 +29,8 @@ const GenerateQuestionField = (
   const ReactElement = fieldsMap.get(question.type.split("_", 2)[1], null);
   if (ReactElement) {
     return (
-      <ReactElement // @ts-ignore: Unreachable code error
+      <ReactElement
+        key={question.qid} // @ts-ignore: Unreachable code error
         question={question}
         onChangeCallback={onChangeCallback}
         setInvalidFields={setInvalidFields}

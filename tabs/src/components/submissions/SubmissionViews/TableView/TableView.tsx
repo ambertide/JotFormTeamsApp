@@ -17,12 +17,13 @@ export function TableView({ formQuestions, formTitle, submissions }: ViewerProps
     const questionIDs = formQuestions.keySeq().toList();
     return submissions.submissions
       .map((submission, index) => ({
-        key: `${submission.submissionDate}${submission.ipAdress}${index}`,
+        key: `${submission.submissionID}`,
         items: questionIDs
-          .map(
-            (questionID) =>
-              submission.answers.find((answer) => answer.qid === questionID)?.processedAnswer
-          )
+          .map((questionID) => ({
+            key: `${submission.submissionID}${questionID}`,
+            content: submission.answers.find((answer) => answer.qid === questionID)
+              ?.processedAnswer,
+          }))
           .toArray(),
       }))
       .toArray();

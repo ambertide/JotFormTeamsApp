@@ -1,9 +1,8 @@
-import { List, Segment, Text, Flex, Header, Divider, Loader } from "@fluentui/react-northstar";
+import { Segment, Flex, Dropdown, Divider, Loader } from "@fluentui/react-northstar";
 import { ViewerProps } from "interfaces/ViewTypes";
+import { useEffect } from "react";
 import { useMemo } from "react";
 import { useState } from "react";
-import I from "immutable";
-import { useCallback } from "react";
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from "recharts";
 
 const colours = [
@@ -25,64 +24,57 @@ const colours = [
 
 export function GraphView({ formTitle, formQuestions, distributions }: ViewerProps) {
   const [questionID, setQuestionID] = useState(distributions?.keySeq().get(0));
-  const QuestionSelector = useCallback(() => {
-    // A small memoised component to select questions.
-    const listItems = formQuestions
-      .filter((questionName, qid) => distributions?.keySeq().contains(qid)) // Filter the only questions with graph data.
-      .reduce(
-        (reduction, questionName, qid) =>
-          reduction.push({
-            key: qid,
-            content: questionName,
-            onClick: () => {
-              // Clicking on a question should switch to that question.
-              setQuestionID(qid);
-            },
-          }),
-        I.List()
-      ) // Convert to shorthand format.
-      .toArray(); // Wihch also requires an array.
-    return (
-      <Segment styles={{ maxWidth: "240px", minHeight: "100%" }}>
-        <Text content="Select a Question" weight="bold" />
-        <List items={listItems as any} defaultSelectedIndex={0} selectable truncateContent={true} />
-      </Segment>
-    );
-  }, [distributions, formQuestions]);
+
+  const listItems = useMemo(
+    () =>
+      formQuestions
+        .filter((questionName, qid) => distributions?.keySeq().contains(qid))
+        .valueSeq()
+        .toArray(),
+    [formQuestions, distributions]
+  );
+  useEffect(() => {
+    setQuestionID(formQuestions.findKey((value, key) => value === listItems[0]));
+  }, [listItems, formQuestions, setQuestionID]);
   return (
-    <Flex fill gap="gap.medium" padding="padding.medium" styles={{ flexGrow: 1 }}>
-      <QuestionSelector />
-      <Segment styles={{ width: "100%", minHeight: "100%" }}>
-        <Flex hAlign="center" fill column styles={{ flexGrow: 1 }}>
-          <Header content={formQuestions.get(questionID || "0")} />
-          <Divider />
-          {!distributions || distributions?.isEmpty() ? (
-            <Loader />
-          ) : (
-            <ResponsiveContainer height="100%">
-              <PieChart>
-                <Pie
-                  data={distributions?.get(questionID || "0")?.toArray()}
-                  dataKey="value"
-                  nameKey="name"
-                  cx="50%"
-                  cy="100%"
-                  startAngle={180}
-                  endAngle={0}
-                  outerRadius="150%"
-                  label={true}
-                >
-                  {distributions
-                    ?.get(questionID || "0")
-                    ?.map((entry, index) => <Cell fill={colours[index % colours.length]} />)
-                    .toArray()}
-                </Pie>
-                <Legend align="left" layout="vertical" verticalAlign="top" />
-              </PieChart>
-            </ResponsiveContainer>
-          )}
-        </Flex>
-      </Segment>
+    <Flex hAlign="center" column>
+      <Dropdown
+        styles={{ width: "100%" }}
+        items={listItems}
+        defaultValue={listItems[0]}
+        aria-label={"Select the question"}
+        onChange={(event, data) =>
+          setQuestionID(formQuestions.findKey((value, key) => value === data?.value))
+        }
+        checkable
+        fluid
+      />
+      <Divider />
+      {!distributions || distributions?.isEmpty() ? (
+        <Loader />
+      ) : (
+        <Segment styles={{ width: "100%", maxHeight: "100%" }}>
+          <ResponsiveContainer height="100%" aspect={3.5}>
+            <PieChart>
+              <Pie
+                data={distributions?.get(questionID || "0")?.toArray()}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                outerRadius="90%"
+                label={true}
+              >
+                {distributions
+                  ?.get(questionID || "0")
+                  ?.map((entry, index) => <Cell fill={colours[index % colours.length]} />)
+                  .toArray()}
+              </Pie>
+              <Legend align="left" layout="vertical" verticalAlign="top" />
+            </PieChart>
+          </ResponsiveContainer>
+        </Segment>
+      )}
     </Flex>
   );
 }

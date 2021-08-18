@@ -14,7 +14,7 @@ export function CardView({ formQuestions, formTitle, submissions }: ViewerProps)
     >
       {submissions?.submissions.map((submission, index) => (
         <SubmissionCard
-          key={`${submission.submissionDate}${submission.ipAdress}${index}`}
+          key={`${submission.submissionID}`}
           formTitle={formTitle}
           submission={submission}
           formQuestions={formQuestions}

@@ -16,8 +16,8 @@ export default function SelectAnswerView({ options }: SelectAnswerViewProps) {
     <Segment styles={{ width: "100%" }} color="red">
       <Flex>
         <PillGroup aria-label="User selected options">
-          {options.map((option) => (
-            <Pill content={option} />
+          {options.map((option, index) => (
+            <Pill content={option} key={`${option}${index}`} />
           ))}
         </PillGroup>
       </Flex>

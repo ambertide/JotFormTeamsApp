@@ -69,7 +69,10 @@ export async function postSubmissionByProxy(
   uuid: string,
   submission: PostSubmissionRequest
 ): Promise<boolean> {
-  const response = await axios.put<SubmissionResponse>(constructURL("poll", uuid), submission);
+  const response = await axios.put<SubmissionResponse>(
+    constructURL("poll", uuid, "submissions"),
+    submission
+  );
   return response && response.status === 200;
 }
 

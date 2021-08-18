@@ -1,4 +1,4 @@
-import { getForm, getUser } from "./JFApi";
+import { getForm, getFormQuestions, getUser } from "./JFApi";
 import { postAdaptiveCardToChannel } from "./AzureADApi";
 import { generateAdaptiveCard } from "templates/generators/cardGenerators";
 import axios from "axios";
@@ -9,6 +9,7 @@ import {
   QuestionResponse,
   SubmissionResponse,
 } from "interfaces/JotFormTypes";
+import I from "immutable";
 
 const poll_proxy_base_url = "https://ambertide-jfteams-proxy.herokuapp.com";
 
@@ -28,7 +29,8 @@ export async function sendPollToTeam(
   const formData = await getForm(apiKey, formID);
   const userData = await getUser(apiKey);
   const uuid = await registerUser(apiKey, formID); // Register the user to the proxy server.
-  const adaptiveCard = generateAdaptiveCard(userData, formData, apiKey, uuid);
+  const isPoll = await isFormPoll(apiKey, formID); // Check if the form is a Poll.
+  const adaptiveCard = generateAdaptiveCard(userData, formData, apiKey, uuid, isPoll);
   await postAdaptiveCardToChannel(teamID, channelID, adaptiveCard);
 }
 
@@ -81,4 +83,26 @@ export async function postSubmissionByProxy(
  */
 export async function pingProxy() {
   await axios.get(constructURL("ping"));
+}
+
+/**
+ * Check if the given form is a poll, ie: If true,
+ * this simply means that our form can be shown
+ * in the integrated modal.
+ * @param formID ID of the form to check.
+ */
+export async function isFormPoll(appKey: string, formID: string): Promise<boolean> {
+  const validQuestionTypes = I.Set([
+    "control_head",
+    "control_button",
+    "control_radio",
+    "control_checkbox",
+    "control_textbox",
+    "control_fullname",
+  ]);
+  const formQuestions = await getFormQuestions(appKey, formID);
+  return formQuestions.every(
+    // If every single question is of the valid type, than it is true.
+    (question) => validQuestionTypes.has(question.type)
+  );
 }

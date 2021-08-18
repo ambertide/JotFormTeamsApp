@@ -47,15 +47,15 @@
     },
     {
       "type": "TextBlock",
-      "text": "${user.name} has sent a Poll and is waiting for your answers.",
+      "text": "${user.name} has sent a Form, as this form uses advanced JotForm features, you can answer it in your browser.",
       "wrap": true
     }
   ],
   "actions": [
     {
       "type": "Action.OpenUrl",
-      "title": "Answer the Poll",
-      "url": "https://teams.microsoft.com/l/task/5182671a-cad1-4d8a-8fa3-61a8eea18c20?url=https%3A%2F%2Flocalhost%3A3000%2Findex.html%23%2Fpoll%2F${uuid}%2F${form.title}&height=large&width=medium&title=${form.title}"
+      "title": "Answer the Form",
+      "url": "${form.url}"
     }
   ]
 }

@@ -65,6 +65,7 @@ export default function useFormData(
   }, [getSubmissions, setFormSubmissions, formQuestions, formName, indicateLoaded]);
   useEffect(() => {
     if (formQuestions.isEmpty()) {
+      indicateLoaded(); // For empty, no need to load
       return;
     }
     // Register the user, get the poll's stats, process them and then set the form distribution.

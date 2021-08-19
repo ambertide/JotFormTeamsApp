@@ -4,6 +4,7 @@ import { ViewComponent, ViewerProps, ViewType } from "interfaces/ViewTypes";
 import { useState } from "react";
 import ViewSwitcher from "./ViewSwitcher";
 import * as viewsObject from "./SubmissionViews";
+import { MessageSegment } from "components/Extensions";
 
 const views = I.Map<ViewType, ViewComponent>(viewsObject as any);
 
@@ -48,7 +49,17 @@ export default function SubmissionViewer({
           </Flex>
         </Flex>
         <Divider />
-        {!formQuestions.isEmpty() ? (
+        {isLoading ? (
+          <Loader />
+        ) : submissions?.submissions.isEmpty() ? (
+          <Flex vAlign="center" styles={{ height: "100%", width: "100%", flexGrow: 1 }}>
+            <MessageSegment
+              message="This poll has not recieved any submissions for now!"
+              messageType="info"
+              fragment
+            />
+          </Flex>
+        ) : (
           generateView(viewType, {
             formTitle,
             formQuestions,
@@ -56,8 +67,6 @@ export default function SubmissionViewer({
             distributions,
             isLoading,
           })
-        ) : (
-          <Loader />
         )}
       </Flex>
     </Segment>

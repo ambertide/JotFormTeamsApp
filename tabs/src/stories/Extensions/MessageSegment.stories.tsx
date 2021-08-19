@@ -6,6 +6,7 @@ export default {
   component: MessageSegment,
   argTypes: {
     messageType: {
+      options: ["info", "success", "error", "loading"],
       control: { type: "inline-radio" },
     },
   },

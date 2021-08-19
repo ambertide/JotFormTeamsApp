@@ -1,4 +1,5 @@
 import { Segment, Flex, Dropdown, Divider, Loader } from "@fluentui/react-northstar";
+import { MessageSegment } from "components/Extensions";
 import { ViewerProps } from "interfaces/ViewTypes";
 import { useEffect } from "react";
 import { useMemo } from "react";
@@ -38,6 +39,13 @@ export function GraphView({ formTitle, formQuestions, distributions, isLoading }
   }, [listItems, formQuestions, setQuestionID]);
   if (!isLoading && (!distributions || distributions?.isEmpty())) {
     // Despite loading being complete, still no data.
+    return (
+      <MessageSegment
+        messageType="info"
+        message="This poll either has no submissions yet, or it does not contain question that can be shown in a graph."
+        fragment
+      />
+    );
   }
   return (
     <Flex hAlign="center" column>

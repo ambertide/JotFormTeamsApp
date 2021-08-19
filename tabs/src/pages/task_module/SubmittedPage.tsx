@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import useFormData from "hooks/useFormData";
 import { useCallback } from "react";
 import { getPollQuestions } from "api/JFPollApi";
+import { MessageSegment } from "components/Extensions";
 
 export default function SubmittedPage() {
   const { status } = useParams<{ status: "success" | "fail" | "error" }>();
@@ -18,19 +19,36 @@ export default function SubmittedPage() {
     getQuestions,
     getUUID
   );
+  if (status !== "success") {
+    return (
+      <Flex column styles={{ position: "absolute", top: 0 }} fill>
+        <Segment styles={{ width: "100%", height: "100%" }}>
+          <MessageSegment messageType="error" message="Submission failed." fragment />
+        </Segment>
+      </Flex>
+    );
+  }
   return (
     <Flex column styles={{ position: "absolute", top: 0 }} fill>
       <Segment styles={{ width: "100%", height: "100%" }}>
-        <Header>
-          {status === "success" ? "Submitted Your Answers!" : "An Error Has Occurred."}
-        </Header>
-        <Divider />
-        <GraphView
-          formTitle={""}
-          formQuestions={formQuestions}
-          distributions={formDistributions}
-          isLoading={!hasLoaded}
-        />
+        {hasLoaded ? (
+          formDistributions.isEmpty() ? (
+            <MessageSegment messageType="success" message="You have submitted an answer" fragment />
+          ) : (
+            <GraphView
+              formTitle={""}
+              formQuestions={formQuestions}
+              distributions={formDistributions}
+              isLoading={!hasLoaded}
+            />
+          )
+        ) : (
+          <MessageSegment
+            messageType="loading"
+            message="Your submission went through, loading other submissions..."
+            fragment
+          />
+        )}
       </Segment>
     </Flex>
   );

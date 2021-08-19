@@ -21,6 +21,6 @@ const Template: ComponentStory<typeof FullNameInputGroup> = ({ prefixList, ...ar
   </Segment>
 );
 
-export const ExampleButtonWithImage = Template.bind({});
+export const ExampleFullNameInputGroup = Template.bind({});
 
-ExampleButtonWithImage.args = {};
+ExampleFullNameInputGroup.args = {};

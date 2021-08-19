@@ -3,6 +3,7 @@ import CheckboxGroup from "./CheckboxGroup";
 import FullNameInputGroup from "./FullNameInputGroup";
 import RadioGroupCustom from "./RadioGroupCustom";
 import SelfValidatingInput from "./SelfValidatingInput";
+import MessageSegment from "./MessageSegment";
 
 export {
   ButtonWithImage,
@@ -10,4 +11,5 @@ export {
   FullNameInputGroup,
   RadioGroupCustom,
   SelfValidatingInput,
+  MessageSegment,
 };

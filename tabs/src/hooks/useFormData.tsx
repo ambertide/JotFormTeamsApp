@@ -1,5 +1,5 @@
 import I from "immutable";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FormSubmissionResponseContent, QuestionResponse } from "interfaces/JotFormTypes";
 import {
   FormAnswerDistribution,
@@ -9,6 +9,8 @@ import {
 import { processFormQuestions, processPollDistributions } from "utils/PollUtils";
 import { processSubmissions } from "utils/JFUtils";
 import { getPollStats } from "api/JFPollApi";
+import { useMemo } from "react";
+import useCount from "./useCount";
 
 /**
  * A hook used to get submission and statistical data
@@ -20,7 +22,9 @@ import { getPollStats } from "api/JFPollApi";
  *  of the proxy server.
  * @param getSubmissions A function that returns a promise to the
  *  form submissions.
- * @returns Processed questions, submissions and distributions array.
+ * @returns Processed questions, submissions and distributions array, and
+ * a boolean indicator to indicate whether or not the content loading
+ * is complete.
  */
 export default function useFormData(
   formName: string,
@@ -28,6 +32,8 @@ export default function useFormData(
   getUUID: () => Promise<string>,
   getSubmissions?: () => Promise<FormSubmissionResponseContent[]>
 ) {
+  const { isFull: hasLoaded, incrementCount } = useCount(3);
+  const indicateLoaded = useCallback(() => incrementCount(1), [incrementCount]);
   const [formQuestions, setFormQuestions] = useState(I.Map<string, string>());
   const [formSubmissions, setFormSubmissions] = useState<ProcessedFormSubmissions>({
     formName: formName,
@@ -38,28 +44,36 @@ export default function useFormData(
   );
 
   useEffect(() => {
-    getFormQuestions().then((questions) => setFormQuestions(processFormQuestions(questions)));
-  }, [getFormQuestions, setFormQuestions]); // This use effect is to get the questions.
+    getFormQuestions().then((questions) => {
+      setFormQuestions(processFormQuestions(questions));
+      indicateLoaded(); // Our questions are loaded.
+    });
+  }, [getFormQuestions, setFormQuestions, indicateLoaded]); // This use effect is to get the questions.
   useEffect(() => {
     if (formQuestions.isEmpty()) {
       return;
     }
     if (getSubmissions) {
-      getSubmissions().then((submissions) =>
-        setFormSubmissions(processSubmissions(submissions, formName))
-      );
+      getSubmissions().then((submissions) => {
+        setFormSubmissions(processSubmissions(submissions, formName));
+        indicateLoaded();
+      });
+    } else {
+      // If this does not exist we can just set this one to loaded.
+      indicateLoaded();
     }
-  }, [getSubmissions, setFormSubmissions, formQuestions, formName]);
+  }, [getSubmissions, setFormSubmissions, formQuestions, formName, indicateLoaded]);
   useEffect(() => {
     if (formQuestions.isEmpty()) {
       return;
     }
     // Register the user, get the poll's stats, process them and then set the form distribution.
     getUUID()
-      .then((uuid) =>
-        getPollStats(uuid).then((stats) => setFormDistributions(processPollDistributions(stats)))
-      )
+      .then((uuid) => {
+        getPollStats(uuid).then((stats) => setFormDistributions(processPollDistributions(stats)));
+        indicateLoaded();
+      })
       .catch((e) => console.log("Err.", e));
-  }, [getUUID, setFormDistributions, formQuestions]);
-  return { formQuestions, formSubmissions, formDistributions };
+  }, [getUUID, setFormDistributions, formQuestions, indicateLoaded]);
+  return { formQuestions, formSubmissions, formDistributions, hasLoaded };
 }

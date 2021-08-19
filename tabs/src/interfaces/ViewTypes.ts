@@ -39,6 +39,10 @@ export interface ViewerProps {
    * Distributions of the answer.
    */
   distributions?: FormAnswerDistribution;
+  /**
+   * Indicates if the questions are still loading..
+   */
+  isLoading: boolean;
 }
 
 /**

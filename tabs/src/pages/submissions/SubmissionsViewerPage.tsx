@@ -29,7 +29,7 @@ export default function SubmissionsViewerPage() {
     // Get the submissions using JF API.
     return getFormSubmissions(apiKey, formID);
   }, [apiKey, formID]);
-  const { formQuestions, formSubmissions, formDistributions } = useFormData(
+  const { formQuestions, formSubmissions, formDistributions, hasLoaded } = useFormData(
     formName,
     getQuestions,
     register,
@@ -43,6 +43,7 @@ export default function SubmissionsViewerPage() {
         formQuestions={formQuestions}
         submissions={formSubmissions}
         distributions={formDistributions}
+        isLoading={!hasLoaded} // We can show some data even if some of it has not loaded yet.
         navButton={<Button content="Return to Main Page" onClick={navigateToMainPage} />}
       />
     </Flex>

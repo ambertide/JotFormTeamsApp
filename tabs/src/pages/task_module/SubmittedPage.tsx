@@ -13,7 +13,11 @@ export default function SubmittedPage() {
     return getPollQuestions(uuid);
   }, [uuid]);
   const getUUID = useCallback(() => Promise.resolve(uuid), [uuid]);
-  const { formQuestions, formDistributions } = useFormData(formName, getQuestions, getUUID);
+  const { formQuestions, formDistributions, hasLoaded } = useFormData(
+    formName,
+    getQuestions,
+    getUUID
+  );
   return (
     <Flex column styles={{ position: "absolute", top: 0 }} fill>
       <Segment styles={{ width: "100%", height: "100%" }}>
@@ -21,7 +25,12 @@ export default function SubmittedPage() {
           {status === "success" ? "Submitted Your Answers!" : "An Error Has Occurred."}
         </Header>
         <Divider />
-        <GraphView formTitle={""} formQuestions={formQuestions} distributions={formDistributions} />
+        <GraphView
+          formTitle={""}
+          formQuestions={formQuestions}
+          distributions={formDistributions}
+          isLoading={!hasLoaded}
+        />
       </Segment>
     </Flex>
   );

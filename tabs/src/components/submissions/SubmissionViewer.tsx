@@ -33,6 +33,7 @@ export default function SubmissionViewer({
   formQuestions,
   submissions,
   distributions,
+  isLoading,
   navButton,
 }: Props) {
   const [viewType, setViewType] = useState<ViewType>("List");
@@ -48,7 +49,13 @@ export default function SubmissionViewer({
         </Flex>
         <Divider />
         {!formQuestions.isEmpty() ? (
-          generateView(viewType, { formTitle, formQuestions, submissions, distributions })
+          generateView(viewType, {
+            formTitle,
+            formQuestions,
+            submissions,
+            distributions,
+            isLoading,
+          })
         ) : (
           <Loader />
         )}

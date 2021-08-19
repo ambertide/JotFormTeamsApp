@@ -1,11 +1,7 @@
-import { Button, Divider, Flex, Header, Segment } from "@fluentui/react-northstar";
+import { Divider, Flex, Header, Segment } from "@fluentui/react-northstar";
 import { GraphView } from "components/submissions/SubmissionViews/GraphView/GraphView";
 import { PollURLParams } from "interfaces/PageURLParams";
-import { FormAnswerDistribution, ProcessedFormSubmissions } from "interfaces/ViewTypes";
-import { useState } from "react";
 import { useParams } from "react-router-dom";
-import I from "immutable";
-import { useEffect } from "react";
 import useFormData from "hooks/useFormData";
 import { useCallback } from "react";
 import { getPollQuestions } from "api/JFPollApi";

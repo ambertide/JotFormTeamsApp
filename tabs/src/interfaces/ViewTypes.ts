@@ -1,5 +1,4 @@
 import I from "immutable";
-import { FormSubmissionAnswer } from "./JotFormTypes";
 
 export interface PorcessedSubmissionAnswer {
   qid: string /** Question ID the answer is for. */;

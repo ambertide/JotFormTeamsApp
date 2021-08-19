@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardFooter, CardBody, Flex, Divider } from "@fluentui/react-northstar";
+import { Card, CardHeader, CardBody, Flex, Divider } from "@fluentui/react-northstar";
 import { ProcessedFormSubmission } from "interfaces/ViewTypes";
 import { Text } from "@fluentui/react-northstar";
 import SelectAnswerView from "./SelectAnswerView";

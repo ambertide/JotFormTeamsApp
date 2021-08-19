@@ -1,4 +1,4 @@
-import { Flex, Grid } from "@fluentui/react-northstar";
+import { Flex } from "@fluentui/react-northstar";
 import { ViewerProps } from "interfaces/ViewTypes";
 import SubmissionCard from "./SubmissionCard";
 

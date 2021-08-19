@@ -18,7 +18,7 @@ export default function LoginPage() {
       dispatch({ type: "AUTH_REQUEST", username: username, password: password });
       history.replace(from); // Almost verbatim form reactrouter auth workflow example.
     },
-    [dispatch]
+    [dispatch, history, from]
   );
   return (
     <Flex styles={{ backgroundColor: "#eeeeee" }} hAlign="center">

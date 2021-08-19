@@ -1,6 +1,6 @@
-import I, { setIn } from "immutable";
+import I from "immutable";
 import { PollRestricted, QuestionResponse, SubmissionFieldAnswer } from "interfaces/JotFormTypes";
-import { Dispatch, MutableRefObject, SetStateAction, useEffect, useRef, useState } from "react";
+import { MutableRefObject, useRef, useState } from "react";
 import { Button, Flex, Form, Segment, Text } from "@fluentui/react-northstar";
 import { useMemo } from "react";
 import * as fields from "./Fields";

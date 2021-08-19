@@ -121,7 +121,12 @@ export default function QuestionBuilder(props: QuestionBuilderProps) {
   };
   return (
     <Flex column>
-      <Form className={isLite ? "lite" : ""}>
+      <Form
+        className={isLite ? "lite" : ""}
+        onSubmit={() => {
+          onSaveQuestion(questionProperties.toObject() as unknown as JotFormQuestionData);
+        }}
+      >
         <FormInput
           label="Question title"
           id="QuestionTitle"
@@ -161,13 +166,7 @@ export default function QuestionBuilder(props: QuestionBuilderProps) {
         />
         {getQuestionFragment(questionType)}
         <Flex gap="gap.smaller">
-          <FormButton
-            content={buttonTitle}
-            primary
-            onClick={() => {
-              onSaveQuestion(questionProperties.toObject() as unknown as JotFormQuestionData);
-            }}
-          />
+          <FormButton content={buttonTitle} primary />
           <Button content={secondaryButtonTitle} onClick={onClickSecondary} />
         </Flex>
       </Form>

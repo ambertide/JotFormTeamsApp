@@ -63,7 +63,7 @@ export function addDecorativeFields(formData: JotFormData) {
 }
 
 const validatorStore: ValidatorStore = {
-  None: (validatee: string) => true,
+  None: () => true,
   Email: validator.isEmail,
   URL: validator.isURL,
   AlphaNumeric: validator.isAlphanumeric,

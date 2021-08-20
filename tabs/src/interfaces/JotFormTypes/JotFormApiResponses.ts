@@ -148,8 +148,6 @@ export interface FormQuestionsResponse extends BaseResponse {
   content: QuestionMap;
 }
 
-export interface SubmissionResponse extends BaseResponse {}
-
 /**
  * Returned when requesting form response.
  */

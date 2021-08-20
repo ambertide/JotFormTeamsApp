@@ -9,7 +9,6 @@ import {
 import { processFormQuestions, processPollDistributions } from "utils/PollUtils";
 import { processSubmissions } from "utils/JFUtils";
 import { getPollStats } from "api/JFPollApi";
-import { useMemo } from "react";
 import useTrackAll from "./useTrackAll";
 
 type Resource = "questions" | "distributions" | "submissions";

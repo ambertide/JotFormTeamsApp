@@ -1,9 +1,15 @@
-import Login, { LoginProps } from "components/Tab/Login";
+import Login from "components/Tab/Login";
 import { render, screen } from "@testing-library/react";
 
 describe("<Login>", () => {
   it("should render username, password, sign-in and sign up.", () => {
-    render(<Login onSubmit={() => {}} />);
+    render(
+      <Login
+        onSubmit={() => {
+          console.log("here!");
+        }}
+      />
+    );
     const form = screen.getByTitle("Sign In to JotForm");
     expect(form).toBeInTheDocument();
     const username = screen.getByLabelText("JotForm Username");

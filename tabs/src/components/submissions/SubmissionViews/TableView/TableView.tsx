@@ -16,7 +16,7 @@ export function TableView({ formQuestions, formTitle, submissions }: ViewerProps
   const rows = useMemo(() => {
     const questionIDs = formQuestions.keySeq().toList();
     return submissions?.submissions
-      .map((submission, index) => ({
+      .map((submission) => ({
         key: `${submission.submissionID}`,
         items: questionIDs
           .map((questionID) => ({

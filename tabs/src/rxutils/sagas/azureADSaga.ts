@@ -4,6 +4,7 @@ import { showError, showSuccess } from "utils/messaging";
 import { AzureAction, AzureRequestKeyAction } from "../../interfaces/reduxActions";
 
 // Intercepts the login user requests to send API request.
+// eslint-disable-next-line
 function* getAzureKey(action: AzureRequestKeyAction): any {
   try {
     const token = yield call(getUserToken);

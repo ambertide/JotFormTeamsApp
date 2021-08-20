@@ -8,7 +8,6 @@ import { registerUser } from "api/JFPollApi";
 import useNavigation from "hooks/useNavigation";
 import { useCallback, useState } from "react";
 import useFormData from "hooks/useFormData";
-import { useRef } from "react";
 import { useEffect } from "react";
 
 interface SubmissionsViewURLParams {

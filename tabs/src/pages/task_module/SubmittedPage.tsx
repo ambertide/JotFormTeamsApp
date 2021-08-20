@@ -1,4 +1,4 @@
-import { Divider, Flex, Header, Segment } from "@fluentui/react-northstar";
+import { Flex, Segment } from "@fluentui/react-northstar";
 import { GraphView } from "components/submissions/SubmissionViews/GraphView/GraphView";
 import { PollURLParams } from "interfaces/PageURLParams";
 import { useParams } from "react-router-dom";

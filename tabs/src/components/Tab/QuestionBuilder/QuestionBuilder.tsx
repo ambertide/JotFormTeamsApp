@@ -145,7 +145,7 @@ export default function QuestionBuilder(props: QuestionBuilderProps) {
           onChange={(event, data) => {
             setQuestionProperties((previousProperties) => {
               const { required, text } = previousProperties.toObject();
-              let cleared = previousProperties.clear();
+              const cleared = previousProperties.clear();
               return cleared.concat({ required, text });
             }); // Reset the properties.
             const qType = questionTypes.get(data.value as QuestionTypeName);

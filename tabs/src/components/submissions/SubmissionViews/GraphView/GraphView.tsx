@@ -23,7 +23,7 @@ const colours = [
   "#943670",
 ];
 
-export function GraphView({ formTitle, formQuestions, distributions, isLoading }: ViewerProps) {
+export function GraphView({ formQuestions, distributions, isLoading }: ViewerProps) {
   const [questionID, setQuestionID] = useState(distributions?.keySeq().get(0));
 
   const listItems = useMemo(() => {
@@ -35,7 +35,7 @@ export function GraphView({ formTitle, formQuestions, distributions, isLoading }
     return items;
   }, [formQuestions, distributions]);
   useEffect(() => {
-    setQuestionID(formQuestions.findKey((value, key) => value === listItems[0]));
+    setQuestionID(formQuestions.findKey((value) => value === listItems[0]));
   }, [listItems, formQuestions, setQuestionID]);
   if (!isLoading && (!distributions || distributions?.isEmpty())) {
     // Despite loading being complete, still no data.
@@ -55,7 +55,7 @@ export function GraphView({ formTitle, formQuestions, distributions, isLoading }
         value={formQuestions.get(questionID || "", "")}
         aria-label={"Select the question"}
         onChange={(event, data) =>
-          setQuestionID(formQuestions.findKey((value, key) => value === data?.value))
+          setQuestionID(formQuestions.findKey((value) => value === data?.value))
         }
         checkable
         fluid

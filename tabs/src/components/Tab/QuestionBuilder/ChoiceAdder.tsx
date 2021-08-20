@@ -31,7 +31,7 @@ export default function ChoiceAdder(props: ChoiceAdderProps) {
           {choices.map((choice, index) => (
             <Pill
               key={`${choice}${index}`}
-              onDismiss={(e, data) => {
+              onDismiss={() => {
                 setChoices((previousChoices) => {
                   return previousChoices.remove(index);
                 });

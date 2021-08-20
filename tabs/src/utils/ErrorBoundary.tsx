@@ -6,6 +6,7 @@ export default class ErrorBoundary extends React.Component<any, { hasError: bool
     this.state = { hasError: false };
   }
 
+  // eslint-disable-next-line
   static getDerivedStateFromError(error: Error) {
     return { hasError: true };
   }

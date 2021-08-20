@@ -4,10 +4,10 @@ import { generateAdaptiveCard } from "templates/generators/cardGenerators";
 import axios from "axios";
 import { FrequencyResponseObject, PollRegisterResponse } from "interfaces/PollAPITypes";
 import {
+  BaseResponse,
   FormQuestionsResponse,
   PostSubmissionRequest,
   QuestionResponse,
-  SubmissionResponse,
 } from "interfaces/JotFormTypes";
 import I from "immutable";
 
@@ -17,7 +17,7 @@ const poll_proxy_base_url = "https://ambertide-jfteams-proxy.herokuapp.com";
  * Given its components, construct a URL.
  */
 const constructURL = (...args: string[]) => {
-  return args.reduce((reduction, param, _) => reduction + "/" + param, poll_proxy_base_url);
+  return args.reduce((reduction, param) => reduction + "/" + param, poll_proxy_base_url);
 };
 
 export async function sendPollToTeam(
@@ -71,7 +71,7 @@ export async function postSubmissionByProxy(
   uuid: string,
   submission: PostSubmissionRequest
 ): Promise<boolean> {
-  const response = await axios.put<SubmissionResponse>(
+  const response = await axios.put<BaseResponse>(
     constructURL("poll", uuid, "submissions"),
     submission
   );

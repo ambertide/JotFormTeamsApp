@@ -26,7 +26,7 @@ const config = {
   ],
 };
 Providers.globalProvider = new TeamsProvider(config);
-Providers.onProviderUpdated((event) => {
+Providers.onProviderUpdated(() => {
   if (
     Providers.globalProvider.state === ProviderState.SignedIn &&
     store.getState().auth.get("AzureADToken") === ""

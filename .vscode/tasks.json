@@ -42,6 +42,12 @@
             "options": {
                 "cwd": "${workspaceFolder}/tabs"
             }
+        },
+        {
+            "label": "lint all",
+            "type": "npm",
+            "script": "lint",
+            "problemMatcher": ["$eslint-stylish"]
         }
     ]
 }

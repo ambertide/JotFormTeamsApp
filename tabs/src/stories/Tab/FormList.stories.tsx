@@ -18,7 +18,6 @@ const Template: ComponentStory<typeof FormList> = (args: any) => <FormList {...a
 export const TabFormsList = Template.bind({});
 
 TabFormsList.args = {
-  buttonOnClick: () => {},
   buttonIcon: <ArrowLeftIcon />,
   buttonText: "Return to Main Page",
   forms: I.List([

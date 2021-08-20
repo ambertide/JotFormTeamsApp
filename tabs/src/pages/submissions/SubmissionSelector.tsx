@@ -22,7 +22,9 @@ export default function SubmissionSelector() {
       ) : (
         <FormList
           buttonText={""}
-          buttonOnClick={() => {}}
+          buttonOnClick={() => {
+            console.log("This won't be shown.");
+          }} // TODO: Add logout here.
           buttonIcon={<ErrorIcon />}
           isLite={false}
           forms={forms}

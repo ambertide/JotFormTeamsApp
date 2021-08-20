@@ -36,7 +36,7 @@ export async function postMessageToChannel(
 export async function postAdaptiveCardToChannel(
   teamID: string,
   channelID: string,
-  adaptiveCard: object
+  adaptiveCard: any
 ): Promise<void> {
   const attachment_id = "4523423432432423432423";
   const chatMessage = {

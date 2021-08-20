@@ -21,7 +21,7 @@ export default function PollPage() {
     (answers: I.Map<string, string | SubmissionFieldAnswer>) => {
       const formattedAnswers = [
         answers
-          .map((value, key) => {
+          .map((value) => {
             if (typeof value === "string") {
               return { text: value };
             } else {
@@ -41,7 +41,7 @@ export default function PollPage() {
             navigateToFailure();
           }
         })
-        .catch((err) => {
+        .catch(() => {
           setTimeout(() => {
             teams.tasks.submitTask();
           }, 1000);

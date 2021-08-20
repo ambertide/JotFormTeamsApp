@@ -52,7 +52,7 @@ function CheckboxGroupOther(props: {
     <Flex>
       <Checkbox
         checked={isSelected}
-        onChange={(data, event) => setIsSelected((prevSelected) => !prevSelected)}
+        onChange={() => setIsSelected((prevSelected) => !prevSelected)}
       />
       <Input
         value={text}
@@ -93,7 +93,7 @@ export default function CheckboxGroup(props: CheckboxGroupProps) {
           key={item.keyID}
           label={item.text}
           checked={selections.get(item.keyID)}
-          onChange={(event, data) => {
+          onChange={() => {
             setSelections((previousSelections) =>
               previousSelections.set(item.keyID, !previousSelections.get(item.keyID))
             );

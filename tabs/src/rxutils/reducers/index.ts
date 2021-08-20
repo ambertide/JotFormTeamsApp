@@ -17,10 +17,10 @@ const rootReducer = combineReducers({
 });
 
 const ImmutableTransform = createTransform(
-  (inboundState: User, key) => {
+  (inboundState: User) => {
     return inboundState; // Already JSON compatible
   },
-  (outboundState: User, key) => {
+  (outboundState: User) => {
     return I.Map(outboundState); // Return to map.
   },
   { whitelist: ["auth"] }

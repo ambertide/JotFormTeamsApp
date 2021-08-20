@@ -1,11 +1,4 @@
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  Button,
-  ContactCardIcon,
-  PollIcon,
-  TableIcon,
-} from "@fluentui/react-northstar";
+import { ArrowLeftIcon, ArrowRightIcon, Button } from "@fluentui/react-northstar";
 import { useMemo, useState, useEffect } from "react";
 
 interface PageSwitcherProps {

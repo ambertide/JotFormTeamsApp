@@ -7,6 +7,7 @@ import {
 } from "../../interfaces/reduxActions";
 
 // Intercepts the login user requests to send API request.
+// eslint-disable-next-line
 function* getAzureTeamsList(action: AzureRequestTeamsListAction): any {
   try {
     const teams = yield call(getUserTeams);

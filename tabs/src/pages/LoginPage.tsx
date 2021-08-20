@@ -12,7 +12,7 @@ export default function LoginPage() {
   const dispatch = useDispatch();
   const location = useLocation<From>();
   const history = useHistory();
-  let { from } = location.state || { from: { pathname: "/" } }; // Almost verbatim form reactrouter auth workflow example.
+  const { from } = location.state || { from: { pathname: "/" } }; // Almost verbatim form reactrouter auth workflow example.
   const userLogin = useCallback(
     (username: string, password: string) => {
       dispatch({ type: "AUTH_REQUEST", username: username, password: password });

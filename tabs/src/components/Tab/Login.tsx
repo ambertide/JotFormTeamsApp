@@ -13,7 +13,7 @@ import {
 import { useCallback } from "react";
 import { useState } from "react";
 import JFLogo from "assets/images/jflogo.png";
-interface LoginProps {
+export interface LoginProps {
   /**
    * Callback function that stores the passed credentials in a global state.
    */
@@ -42,8 +42,8 @@ export default function Login(props: LoginProps) {
     >
       <Flex vAlign="center">
         <Flex column>
-          <Header content="Sign In" />
-          <Form>
+          <Header content="Sign In to JotForm" />
+          <Form title="Sign In to JotForm">
             <FormInput
               onChange={handleUsername}
               label="JotForm Username"

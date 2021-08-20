@@ -5,6 +5,7 @@ import { useState } from "react";
 import ViewSwitcher from "./ViewSwitcher";
 import * as viewsObject from "./SubmissionViews";
 import { MessageSegment } from "components/Extensions";
+import PageSwitcher from "./PageSwitcher";
 
 const views = I.Map<ViewType, ViewComponent>(viewsObject as any);
 
@@ -22,7 +23,15 @@ interface Props extends ViewerProps {
   /**
    * Navigation button that can be put into the page.
    */
+  onPageChange: (page: number) => void;
+  /**
+   * Navigation button that will be placed on the page.
+   */
   navButton?: JSX.Element;
+  /**
+   * Indicates whether or not this is the last page.
+   */
+  isLastPage?: boolean;
 }
 
 /**
@@ -36,6 +45,8 @@ export default function SubmissionViewer({
   distributions,
   isLoading,
   navButton,
+  onPageChange,
+  isLastPage,
 }: Props) {
   const [viewType, setViewType] = useState<ViewType>("List");
   return (
@@ -44,6 +55,13 @@ export default function SubmissionViewer({
         <Flex>
           <Header content={`${formTitle} Submissions`} />
           <Flex style={{ marginLeft: "auto" }} gap="gap.small">
+            {viewType !== "Graph" ? ( // Pages do not exist in Graph.
+              <PageSwitcher
+                onPageChange={onPageChange}
+                isLastPage={isLastPage}
+                isLoading={isLoading}
+              />
+            ) : null}
             {navButton}
             <ViewSwitcher currentState={viewType} setCurrentState={setViewType} />
           </Flex>

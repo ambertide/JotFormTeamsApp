@@ -114,15 +114,23 @@ export async function postSubmission(
 
 /**
  * Get submissions done of a form.
+ * @param limit: Is the number of forms to be fetched,
+ * maximum value of this is 1000.
+ * @param offset: Is the offset in the number of forms
+ * being fetched.
+ * @example limit = 20 and offset = 40 will bring the
+ * submissions between 40 and 60.
  */
 export async function getFormSubmissions(
   apiKey: string,
-  formID: string
+  formID: string,
+  limit: number,
+  offset: number
 ): Promise<FormSubmissionResponseContent[]> {
   const response = await axios.get<FormSubmissionResponse>(
     `https://api.jotform.com/form/${formID}/submissions`,
     {
-      params: { apiKey },
+      params: { apiKey, limit, offset },
     }
   );
   return response.data.content;

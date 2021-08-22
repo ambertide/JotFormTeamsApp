@@ -8,12 +8,12 @@ import {
   UserResponse,
   QuestionResponse,
   FormQuestionsResponse,
-  SubmissionResponse,
   JotFormData,
   JotFormMetadata,
   PostSubmissionRequest,
   FormSubmissionResponse,
   FormSubmissionResponseContent,
+  BaseResponse,
 } from "interfaces/JotFormTypes";
 import { addDecorativeFields } from "utils/JFUtils";
 import { LoginException } from "./exceptions";
@@ -104,7 +104,7 @@ export async function postSubmission(
   formID: string,
   submission: PostSubmissionRequest
 ): Promise<boolean> {
-  const response = await axios.put<SubmissionResponse>(
+  const response = await axios.put<BaseResponse>(
     `https://api.jotform.com/form/${formID}/submissions`,
     submission,
     { params: { apiKey } }

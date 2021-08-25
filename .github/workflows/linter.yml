@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Set up dependencies
-        run: sudo apt install npm eslint
+        run: sudo apt install npm && npm i -g eslint
 
       # Runs a set of commands using the runners shell
       - name: Set up development enviroment

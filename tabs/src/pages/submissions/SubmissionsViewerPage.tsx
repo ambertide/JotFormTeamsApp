@@ -37,7 +37,6 @@ export default function SubmissionsViewerPage() {
     return registerUser(apiKey, formID);
   }, [apiKey, formID]);
   const getSubmissions = useCallback(() => {
-    console.log("Requested submissions.");
     // Get the submissions using JF API.
     return getFormSubmissions(apiKey, formID, 20, currentPage * 20);
   }, [apiKey, formID, currentPage]);

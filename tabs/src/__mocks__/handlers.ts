@@ -77,7 +77,6 @@ export const handlers = [
     const forms = I.Range(Number.parseInt(offset), Number.parseInt(offset) + Number.parseInt(limit))
       .map((index) => baseFormData.set("id", `${index}`))
       .toJS();
-    console.log(forms);
     return res(ctx.status(200), ctx.json(forms));
   }),
 ];

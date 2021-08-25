@@ -23,7 +23,6 @@ describe("Update Collections Function", () => {
       { animal: "dog", sound: "woof" },
       { animal: "duck", sound: "quack" },
     ]);
-    console.log(updatedCollection.toArray());
     expect(updatedCollection).toEqual<I.List<AnimalSound>>(expectedCollection);
   });
 });

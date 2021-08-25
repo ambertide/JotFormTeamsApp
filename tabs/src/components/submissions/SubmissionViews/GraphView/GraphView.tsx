@@ -31,7 +31,6 @@ export function GraphView({ formQuestions, distributions, isLoading }: ViewerPro
       .filter((questionName, qid) => distributions?.keySeq().contains(qid))
       .valueSeq()
       .toArray();
-    console.log(items);
     return items;
   }, [formQuestions, distributions]);
   useEffect(() => {

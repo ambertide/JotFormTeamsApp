@@ -37,12 +37,13 @@ jobs:
           npm install
           cd ..
 
-        # Run the lint.
-      - name: Lint the project
-        run: npm run lint
-
       - name: Test the project
         run: |
           cd tabs
           npm run test
           cd ..
+        # Run the lint.
+      
+      - name: Lint the project
+        run: npm run lint
+

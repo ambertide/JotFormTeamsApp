@@ -5,6 +5,13 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 export default {
   title: "Extensions/SelfValidatingInput",
   component: SelfValidatingInput,
+  argTypes: {
+    required: {
+      control: {
+        disable: true,
+      },
+    },
+  },
 } as ComponentMeta<typeof SelfValidatingInput>;
 
 const Template: ComponentStory<typeof SelfValidatingInput> = (args: any) => (
@@ -13,9 +20,15 @@ const Template: ComponentStory<typeof SelfValidatingInput> = (args: any) => (
   </Segment>
 );
 
-export const ExampleSelfValidatingInput = Template.bind({});
+export const RequiredSelfValidatingInput = Template.bind({});
+export const OptionalSelfValidatingInput = Template.bind({});
 
-ExampleSelfValidatingInput.args = {
+RequiredSelfValidatingInput.args = {
   label: "What is your name?",
   required: true,
+};
+
+OptionalSelfValidatingInput.args = {
+  label: "What is your name?",
+  required: false,
 };

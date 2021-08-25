@@ -81,9 +81,17 @@ function dispatchValidator(validationType: ValidationType): ValidatorFunction {
  * whether the string is valid.
  * @param validatee String to be validated.
  * @param validationType Type of validation to be performed.
+ * @param required If the empty string is invalid.
  * @returns Whether the string is valid.
  */
-export function validateString(validatee: string, validationType: ValidationType): boolean {
+export function validateString(
+  validatee: string,
+  validationType: ValidationType,
+  required: boolean
+): boolean {
+  if (validatee === "") {
+    return !required;
+  }
   const validator = dispatchValidator(validationType);
   return validator(validatee);
 }

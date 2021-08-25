@@ -52,9 +52,10 @@ export default function SelfValidatingInput({
   validationType = "None",
   onInputChange,
   setValidateState,
+  required,
   ...misc
 }: SelfValidatingInputProps) {
-  const [isValid, setIsValid] = useState(false);
+  const [isValid, setIsValid] = useState(required ? false : true);
   useEffect(() => {
     if (setValidateState) {
       setValidateState(isValid);
@@ -62,7 +63,7 @@ export default function SelfValidatingInput({
   }, [isValid, setValidateState]);
   const validateStringBeforePassing = useCallback(
     (validatee: string) => {
-      const isStringValid = validateString(validatee, validationType);
+      const isStringValid = validateString(validatee, validationType, required ? true : false);
       setIsValid(isStringValid);
       if (isStringValid && onInputChange) {
         onInputChange(validatee);
@@ -74,6 +75,7 @@ export default function SelfValidatingInput({
     <Input
       error={!isValid}
       onChange={(event, data) => validateStringBeforePassing(data?.value || "")}
+      required={required}
       {...misc}
     />
   );

@@ -14,6 +14,7 @@ import {
   FormSubmissionResponse,
   FormSubmissionResponseContent,
   BaseResponse,
+  UserFormResponse,
 } from "interfaces/JotFormTypes";
 import { addDecorativeFields } from "utils/JFUtils";
 import { LoginException } from "./exceptions";
@@ -35,28 +36,29 @@ export async function login(username: string, password: string): Promise<string>
   return response.data.content.appKey;
 }
 
-export async function getTables(appKey: string): Promise<List<JotFormMetadata>> {
-  const response = await axios({
-    method: "get",
-    url: "https://api.jotform.com/user/forms",
+export async function getTables(
+  appKey: string,
+  offset = 0,
+  limit = 20
+): Promise<List<JotFormMetadata>> {
+  const response = await axios.get<UserFormResponse>("https://api.jotform.com/user/forms", {
     params: {
       apiKey: appKey,
+      offset: offset,
+      limit: limit,
     },
   });
-  const formData: any[] = response.data.content;
-  return List(
-    formData.map((formData) => {
-      return {
-        id: formData.id,
-        title: formData.title,
-        url: formData.url,
-        status: formData.status,
-        created_at: formData.created_at,
-        updated_at: formData.updated_at,
-        count: formData.count,
-      };
-    })
-  );
+  return List(response.data.content).map((formData) => {
+    return {
+      id: formData.id,
+      title: formData.title,
+      url: formData.url,
+      status: formData.status,
+      created_at: formData.created_at,
+      updated_at: formData.updated_at,
+      count: Number.parseInt(formData.count),
+    };
+  });
 }
 
 export async function postForm(apiKey: string, formData: JotFormData): Promise<void> {

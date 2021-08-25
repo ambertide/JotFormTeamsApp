@@ -10,10 +10,12 @@ import {
   Loader,
   Segment,
   SegmentProps,
+  Text,
 } from "@fluentui/react-northstar";
 import I from "immutable";
 import { AzureChannelMetadata, AzureTeamMetadata } from "interfaces/AzureTypes";
 import { useCallback, useEffect, useState } from "react";
+import "./TeamSelector.css";
 interface TeamSelectorProps {
   /**
    * An immutable list of Microsoft Teams Teams Metadata.
@@ -36,10 +38,20 @@ interface TeamSelectorProps {
    * Callback to be executed on close.
    */
   onClose: () => void;
+  /**
+   * Name of the selected form.
+   */
+  formName?: string;
 }
 
-export default function TeamSelector(props: TeamSelectorProps) {
-  const { teams, styles, getChannels, onChannelSelect, onClose } = props;
+export default function TeamSelector({
+  teams,
+  styles,
+  getChannels,
+  onChannelSelect,
+  onClose,
+  formName,
+}: TeamSelectorProps) {
   const [selectedTeam, setSelectedTeam] = useState<string>("");
   const [channels, setChannels] = useState<I.List<AzureChannelMetadata>>(I.List());
   const cleanSelectedTeam = useCallback(() => {
@@ -56,7 +68,10 @@ export default function TeamSelector(props: TeamSelectorProps) {
     }
   }, [selectedTeam, setChannels, getChannels]);
   return (
-    <Segment styles={{ width: "320px", minHeight: "100%", ...styles }}>
+    <Segment
+      styles={{ width: "320px", minHeight: "100%", ...styles }}
+      className="teamSelectorSegment"
+    >
       <Flex column>
         <Flex styles={{ width: "100%" }}>
           <Header as="h3" content={"Share your poll"} />
@@ -71,6 +86,13 @@ export default function TeamSelector(props: TeamSelectorProps) {
             onClick={selectedTeam === "" ? onClose : cleanSelectedTeam}
           />
         </Flex>
+        <Text
+          content={`Share ${formName}`}
+          truncated
+          size="small"
+          weight="semilight"
+          styles={{ maxWidth: "80%" }}
+        />
         <Divider content={`Select a ${selectedTeam === "" ? "Team" : "Channel"}`} />
         {selectedTeam === "" ? (
           teams === undefined ? (

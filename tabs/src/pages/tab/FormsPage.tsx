@@ -10,11 +10,13 @@ import { getChannelsInTeam } from "api/AzureADApi";
 import { RequestSendPollAction } from "interfaces/reduxActions";
 import { selectIsAzureADAuth, selectJFApiKey } from "rxutils/selectors";
 import { Login } from "@microsoft/mgt-react";
+import useFormList from "hooks/useFormList";
 
 export default function FormsPage() {
-  const forms = useSelector((auth: reduxState) => auth.forms);
+  const { forms, ensureFormContinuity } = useFormList();
   const JFApiKey = useSelector(selectJFApiKey);
   const [selectedFormID, setSelectedFormID] = useState("");
+  const [selectedFormName, setSelectedFormName] = useState("");
   const [isOpen, setIsOpen] = useState(false); // Sidepanel.
   const dispatch = useDispatch();
   const navigateToMainPage = useNavigation("/tab");
@@ -36,7 +38,6 @@ export default function FormsPage() {
     [selectedFormID, setSelectedFormID, setIsOpen, JFApiKey, dispatch]
   );
   useEffect(() => {
-    dispatch({ type: "FORMS_REQUEST", apiKey: JFApiKey });
     dispatch({ type: "AZURE_TEAMS_REQUEST" });
   }, [dispatch, JFApiKey]);
   if (isAzureADAuth) {
@@ -57,6 +58,7 @@ export default function FormsPage() {
               setSelectedFormID("");
               setIsOpen(false);
             }}
+            formName={selectedFormName}
           />
         ) : null}
         <Flex hAlign="center" fill>
@@ -69,10 +71,12 @@ export default function FormsPage() {
               buttonOnClick={navigateToMainPage}
               buttonIcon={<ArrowLeftIcon />}
               buttonText={"Return to Main Page"}
-              onFormSelect={(formID: string) => {
+              onFormSelect={(formID: string, formName: string) => {
                 setSelectedFormID(formID);
+                setSelectedFormName(formName);
                 setIsOpen(true);
               }}
+              onFormScroll={ensureFormContinuity}
             />
           )}
         </Flex>

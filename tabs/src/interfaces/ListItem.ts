@@ -1,5 +1,5 @@
 export default interface ListItem {
-  key: string;
+  key?: string;
   header: string;
   headerMedia?: any;
   media: any;

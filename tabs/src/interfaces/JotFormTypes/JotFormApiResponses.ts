@@ -46,7 +46,7 @@ export interface UserFormContent {
   title: string;
   height: string;
   url: string;
-  status: string;
+  status: "ENABLED" | "DISABLED";
   created_at: string;
   updated_at: string;
   new: string;

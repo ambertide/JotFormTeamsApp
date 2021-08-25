@@ -3,7 +3,7 @@ import "./index.css";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { store, persistor } from "./rxutils";
 import { ToastContainer } from "react-toastify";
-import { Provider as NorthstarProvider, Loader, Box } from "@fluentui/react-northstar";
+import { Provider as NorthstarProvider, Loader } from "@fluentui/react-northstar";
 import ErrorBoundary from "utils/ErrorBoundary";
 import { PersistGate } from "redux-persist/integration/react";
 import "react-toastify/dist/ReactToastify.css";
@@ -43,7 +43,6 @@ function TeamsApp() {
   teams.initialize();
   const dispatch = useDispatch();
   teams.registerOnThemeChangeHandler((theme) => {
-    console.log(theme);
     dispatch<ThemeChangeAction>({ type: "THEME_CHANGE", newTheme: theme });
   });
   const currentTheme = useSelector(selectTeamsTheme);
@@ -54,12 +53,10 @@ function TeamsApp() {
       styles={{ justifyContent: "center" }}
     >
       <PersistGate persistor={persistor} loading={<Loader />}>
-        <Box>
-          <ToastContainer />
-          <ErrorBoundary>
-            <App />
-          </ErrorBoundary>
-        </Box>
+        <ToastContainer />
+        <ErrorBoundary>
+          <App />
+        </ErrorBoundary>
       </PersistGate>
     </NorthstarProvider>
   );

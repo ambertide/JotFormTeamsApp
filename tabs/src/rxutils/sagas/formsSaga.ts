@@ -6,7 +6,7 @@ import { formsRequestAction } from "../../interfaces/reduxActions";
 // Intercepts the login user requests to send API request.
 function* getUserForms(action: formsRequestAction): any {
   try {
-    const forms = yield call(getTables, action.apiKey);
+    const forms = yield call(getTables, action.apiKey, action.offset, action.limit);
     yield put({ type: "FORMS_FETCHED", newForms: forms });
   } catch (e) {
     showError(e.message);

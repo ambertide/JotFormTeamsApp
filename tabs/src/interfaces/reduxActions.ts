@@ -26,6 +26,12 @@ export interface formsAction {
 export interface formsRequestAction {
   type: "FORMS_REQUEST";
   apiKey: string;
+  limit?: number;
+  offset?: number;
+}
+
+export interface FormsResetAction {
+  type: "FORMS_RESET";
 }
 
 export interface createFormRequestAction {

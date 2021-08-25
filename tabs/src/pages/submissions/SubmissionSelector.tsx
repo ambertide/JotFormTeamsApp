@@ -1,14 +1,15 @@
-import { ErrorIcon, Loader, Flex } from "@fluentui/react-northstar";
+import { Loader, Flex, ArrowLeftIcon } from "@fluentui/react-northstar";
 import { FormList } from "components/Tab";
+import useFormList from "hooks/useFormList";
 import { formsRequestAction } from "interfaces/reduxActions";
-import reduxState from "interfaces/reduxState";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { selectJFApiKey } from "rxutils/selectors";
+import { showInfo } from "utils/messaging";
 
 export default function SubmissionSelector() {
-  const forms = useSelector((state: reduxState) => state.forms);
+  const { forms, ensureFormContinuity } = useFormList();
   const apiKey = useSelector(selectJFApiKey);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -21,17 +22,18 @@ export default function SubmissionSelector() {
         <Loader />
       ) : (
         <FormList
-          buttonText={""}
           buttonOnClick={() => {
-            console.log("This won't be shown.");
-          }} // TODO: Add logout here.
-          buttonIcon={<ErrorIcon />}
+            showInfo("Logged out of your account.");
+            dispatch({ type: "AUTH_LOGOUT" });
+          }}
+          buttonIcon={<ArrowLeftIcon />}
+          buttonText={"Logout"}
           isLite={false}
           forms={forms}
           onFormSelect={(formID, formName) => {
             history.push(`/results/${formID}/${formName}`);
           }}
-          hideButton
+          onFormScroll={ensureFormContinuity}
         />
       )}
     </Flex>

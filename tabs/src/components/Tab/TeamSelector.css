@@ -1,0 +1,14 @@
+@keyframes slidein {
+  from {
+    right: -20%;
+  }
+  to {
+    right: 0;
+  }
+}
+
+.teamSelectorSegment {
+  animation-name: slidein;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}

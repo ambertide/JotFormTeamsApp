@@ -1,34 +1,18 @@
 {
-    "name": "JotFormTeamsIntegration",
-    "version": "0.0.1",
-    "description": "",
-    "author": "",
-    "scripts": {
-        "prepare": "husky install",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "lint": "eslint tabs/src"
-    },
-    "license": "MIT",
-    "dependencies": {
-        "@microsoft/mgt": "^2.2.1",
-        "@microsoft/mgt-react": "^2.2.1",
-        "adaptivecards-templating": "^2.1.0",
-        "axios": "^0.21.1",
-        "eslint": "^7.31.0",
-        "immutable": "^4.0.0-rc.14",
-        "react-modal": "^3.14.3",
-        "react-redux": "^7.2.4",
-        "react-toastify": "^7.0.4",
-        "recharts": "^2.1.0",
-        "redux": "^4.1.0",
-        "redux-persist": "^6.0.0",
-        "redux-saga": "^1.1.3"
-    },
-    "devDependencies": {
-        "@types/react-modal": "^3.12.1",
-        "eslint-config-airbnb": "^18.2.1",
-        "eslint-config-jotform": "^1.0.34",
-        "husky": "^7.0.1",
-        "prettier": "^2.3.2"
-    }
+  "name": "JotFormTeamsIntegration",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "eslint tabs/src",
+    "test": "cd tabs && npm run test"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@testing-library/dom": "^8.1.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "husky": "^7.0.1",
+    "prettier": "^2.3.2"
+  }
 }

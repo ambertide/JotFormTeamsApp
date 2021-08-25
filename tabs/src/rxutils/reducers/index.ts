@@ -9,7 +9,7 @@ import { createTransform } from "redux-persist";
 import User from "interfaces/User";
 import themeReducer from "./themeReducer";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   auth: authReducer,
   forms: formsReducer,
   teams: azureTeamsReducer,

@@ -1,5 +1,8 @@
-import { Table, Text } from "@fluentui/react-northstar";
+import { Ref, Table, Text } from "@fluentui/react-northstar";
 import { ViewerProps } from "interfaces/ViewTypes";
+import { useCallback, useEffect } from "react";
+import { useState } from "react";
+import { useRef } from "react";
 import { useMemo } from "react";
 
 export function TableView({ formQuestions, formTitle, submissions }: ViewerProps) {
@@ -13,6 +16,14 @@ export function TableView({ formQuestions, formTitle, submissions }: ViewerProps
     }),
     [formQuestions, formTitle]
   );
+  const [tableWidth, setTableWidth] = useState(0);
+  const tableReference = useRef<HTMLTableElement>(null);
+  const onResize = useCallback(() => {
+    setTableWidth(tableReference.current?.getBoundingClientRect().width || 0);
+  }, [tableReference, setTableWidth]);
+  useEffect(() => {
+    window.addEventListener("resize", onResize);
+  }, [window, onResize]);
   const rows = useMemo(() => {
     const questionIDs = formQuestions.keySeq().toList();
     return submissions?.submissions
@@ -23,10 +34,22 @@ export function TableView({ formQuestions, formTitle, submissions }: ViewerProps
             key: `${submission.submissionID}${questionID}`,
             content: submission.answers.find((answer) => answer.qid === questionID)
               ?.processedAnswer,
+            truncateContent: tableWidth < 900,
           }))
           .toArray(),
       }))
       .toArray();
-  }, [submissions, formQuestions]);
-  return <Table header={header} rows={rows} styles={{ maxHeight: "100%", overflowY: "auto" }} />;
+  }, [submissions, formQuestions, tableWidth]);
+  return (
+    <Ref innerRef={tableReference}>
+      <Table
+        header={header}
+        variables={{
+          cellContentOverflow: "none",
+        }}
+        rows={rows}
+        styles={{ maxHeight: "100%", overflowY: "auto", minWidth: "fit-content" }}
+      />
+    </Ref>
+  );
 }

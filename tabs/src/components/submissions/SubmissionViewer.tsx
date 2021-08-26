@@ -51,7 +51,7 @@ export default function SubmissionViewer({
   const [viewType, setViewType] = useState<ViewType>("List");
   return (
     <Segment styles={{ width: "90%", height: "90%" }}>
-      <Flex column styles={{ minHeight: "100%", maxHeight: "100%" }}>
+      <Flex column styles={{ minHeight: "100%", maxHeight: "100%", overflowX: "auto" }}>
         <Flex>
           <Header content={`${formTitle} Submissions`} />
           <Flex style={{ marginLeft: "auto" }} gap="gap.small">

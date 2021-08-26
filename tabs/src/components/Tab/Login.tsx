@@ -43,7 +43,7 @@ export default function Login(props: LoginProps) {
       <Flex vAlign="center">
         <Flex column>
           <Header content="Sign In to JotForm" />
-          <Form title="Sign In to JotForm">
+          <Form title="Sign In to JotForm" name="jotformSignIn">
             <FormInput
               onChange={handleUsername}
               label="JotForm Username"

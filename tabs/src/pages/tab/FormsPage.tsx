@@ -85,6 +85,7 @@ export default function FormsPage() {
   } else {
     return (
       <Dialog
+        className="azureAdAuthDialog"
         content="In order access your Teams, we need extra permissions, you will now be redirected to your Azure AD account where you can grant permissions to our application."
         onConfirm={navigateToAuth}
         open={!isAzureADAuth}

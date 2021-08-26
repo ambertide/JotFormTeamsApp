@@ -14,6 +14,12 @@ import App from "pages/App";
 import { ThemeChangeAction } from "interfaces/reduxActions";
 import { selectTeamsTheme } from "rxutils/selectors";
 
+if (process.env.REACT_APP_MSW === "true") {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { worker } = require("./__mocks__/browser");
+  worker.start();
+}
+
 TeamsProvider.microsoftTeamsLib = teams;
 const config = {
   clientId: "f33b568f-ba01-477c-a45a-bac73d5fffa4", //TODO: Possibly hide this.

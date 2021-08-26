@@ -5,7 +5,7 @@
 /* eslint-disable */
 module.exports = {
   moduleDirectories: ["node_modules", "src"],
-  preset: "ts-jest/presets/js-with-babel",
+  preset: "jest-puppeteer",
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -79,12 +79,13 @@ module.exports = {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  moduleNameMapper: {
-    "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-      "<rootDir>/src/__mocks__/fileMock.js",
-    "\\.(css|less)$": "<rootDir>/src/__mocks__/fileMock.js",
-  },
-  setupFilesAfterEnv: ["<rootDir>/src/setuptests.ts"],
+
+  //moduleNameMapper: {
+  //  "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+  //    "<rootDir>/src/__mocks__/fileMock.js",
+  //  "\\.(css|less)$": "<rootDir>/src/__mocks__/fileMock.js",
+  //},
+  //setupFilesAfterEnv: ["<rootDir>/src/setuptests.ts"],
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -140,7 +141,7 @@ module.exports = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: "jsdom",
+  //testEnvironment: "jsdom",
   transform: {
     "^.+\\.jsx?$": "babel-jest",
     "^.+\\.tsx?$": "ts-jest",
@@ -153,8 +154,8 @@ module.exports = {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  testMatch: ["**/__tests__/unittests/**/*.[jt]s?(x)"],
-
+  testMatch: ["**/__tests__/e2e/**/*.[jt]s?(x)"],
+  //cacheDirectory: "/tmp/jest_e2e",
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [
   //   "/node_modules/"
@@ -196,4 +197,10 @@ module.exports = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
+
+  globals: {
+    "ts-jest": {
+      tsconfig: "src/__tests__/e2e/tsconfig.json",
+    },
+  },
 };

@@ -85,7 +85,7 @@ export default function FormBuilder(props: FormBuilderProps) {
         width: "90%",
         overflowY: "auto",
       }}
-      className={isLite ? "lite" : ""}
+      className={"formBuilder" + isLite ? " lite" : ""}
     >
       <Flex column gap="gap.smaller">
         <Flex styles={{ width: "100%" }}>

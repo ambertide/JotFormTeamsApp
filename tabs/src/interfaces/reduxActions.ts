@@ -16,6 +16,7 @@ export interface authRequestAction {
   type: "AUTH_REQUEST";
   username: string;
   password: string;
+  onResponse: () => void;
 }
 
 export interface formsAction {

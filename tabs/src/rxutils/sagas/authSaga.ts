@@ -15,6 +15,8 @@ function* loginUser(action: authRequestAction): any {
     } else {
       showError(e.message);
     }
+  } finally {
+    action.onResponse(); // Signal that the response has arrived.
   }
 }
 

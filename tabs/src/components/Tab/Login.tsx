@@ -22,13 +22,17 @@ export interface LoginProps {
    * When true, only the login fields are shown.
    */
   isLite?: boolean;
+  /**
+   * When true, indicates that the sign in button is deactivated
+   * as the user's login request is being processed.
+   */
+  isLoading?: boolean;
 }
 
 /**
  * Used to Log in the user to their JotForm account.
  */
-export default function Login(props: LoginProps) {
-  const { onSubmit, isLite } = props;
+export default function Login({ onSubmit, isLite, isLoading }: LoginProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const handleUsername = useCallback((event: any) => setUsername(event.target.value || ""), []);
@@ -62,7 +66,18 @@ export default function Login(props: LoginProps) {
               showSuccessIndicator={false}
             />
             <Flex gap="gap.small" hAlign="end">
-              <FormButton content="Sign In" primary onClick={() => onSubmit(username, password)} />
+              <FormButton
+                content="Sign In"
+                loading={isLoading}
+                disabled={isLoading}
+                disabledFocusable={isLoading}
+                primary
+                onClick={() => {
+                  if (username !== "" && password !== "") {
+                    onSubmit(username, password);
+                  }
+                }}
+              />
               <Button
                 content="Sign Up"
                 onClick={() => {

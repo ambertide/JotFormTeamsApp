@@ -18,7 +18,13 @@ import ListItem from "interfaces/ListItem";
 import QuestionBuilder from "./QuestionBuilder";
 
 interface FormBuilderProps {
+  /**
+   * Determines whether or not the element is in light mode.
+   */
   isLite: boolean;
+  /**
+   * Callback to be called upon saving the form.
+   */
   onSaveForm: (formData: JotFormData) => void;
   /**
    * Text on the button in top right.
@@ -82,7 +88,7 @@ export default function FormBuilder(props: FormBuilderProps) {
     <Segment
       styles={{
         height: "90%",
-        width: "90%",
+        minWidth: "90%",
         overflowY: "auto",
       }}
       className={"formBuilder" + isLite ? " lite" : ""}

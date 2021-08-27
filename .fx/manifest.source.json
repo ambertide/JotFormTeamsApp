@@ -15,14 +15,14 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "JotFormTeamsIntegration",
+    "short": "JotForm Polls",
     "full": "This field is not used"
   },
   "description": {
     "short": "An app where you can create polls.",
-    "full": "Full description of JotFormTeamsIntegration."
+    "full": "Create and share easy to use and quick to fill polls using JotForm Polls for Microsoft Teams."
   },
-  "accentColor": "#FFFFFF",
+  "accentColor": "#fa8900",
   "composeExtensions": [],
   "configurableTabs": [
     {
@@ -48,7 +48,7 @@
     }
   ],
   "permissions": ["identity", "messageTeamMembers"],
-  "validDomains": ["6c82a0ea6594.ngrok.io"],
+  "validDomains": [],
   "webApplicationInfo": {
     "id": "{appClientId}",
     "resource": "{webApplicationInfoResource}"

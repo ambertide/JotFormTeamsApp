@@ -3,7 +3,7 @@
   "manifestVersion": "1.9",
   "version": "1.0.0",
   "id": "{appid}",
-  "packageName": "com.microsoft.teams.extension",
+  "packageName": "com.ambertide.jf.polls",
   "developer": {
     "name": "Teams App, Inc.",
     "websiteUrl": "{baseUrl}",
@@ -15,14 +15,14 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "JotFormTeamsIntegration",
+    "short": "JotForm Polls",
     "full": "This field is not used"
   },
   "description": {
-    "short": "An app where you can create polls.",
-    "full": "Full description of JotFormTeamsIntegration."
+    "short": "Create and share polls.",
+    "full": "Create and share easy to use and quick to fill polls using JotForm Polls for Microsoft Teams."
   },
-  "accentColor": "#FFFFFF",
+  "accentColor": "#fa8900",
   "composeExtensions": [],
   "configurableTabs": [
     {
@@ -48,7 +48,7 @@
     }
   ],
   "permissions": ["identity", "messageTeamMembers"],
-  "validDomains": ["6c82a0ea6594.ngrok.io"],
+  "validDomains": [],
   "webApplicationInfo": {
     "id": "{appClientId}",
     "resource": "{webApplicationInfoResource}"

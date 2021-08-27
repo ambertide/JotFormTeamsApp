@@ -65,7 +65,7 @@ function convertQuestions(
 
 export default function FormBuilder(props: FormBuilderProps) {
   const { onSaveForm, isLite, buttonOnClick, buttonContent } = props;
-  const [formTitle, setFormTitle] = useState<string>("My Form");
+  const [formTitle, setFormTitle] = useState<string>("My Poll");
   const [questions, setQuestions] = useState(I.List<JotFormQuestionData>());
   const [listItems, setListItems] = useState(I.List<ListItem | JSX.Element>());
   // Represents the question currently selected, -1 for new question.

@@ -53,6 +53,7 @@ const ListItemRow = React.memo(({ data, style, index }: ListProp) => {
     <List.Item
       style={style}
       index={index}
+      content={item?.content}
       header={item?.header}
       media={item?.media}
       onClick={item?.onClick}
@@ -79,6 +80,7 @@ export default function FormList({
       forms.map((form) => {
         return {
           header: form.title,
+          content: form.created_at,
           headerMedia: isLite ? "" : form.updated_at,
           media: <Avatar icon={<ToDoListIcon />} square />,
           onClick: () => {

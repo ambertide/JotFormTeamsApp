@@ -51,6 +51,10 @@ export interface QuestionBuilderProps {
    * Text of the primary button.
    */
   buttonTitle?: string;
+  /**
+   * If set to true, the button will be disabled.
+   */
+  secondaryButtonDisabled?: boolean;
 }
 
 /**

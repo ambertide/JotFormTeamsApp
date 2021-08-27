@@ -31,6 +31,7 @@ export default function QuestionBuilder({
   isLite,
   initialState,
   buttonTitle = "Add Question",
+  secondaryButtonDisabled = false,
 }: QuestionBuilderProps) {
   const [questionType, setQuestionType] = useState<QuestionType>(
     (initialState?.type as any) || "control_textbox"
@@ -66,12 +67,7 @@ export default function QuestionBuilder({
   );
   return (
     <Flex column>
-      <Form
-        className={isLite ? "lite" : ""}
-        onSubmit={() => {
-          onSaveQuestion(questionProperties.toObject() as unknown as JotFormQuestionData);
-        }}
-      >
+      <Form className={isLite ? "lite" : ""}>
         <FormInput
           label="Question title"
           id="QuestionTitle"
@@ -113,9 +109,22 @@ export default function QuestionBuilder({
           }}
         />
         {questionFragment}
-        <Flex gap="gap.smaller">
-          <FormButton content={buttonTitle} disabled={isFormValid ? false : true} primary />
-          <Button content={secondaryButtonTitle} onClick={onClickSecondary} />
+        <Flex gap="gap.smaller" column>
+          <Flex gap="gap.smaller">
+            <FormButton
+              content={buttonTitle}
+              disabled={isFormValid ? false : true}
+              primary
+              onClick={() => {
+                onSaveQuestion(questionProperties.toObject() as unknown as JotFormQuestionData);
+              }}
+            />
+            <Button
+              content={secondaryButtonTitle}
+              onClick={onClickSecondary}
+              disabled={secondaryButtonDisabled}
+            />
+          </Flex>
           {isFormValid ? null : (
             <Text content="There are issues in your question properties." error />
           )}

@@ -115,7 +115,7 @@ export default function FormBuilder(props: FormBuilderProps) {
                       onSaveQuestion={(question) => {
                         setQuestions((previousQuestions) => previousQuestions.push(question));
                       }}
-                      secondaryButtonTitle="Save Form"
+                      secondaryButtonTitle="Save Poll"
                       onClickSecondary={() => {
                         onSaveForm({
                           properties: { title: formTitle },
@@ -123,6 +123,7 @@ export default function FormBuilder(props: FormBuilderProps) {
                         });
                       }}
                       isLite={isLite}
+                      secondaryButtonDisabled={questions.isEmpty()}
                     />
                   )
                   .toArray()

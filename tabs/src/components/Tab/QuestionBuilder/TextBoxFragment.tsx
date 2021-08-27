@@ -1,4 +1,4 @@
-import { FormDropdown } from "@fluentui/react-northstar";
+import { Flex, FormDropdown } from "@fluentui/react-northstar";
 import { SelfValidatingInput } from "components/Extensions";
 import { TextBoxQuestion } from "interfaces/JotFormTypes";
 import QuestionFragmentProps from "interfaces/QuestionFragmentProps";
@@ -40,16 +40,18 @@ export default function TextBoxFragment({
         checkable
         getA11ySelectionMessage={{ onAdd: (item) => `${item} has been selected.` }}
       />
-      <SelfValidatingInput
-        label="Text area size"
-        required
-        validationType="Numeric"
-        defaultValue={initialState?.maxsize}
-        setValidateState={(isValid) => setValidity("maxsize-input", isValid)}
-        onInputChange={(value) => {
-          addPropertyToQuestion("maxsize", value);
-        }}
-      />
+      <Flex styles={{ maxWidth: "100%" }}>
+        <SelfValidatingInput
+          label="Text area size"
+          required
+          validationType="Numeric"
+          defaultValue={initialState?.maxsize}
+          setValidateState={(isValid) => setValidity("maxsize-input", isValid)}
+          onInputChange={(value) => {
+            addPropertyToQuestion("maxsize", value);
+          }}
+        />
+      </Flex>
     </>
   );
 }

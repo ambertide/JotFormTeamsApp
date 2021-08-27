@@ -1,4 +1,4 @@
-import { Flex, Header, Segment } from "@fluentui/react-northstar";
+import { Flex, Segment } from "@fluentui/react-northstar";
 import useNavigation from "hooks/useNavigation";
 import FormBuilder from "components/Tab/FormBuilder";
 import { useCallback } from "react";
@@ -8,6 +8,7 @@ import { JotFormData } from "interfaces/JotFormTypes";
 import { useState } from "react";
 import { showSuccess } from "utils/messaging";
 import { selectJFApiKey } from "rxutils/selectors";
+import { MessageSegment } from "components/Extensions";
 
 export default function FormBuilderPage() {
   const navigateToMainPage = useNavigation("/tab");
@@ -37,8 +38,10 @@ export default function FormBuilderPage() {
       />
     </Flex>
   ) : (
-    <Segment>
-      <Header content="Successfully created your poll." />
-    </Segment>
-  ); // TODO: Add successful creation thingie here.
+    <Flex fill hAlign="center">
+      <Segment styles={{ width: "90%", height: "90%" }}>
+        <MessageSegment message="Poll created." messageType="success" fragment />
+      </Segment>
+    </Flex>
+  );
 }

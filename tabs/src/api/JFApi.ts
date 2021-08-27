@@ -64,7 +64,7 @@ export async function getTables(
 export async function postForm(apiKey: string, formData: JotFormData): Promise<void> {
   addDecorativeFields(formData);
   await axios.put("https://api.jotform.com/form", formData, {
-    params: { apiKey: apiKey },
+    params: { apiKey: apiKey, orderBy: "created_at" },
   });
 }
 
@@ -132,7 +132,7 @@ export async function getFormSubmissions(
   const response = await axios.get<FormSubmissionResponse>(
     `https://api.jotform.com/form/${formID}/submissions`,
     {
-      params: { apiKey, limit, offset },
+      params: { apiKey, limit, offset, filter: '{"status:ne":"DELETED"}', orderby: "created_at" },
     }
   );
   return response.data.content;

@@ -49,6 +49,7 @@ export function TableView({ formQuestions, formTitle, submissions }: ViewerProps
         }}
         rows={rows}
         styles={{ maxHeight: "100%", overflowY: "auto", minWidth: "fit-content" }}
+        compact
       />
     </Ref>
   );

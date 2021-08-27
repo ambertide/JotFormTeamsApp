@@ -5,70 +5,33 @@ import {
   Form,
   FormButton,
   FormCheckbox,
+  Text,
   FormDropdown,
   FormInput,
 } from "@fluentui/react-northstar";
 import { useState } from "react";
 import I from "immutable";
 import { useCallback } from "react";
-import TextBoxFragment from "./TextBoxFragment";
-import FullNameFragment from "./FullNameFragment";
-import SelectionFragment from "./SelectionFragment";
-import {
-  CheckboxQuestion,
-  FullNameQuestion,
-  JotFormQuestionData,
-  RadioQuestion,
-  TextBoxQuestion,
-} from "interfaces/JotFormTypes";
+import { JotFormQuestionData } from "interfaces/JotFormTypes";
+import useTransientFormValidation from "hooks/useTransientFormValidation";
+import { useMemo } from "react";
+import getQuestionFragment, {
+  QuestionBuilderProps,
+  QuestionType,
+  QuestionTypeName,
+  questionTypeNames,
+  questionTypes,
+  questionTypesReverseLookup,
+} from "./ QuestionFragmentCommons";
 
-type QuestionType = "control_textbox" | "control_fullname" | "control_radio" | "control_checkbox";
-type QuestionTypeName = "Text Box" | "Full Name" | "Single Choice" | "Multiple Choice";
-const questionTypeNames = ["Text Box", "Full Name", "Single Choice", "Multiple Choice"];
-const questionTypes = I.Map<QuestionTypeName, QuestionType>({
-  "Text Box": "control_textbox",
-  "Full Name": "control_fullname",
-  "Single Choice": "control_radio",
-  "Multiple Choice": "control_checkbox",
-});
-
-const questionTypesReverseLookup = I.Map<QuestionType, QuestionTypeName>({
-  control_textbox: "Text Box",
-  control_fullname: "Full Name",
-  control_radio: "Single Choice",
-  control_checkbox: "Multiple Choice",
-});
-interface QuestionBuilderProps {
-  /**
-   * Represents the initial parameters given to the question, this
-   * will populate the fields.
-   */
-  initialState?: JotFormQuestionData;
-  /**
-   * Callback used to save the question to the global state.
-   */
-  onSaveQuestion: (question: JotFormQuestionData) => void;
-  /** Title of the secondary button. */
-  secondaryButtonTitle: string;
-  /** Action of the secondary button */
-  onClickSecondary: () => void;
-  /** True if the component is in lite mode. */
-  isLite: boolean;
-  /**
-   * Text of the primary button.
-   */
-  buttonTitle?: string;
-}
-
-export default function QuestionBuilder(props: QuestionBuilderProps) {
-  const {
-    onSaveQuestion,
-    secondaryButtonTitle,
-    onClickSecondary,
-    isLite,
-    initialState,
-    buttonTitle = "Add Question",
-  } = props;
+export default function QuestionBuilder({
+  onSaveQuestion,
+  secondaryButtonTitle,
+  onClickSecondary,
+  isLite,
+  initialState,
+  buttonTitle = "Add Question",
+}: QuestionBuilderProps) {
   const [questionType, setQuestionType] = useState<QuestionType>(
     (initialState?.type as any) || "control_textbox"
   );
@@ -82,6 +45,12 @@ export default function QuestionBuilder(props: QuestionBuilderProps) {
         : { required: "No", text: "My Question", type: "control_textbox" }
     )
   );
+  const doesNotNeedValidation = useCallback(
+    () => questionType !== "control_textbox",
+    [questionType]
+  );
+  const { isFormValid, setFieldValidity, resetValidityMap } =
+    useTransientFormValidation(doesNotNeedValidation);
   const addPropertyToQuestion = useCallback(
     // Adds a property to the active question.
     (propertyKey: string, propertyValue: string | number) => {
@@ -91,34 +60,10 @@ export default function QuestionBuilder(props: QuestionBuilderProps) {
     },
     [setQuestionProperties]
   );
-  const getQuestionFragment = (questionType: QuestionType) => {
-    switch (questionType) {
-      case "control_fullname":
-        return (
-          <FullNameFragment
-            addPropertyToQuestion={addPropertyToQuestion}
-            initialState={initialState as FullNameQuestion}
-          />
-        );
-      case "control_textbox":
-        return (
-          <TextBoxFragment
-            addPropertyToQuestion={addPropertyToQuestion}
-            initialState={initialState as TextBoxQuestion}
-          />
-        );
-      case "control_radio":
-      case "control_checkbox":
-        return (
-          <SelectionFragment
-            addPropertyToQuestion={addPropertyToQuestion}
-            initialState={initialState as RadioQuestion | CheckboxQuestion}
-          />
-        );
-      default:
-        return null;
-    }
-  };
+  const questionFragment = useMemo(
+    () => getQuestionFragment(questionType, setFieldValidity, addPropertyToQuestion, initialState),
+    [questionType, initialState, setFieldValidity, addPropertyToQuestion, getQuestionFragment]
+  );
   return (
     <Flex column>
       <Form
@@ -143,8 +88,11 @@ export default function QuestionBuilder(props: QuestionBuilderProps) {
           items={questionTypeNames}
           value={questionName}
           onChange={(event, data) => {
+            // When dropdown changes, also
+            resetValidityMap(); // Reset the validity states.
             setQuestionProperties((previousProperties) => {
-              const { required, text } = previousProperties.toObject();
+              // And the question properties
+              const { required, text } = previousProperties.toObject(); // Except the common ones.
               const cleared = previousProperties.clear();
               return cleared.concat({ required, text });
             }); // Reset the properties.
@@ -164,10 +112,13 @@ export default function QuestionBuilder(props: QuestionBuilderProps) {
             addPropertyToQuestion("required", data?.checked ? "Yes" : "No");
           }}
         />
-        {getQuestionFragment(questionType)}
+        {questionFragment}
         <Flex gap="gap.smaller">
-          <FormButton content={buttonTitle} primary />
+          <FormButton content={buttonTitle} disabled={isFormValid ? false : true} primary />
           <Button content={secondaryButtonTitle} onClick={onClickSecondary} />
+          {isFormValid ? null : (
+            <Text content="There are issues in your question properties." error />
+          )}
         </Flex>
       </Form>
     </Flex>

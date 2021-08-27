@@ -1,19 +1,30 @@
-import { Input, FormDropdown } from "@fluentui/react-northstar";
+import { FormDropdown } from "@fluentui/react-northstar";
+import { SelfValidatingInput } from "components/Extensions";
 import { TextBoxQuestion } from "interfaces/JotFormTypes";
 import QuestionFragmentProps from "interfaces/QuestionFragmentProps";
 import { useState } from "react";
 const TextBookItemTypes = ["None", "Email", "AlphaNumeric", "Alphabetic", "Numeric", "URL"];
 
 interface TextBoxFragmentProps extends QuestionFragmentProps {
+  /**
+   * Initial state of the question fields.
+   */
   initialState?: TextBoxQuestion;
+  /**
+   * Callback to set the validity of the fields this component.
+   */
+  setValidity: (fieldID: string, isValid: boolean) => void;
 }
 
 /**
  * Used to build a question of type
  * control_fullname.
  */
-export default function TextBoxFragment(props: TextBoxFragmentProps) {
-  const { addPropertyToQuestion, initialState } = props;
+export default function TextBoxFragment({
+  addPropertyToQuestion,
+  initialState,
+  setValidity,
+}: TextBoxFragmentProps) {
   const [validation, setValidation] = useState(initialState?.validation || "None");
   return (
     <>
@@ -29,13 +40,14 @@ export default function TextBoxFragment(props: TextBoxFragmentProps) {
         checkable
         getA11ySelectionMessage={{ onAdd: (item) => `${item} has been selected.` }}
       />
-      <Input
+      <SelfValidatingInput
         label="Text area size"
         required
-        inputMode="numeric"
+        validationType="Numeric"
         defaultValue={initialState?.maxsize}
-        onChange={(event, data) => {
-          addPropertyToQuestion("maxsize", data?.value || "60");
+        setValidateState={(isValid) => setValidity("maxsize-input", isValid)}
+        onInputChange={(value) => {
+          addPropertyToQuestion("maxsize", value);
         }}
       />
     </>

@@ -24,3 +24,12 @@ export function types(element: TargetElement, value: string) {
 export function clicks(element: TargetElement) {
   fireEvent.click(element, fabricNormalizerParam);
 }
+
+/**
+ * Imitate the user selecting from a dropdown.
+ * @param element: Element to select from.
+ * @param value: Dropdown value to select.
+ */
+export function picks(element: TargetElement, value: string) {
+  types(element, value); // Effectively an alias for now.
+}

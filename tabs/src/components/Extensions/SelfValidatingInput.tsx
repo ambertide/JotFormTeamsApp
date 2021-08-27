@@ -41,6 +41,10 @@ interface SelfValidatingInputProps {
    * Whether or not the input is required.
    */
   required?: boolean;
+  /**
+   * Prefilled value of the input.
+   */
+  defaultValue?: string;
 }
 
 /**

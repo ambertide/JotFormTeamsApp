@@ -1,10 +1,11 @@
-import { Avatar, Button, Flex } from "@fluentui/react-northstar";
+import { Button, Flex } from "@fluentui/react-northstar";
+import "../Components.css";
 
 interface ButtonWithImageProps {
   /**
    * Icon to be shown on the top of the button.
    */
-  icon: JSX.Element;
+  icon: React.FC<any>;
   /**
    * Text to be shown on the button.
    */
@@ -16,11 +17,19 @@ interface ButtonWithImageProps {
 }
 
 export default function ButtonWithImage(props: ButtonWithImageProps) {
-  const { icon, buttonText, onClick } = props;
+  const { icon: Icon, buttonText, onClick } = props;
   return (
     <Flex column gap="gap.medium" hAlign="center">
-      <Avatar icon={icon} size="largest" square />
-      <Button content={buttonText} onClick={onClick} />
+      <Flex
+        fill
+        className="flexIconFill"
+        hAlign="center"
+        vAlign="center"
+        styles={{ width: "250px", height: "250px" }}
+      >
+        {<Icon style={{ color: "#fa8900" }} outline />}
+      </Flex>
+      <Button content={buttonText} onClick={onClick} fluid />
     </Flex>
   );
 }

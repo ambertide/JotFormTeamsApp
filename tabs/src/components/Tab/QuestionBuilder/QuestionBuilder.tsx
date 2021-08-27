@@ -66,9 +66,10 @@ export default function QuestionBuilder({
     [questionType, initialState, setFieldValidity, addPropertyToQuestion, getQuestionFragment]
   );
   return (
-    <Flex column>
+    <Flex styles={{ maxWidth: "fit-content" }} column>
       <Form className={isLite ? "lite" : ""}>
         <FormInput
+          fluid
           label="Question title"
           id="QuestionTitle"
           key="QuestionTitle"
@@ -103,6 +104,7 @@ export default function QuestionBuilder({
         />
         <FormCheckbox
           label="Required"
+          toggle
           checked={questionProperties.get("required", "No") === "Yes"}
           onChange={(event, data) => {
             addPropertyToQuestion("required", data?.checked ? "Yes" : "No");

@@ -1,4 +1,10 @@
-import { Segment, Flex, ContentIcon, Button, EditIcon } from "@fluentui/react-northstar";
+import {
+  Segment,
+  Flex,
+  ShareGenericIcon,
+  Button,
+  CanvasAddPageIcon,
+} from "@fluentui/react-northstar";
 import ButtonWithImage from "components/Extensions/ButtonWithImage";
 import useNavigation from "hooks/useNavigation";
 import { useDispatch } from "react-redux";
@@ -19,14 +25,14 @@ export default function SelectorPage() {
           content="Log Out"
           styles={{ position: "absolute", right: "6%" }}
         />
-        <Flex gap="gap.large" vAlign="center" hAlign="center" style={{ height: "100%" }}>
+        <Flex gap="gap.large" vAlign="center" hAlign="center" style={{ gap: "5%", height: "100%" }}>
           <ButtonWithImage
-            icon={<ContentIcon />}
-            buttonText="View Your Polls"
+            icon={ShareGenericIcon}
+            buttonText="View and Share Polls"
             onClick={navigateToForms}
           />
           <ButtonWithImage
-            icon={<EditIcon />}
+            icon={CanvasAddPageIcon}
             buttonText="Create New Poll"
             onClick={navigateToCreate}
           />

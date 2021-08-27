@@ -44,6 +44,7 @@ export default function TextBoxFragment({
         <SelfValidatingInput
           label="Text area size"
           required
+          fluid
           validationType="Numeric"
           defaultValue={initialState?.maxsize}
           setValidateState={(isValid) => setValidity("maxsize-input", isValid)}

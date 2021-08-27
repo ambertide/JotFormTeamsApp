@@ -46,6 +46,7 @@ export default function SelectionFragment(props: SelectionFragmentProps) {
       />
       <FormInput
         label="Other Text"
+        fluid
         defaultValue={initialState?.otherText}
         disabled={radioProperties.get("allowOther") === "No"}
         onChange={(event, data) => {

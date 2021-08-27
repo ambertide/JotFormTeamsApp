@@ -18,6 +18,5 @@ export const ExampleButtonWithImage = Template.bind({});
 
 ExampleButtonWithImage.args = {
   buttonText: "Your Forms",
-  icon: <CalendarAgendaIcon />,
-  onClick: () => console.log("Hi!"),
+  icon: CalendarAgendaIcon,
 };

@@ -4,9 +4,9 @@ import I from "immutable";
 import { FullNameQuestion } from "interfaces/JotFormTypes";
 
 const nameTextKeys = I.Map({
-  "Require Middle Name": "middle",
-  "Require Prefix": "prefix",
-  "Require Suffix": "suffix",
+  "Middle Name": "middle",
+  Prefix: "prefix",
+  Suffix: "suffix",
 });
 
 const items = nameTextKeys.reduce(
@@ -36,6 +36,7 @@ export default function FullNameFragment({
     <>
       <CheckboxGroup
         items={items}
+        areToggles
         itemsPreset={I.List([initialState?.middle, initialState?.prefix, initialState?.suffix]).map(
           (value) => value === "Yes" // Convert JFBoolean to boolean, by default these won't be selected.
         )}

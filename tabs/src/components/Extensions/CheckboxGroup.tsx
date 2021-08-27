@@ -32,6 +32,10 @@ interface CheckboxGroupProps {
    * a specific item is checked.
    */
   itemsPreset?: I.List<boolean>;
+  /**
+   * Converts checkboxes to toggles.
+   */
+  areToggles?: boolean;
 }
 
 function CheckboxGroupOther(props: {
@@ -63,8 +67,14 @@ function CheckboxGroupOther(props: {
   );
 }
 
-export default function CheckboxGroup(props: CheckboxGroupProps) {
-  const { items, onChange, allowOther, itemsPreset, otherText = "Other" } = props;
+export default function CheckboxGroup({
+  items,
+  onChange,
+  allowOther,
+  itemsPreset,
+  otherText = "Other",
+  areToggles = false,
+}: CheckboxGroupProps) {
   const [effectiveOtherText, setEffectiveOtherText] = useState(""); // Effect of the other text to selected.
   const itemKeyToLabel = useRef(
     items.reduce((reducer, value) => reducer.set(value.keyID, value.text), I.Map<string, string>())
@@ -92,6 +102,7 @@ export default function CheckboxGroup(props: CheckboxGroupProps) {
         <Checkbox
           key={item.keyID}
           label={item.text}
+          toggle={areToggles}
           checked={selections.get(item.keyID)}
           onChange={() => {
             setSelections((previousSelections) =>

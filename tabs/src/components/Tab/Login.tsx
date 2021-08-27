@@ -110,7 +110,7 @@ export default function Login({ onSubmit, isLite, isLoading }: LoginProps) {
                 maxWidth: "400px",
               }}
               align="end"
-              content="Sign in to your JotForm account to create forms and share them on the fly during your meetings."
+              content="Sign in to your JotForm account to create polls and share them to your teams and channels easily."
             />
           </Flex>
         ) : null}

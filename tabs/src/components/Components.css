@@ -7,10 +7,25 @@
 }
 
 #FormTitle {
-  font-size: large;
+  font-size: 2rem;
+  margin-bottom: -2rem;
   background-color: transparent;
 }
 
 .ui-dropdown__selected-items {
   overflow: hidden;
+}
+
+.flexIconFill .ui-icon {
+  width: 100%;
+  height: 100%;
+  padding: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flexIconFill svg {
+  width: 90%;
+  height: 90%;
 }

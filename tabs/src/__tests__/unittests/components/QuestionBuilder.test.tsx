@@ -51,3 +51,32 @@ describe("Question Builder Component Validation State Test", () => {
     });
   });
 });
+
+describe("Question Builder Component Initial State Validation Test", () => {
+  test("It should start on a valid state when...", () => {
+    const onSave = jest.fn((results) => results);
+    render(
+      <QuestionBuilder
+        onSaveQuestion={onSave}
+        isLite={false}
+        onClickSecondary={() => {
+          return;
+        }}
+        initialState={{
+          type: "control_textbox",
+          text: "Example question",
+          validation: "Email",
+          maxsize: "60",
+        }}
+        secondaryButtonTitle={"Test"}
+        buttonTitle={"Modify Question"}
+      />
+    );
+    const possiblyButton = screen.getByText("Modify Question").closest("button");
+    expect(possiblyButton).toBeInTheDocument();
+    const button = possiblyButton as HTMLElement;
+    const input = screen.getByLabelText("Text area size");
+    expect(input).toHaveValue("60");
+    expect(button).toBeEnabled();
+  });
+});

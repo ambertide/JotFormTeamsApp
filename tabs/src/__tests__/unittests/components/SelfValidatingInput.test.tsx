@@ -18,7 +18,7 @@ describe("Self Validating Input Component Tests", () => {
     }
   );
 
-  it.each([
+  test.each([
     ["None", "anytext"],
     ["Email", "example@example.com"],
   ])(
@@ -41,7 +41,7 @@ describe("Self Validating Input Component Tests", () => {
     }
   );
 
-  it.each([
+  test.each([
     ["None", "anytext"],
     ["Email", "example@example.com"],
   ])(
@@ -62,7 +62,7 @@ describe("Self Validating Input Component Tests", () => {
     }
   );
 
-  it.each([
+  test.each([
     ["None", "anytext"],
     ["Email", "example@example.com"],
   ])(
@@ -81,6 +81,41 @@ describe("Self Validating Input Component Tests", () => {
       user.types(input, validText);
       user.types(input, "");
       expect(setValidateState).toHaveBeenLastCalledWith(false);
+    }
+  );
+
+  test.each([false, true])(
+    "It should start in valid state when the passed input is valid",
+    (required) => {
+      const setValidateState = jest.fn();
+      render(
+        <SelfValidatingInput
+          validationType={"Email"}
+          setValidateState={setValidateState}
+          value="example@example.com" // A valid email.
+          label="input"
+          required={required}
+        />
+      );
+      expect(setValidateState).toHaveBeenLastCalledWith(true);
+    }
+  );
+
+  test.each([false, true])(
+    // Test for both required and not required.
+    "It should start in valid state when the passed defaultValue is valid",
+    async (required) => {
+      const setValidateState = jest.fn();
+      render(
+        <SelfValidatingInput
+          validationType={"Email"}
+          setValidateState={setValidateState}
+          defaultValue="example@example.com" // A valid email.
+          label="input"
+          required={required}
+        />
+      );
+      expect(setValidateState).toHaveBeenLastCalledWith(true);
     }
   );
 });

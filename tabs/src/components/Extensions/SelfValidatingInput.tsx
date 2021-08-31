@@ -75,6 +75,16 @@ export default function SelfValidatingInput({
     },
     [validationType, onInputChange, setIsValid]
   );
+  useEffect(() => {
+    if (misc.value) {
+      // We also need to check for pre-filled values
+      validateStringBeforePassing(misc.value);
+    } else if (misc.defaultValue) {
+      // In case the input is fully controlled.
+      validateStringBeforePassing(misc.defaultValue);
+    }
+  }, [misc.value, misc.defaultValue, validateStringBeforePassing]);
+
   return (
     <Input
       error={!isValid}

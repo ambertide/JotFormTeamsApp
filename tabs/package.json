@@ -81,7 +81,8 @@
     "e2e": "jest --clear-cache && HEADLESS=true REACT_APP_MSW=true jest --config=\"e2e.config.js\"",
     "e2e:view": "jest --clear-cache && HEADLESS=false REACT_APP_MSW=true jest --config \"e2e.config.js\"",
     "test": "jest --maxWorkers=50%",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "test:memory": "node --max_old_space_size=4096 ./node_modules/.bin/jest --runInBand --logHeapUsage"
   },
   "eslintConfig": {
     "extends": [

@@ -97,6 +97,7 @@ export default function FormBuilder(props: FormBuilderProps) {
         <Flex styles={{ width: "100%" }}>
           <Input
             styles={{ marginLeft: "20px" }}
+            className={questions.size > 0 && selectedQuestion === -1 ? "" : "titleNoMargin"}
             id="FormTitle"
             value={formTitle}
             onChange={(event, data) => {

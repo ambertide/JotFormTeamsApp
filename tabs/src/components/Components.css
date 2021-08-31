@@ -8,8 +8,11 @@
 
 #FormTitle {
   font-size: 2rem;
-  margin-bottom: -2rem;
   background-color: transparent;
+}
+
+.titleNoMargin {
+  margin-bottom: -2rem;
 }
 
 .ui-dropdown__selected-items {

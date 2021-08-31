@@ -80,7 +80,7 @@
     "lint": "eslint src/",
     "e2e": "jest --clear-cache && HEADLESS=true REACT_APP_MSW=true jest --config=\"e2e.config.js\"",
     "e2e:view": "jest --clear-cache && HEADLESS=false REACT_APP_MSW=true jest --config \"e2e.config.js\"",
-    "test": "jest",
+    "test": "jest --maxWorkers=50%",
     "test:watch": "jest --watch"
   },
   "eslintConfig": {

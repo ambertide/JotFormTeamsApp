@@ -47,7 +47,7 @@ export function GraphView({ formQuestions, distributions, isLoading }: ViewerPro
     );
   }
   return (
-    <Flex hAlign="center" column>
+    <Flex hAlign="center" column styles={{ overflowX: "hidden" }}>
       <Dropdown
         styles={{ width: "100%" }}
         items={listItems}

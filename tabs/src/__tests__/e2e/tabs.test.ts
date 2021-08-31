@@ -17,7 +17,7 @@ describe("Tabs Use Cases", () => {
   });
 
   it("should load ask for Azure login on forms page.", async () => {
-    await expect(page).toClick("button", { text: "View Your Polls" });
+    await expect(page).toClick("button", { text: "View and Share Polls" });
     await page.waitForSelector(".azureAdAuthDialog");
   });
 

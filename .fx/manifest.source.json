@@ -3,7 +3,7 @@
   "manifestVersion": "1.9",
   "version": "1.0.0",
   "id": "{appid}",
-  "packageName": "com.microsoft.teams.extension",
+  "packageName": "io.github.ambertide.jfpolls",
   "developer": {
     "name": "Teams App, Inc.",
     "websiteUrl": "{baseUrl}",
@@ -16,7 +16,7 @@
   },
   "name": {
     "short": "JotForm Polls",
-    "full": "This field is not used"
+    "full": "JotForm Polls"
   },
   "description": {
     "short": "An app where you can create polls.",

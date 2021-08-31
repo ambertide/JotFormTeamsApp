@@ -27,7 +27,7 @@ export default function SubmissionSelector() {
             dispatch({ type: "AUTH_LOGOUT" });
           }}
           buttonIcon={<ArrowLeftIcon />}
-          buttonText={"Logout"}
+          buttonText={"Log Out"}
           isLite={false}
           forms={forms}
           onFormSelect={(formID, formName) => {

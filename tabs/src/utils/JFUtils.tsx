@@ -47,11 +47,10 @@ export function addDecorativeFields(formData: JotFormData) {
     type: "control_button",
     text: "Submit Poll",
   };
-  const maxKey =
-    formData.questions
-      .keySeq()
-      .map((key) => Number.parseInt(key))
-      .last() || -1;
+  const maxKey = formData.questions
+    .keySeq()
+    .map((key) => Number.parseInt(key))
+    .last();
   formData.questions = (
     formData.questions.mapKeys((order) => `${Number.parseInt(order) + 1}`) as I.Map<
       `${number}`,
@@ -59,7 +58,7 @@ export function addDecorativeFields(formData: JotFormData) {
     >
   )
     .set("0", headerData) // Put the header in front.
-    .set(`${maxKey + 2}`, submitButton); // Put the submit to the last.
+    .set(`${(maxKey !== undefined ? maxKey : -1) + 2}`, submitButton); // Put the submit to the last.
 }
 
 const validatorStore: ValidatorStore = {

@@ -43,9 +43,9 @@ export default function App() {
         <PrivateRoute path="/tab">
           <TabRouter />
         </PrivateRoute>
-        <PrivateRoute path="/poll">
+        <Route path="/poll">
           <PollRouter />
-        </PrivateRoute>
+        </Route>
         <PrivateRoute path="/results">
           <SubmissionsRouter />
         </PrivateRoute>

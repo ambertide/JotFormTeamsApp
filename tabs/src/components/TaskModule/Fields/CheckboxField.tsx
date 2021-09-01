@@ -5,7 +5,7 @@ import CheckboxGroup from "components/Extensions/CheckboxGroup";
 import { FormFieldCustom, FormLabel } from "@fluentui/react-northstar";
 import React from "react";
 
-interface Props {
+export interface Props {
   question: SelectQuestionResponse;
   onChangeCallback: (value: I.List<string>) => void;
 }

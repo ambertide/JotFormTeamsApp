@@ -3,7 +3,7 @@ import FullNameInputGroup from "components/Extensions/FullNameInputGroup";
 import { FullNameAnswer, FullNameQuestionResponse } from "interfaces/JotFormTypes";
 import React from "react";
 
-interface Props {
+export interface Props {
   question: FullNameQuestionResponse;
   onChangeCallback: (value: FullNameAnswer) => void;
 }

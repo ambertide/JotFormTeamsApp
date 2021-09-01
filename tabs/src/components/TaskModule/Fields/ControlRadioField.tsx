@@ -3,7 +3,7 @@ import { SelectQuestionResponse } from "interfaces/JotFormTypes";
 import * as React from "react";
 import { deconstructSpecial } from "utils/JFUtils";
 
-interface Props {
+export interface Props {
   question: SelectQuestionResponse;
   onChangeCallback: (value: string) => void;
 }

@@ -1,11 +1,11 @@
 import I from "immutable";
 import { PollRestricted, QuestionResponse, SubmissionFieldAnswer } from "interfaces/JotFormTypes";
-import { MutableRefObject, useRef, useState } from "react";
+import { MutableRefObject, useMemo, useRef, useState } from "react";
 import { Button, Flex, Form, Segment, Text } from "@fluentui/react-northstar";
-import { useMemo } from "react";
 import * as fields from "./Fields";
 import useFormValidation from "hooks/useFormValidation";
 import { FormValidityContext } from "utils/FormValidityContext";
+import withRequiredValidation from "utils/HOCs/withRequiredValidation";
 
 interface PollProps {
   /**
@@ -29,8 +29,12 @@ const GenerateQuestionField = (
   const fieldsMap = I.Map(fields);
   const ReactElement = fieldsMap.get(question.type.split("_", 2)[1], null);
   if (ReactElement) {
+    const ElementWithValidation =
+      question.type !== "control_textbox"
+        ? withRequiredValidation(ReactElement as any, question.required === "Yes")
+        : ReactElement; // Control_textbox has its own control.
     return (
-      <ReactElement
+      <ElementWithValidation
         key={question.qid} // @ts-ignore: Unreachable code error
         question={question}
         onChangeCallback={onChangeCallback}

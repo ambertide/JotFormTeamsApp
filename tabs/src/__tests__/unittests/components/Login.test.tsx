@@ -16,9 +16,9 @@ describe("Login Segment Component Test", () => {
     const password = screen.getByLabelText("Password");
     expect(form).toContainElement(username);
     expect(form).toContainElement(password);
-    const loginButton = screen.getByText("Sign In");
+    const loginButton = screen.getByText("Sign In").closest("button");
     expect(loginButton).toBeEnabled();
-    const signupButton = screen.getByText("Sign Up");
+    const signupButton = screen.getByText("Sign Up").closest("button");
     expect(signupButton).toBeEnabled();
   });
 

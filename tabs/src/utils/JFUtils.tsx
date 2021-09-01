@@ -5,6 +5,8 @@ import {
   SubmitQuestion,
   SelectQuestionResponse,
   FormSubmissionResponseContent,
+  FullNameQuestionResponse,
+  FullNameAnswer,
 } from "interfaces/JotFormTypes";
 import I from "immutable";
 import { ValidationType, ValidatorFunction, ValidatorStore } from "interfaces/ValidationTypes";
@@ -129,4 +131,17 @@ export function processSubmissions(
       }, I.List()),
     })),
   };
+}
+
+/**
+ * Check if the answer for the given full name question field is filled.
+ * @param question Question to check the answer against.
+ * @param answer Answer to check.
+ * @returns True if the answer is valid.
+ */
+export function isFullNameFilled(question: FullNameQuestionResponse, answer: FullNameAnswer) {
+  const requiredFields =
+    [question.middle, question.prefix, question.suffix].filter((e) => e === "Yes").length + 2;
+  const answers = Object.values(answer);
+  return answers.length === requiredFields && answers.every((e) => e !== "" && e !== undefined);
 }

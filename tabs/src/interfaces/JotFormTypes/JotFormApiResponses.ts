@@ -102,6 +102,7 @@ export interface FullNameQuestionResponse extends QuestionResponse {
   middle?: string;
   prefix?: string;
   readonly?: string;
+  prefixChoices?: string;
   sublabels?: FullNameSublabels;
   suffix?: string;
   text: string;

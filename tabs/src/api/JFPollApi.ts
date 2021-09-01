@@ -6,6 +6,7 @@ import { FrequencyResponseObject, PollRegisterResponse } from "interfaces/PollAP
 import {
   BaseResponse,
   FormQuestionsResponse,
+  FullNameQuestionResponse,
   PostSubmissionRequest,
   QuestionResponse,
 } from "interfaces/JotFormTypes";
@@ -103,6 +104,17 @@ export async function isFormPoll(appKey: string, formID: string): Promise<boolea
   const formQuestions = await getFormQuestions(appKey, formID);
   return formQuestions.every(
     // If every single question is of the valid type, than it is true.
-    (question) => validQuestionTypes.has(question.type)
+    (question) => {
+      if (!validQuestionTypes.has(question.type)) {
+        return false;
+      }
+      if (question.type === "control_fullname") {
+        return (
+          (question as FullNameQuestionResponse).prefixChoices === "" ||
+          (question as FullNameQuestionResponse).prefixChoices === undefined
+        );
+      }
+      return true;
+    }
   );
 }

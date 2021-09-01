@@ -103,6 +103,10 @@ export function isPollType(questionType: string) {
   return questionType !== "control_head" && questionType !== "control_button";
 }
 
+/**
+ * Converts the raw GET Submissions response to a
+ * data type more suitable for usage in the app.
+ */
 export function processSubmissions(
   submissions: FormSubmissionResponseContent[],
   formName: string

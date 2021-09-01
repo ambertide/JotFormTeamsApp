@@ -17,8 +17,7 @@ function* getAzureTeamsList(action: AzureRequestTeamsListAction): any {
   }
 }
 
-// Starts fetchUser on each dispatched USER_FETCH_REQUESTED action
-// Allows concurrent fetches of user
+// Intercepts Azure Teams fetch requests.
 export function* azureTeamsSaga() {
   yield takeEvery("AZURE_TEAMS_REQUEST", getAzureTeamsList);
 }

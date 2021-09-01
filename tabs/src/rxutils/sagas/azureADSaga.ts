@@ -16,8 +16,7 @@ function* getAzureKey(action: AzureRequestKeyAction): any {
   }
 }
 
-// Starts fetchUser on each dispatched USER_FETCH_REQUESTED action
-// Allows concurrent fetches of user
+// Intercepts Azure Key requests
 export function* azureADSaga() {
   yield takeEvery("AZURE_KEY_REQUEST", getAzureKey);
 }

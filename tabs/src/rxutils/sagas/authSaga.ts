@@ -20,8 +20,7 @@ function* loginUser(action: authRequestAction): any {
   }
 }
 
-// Starts fetchUser on each dispatched USER_FETCH_REQUESTED action
-// Allows concurrent fetches of user
+// Intercepts Authorization requests to JFApi
 export function* authSaga() {
   yield takeEvery("AUTH_REQUEST", loginUser);
 }

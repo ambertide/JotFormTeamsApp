@@ -13,8 +13,7 @@ function* createNewForm(action: createFormRequestAction): any {
   }
 }
 
-// Starts fetchUser on each dispatched USER_FETCH_REQUESTED action
-// Allows concurrent fetches of user
+// Intercepts form creation requests.
 export function* createFormSaga() {
   yield takeEvery("FORM_CREATE_REQUEST", createNewForm);
 }

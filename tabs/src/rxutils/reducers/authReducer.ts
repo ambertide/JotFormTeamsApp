@@ -2,6 +2,10 @@ import I from "immutable";
 import User from "interfaces/User";
 import { LogoutAction, AuthAction, AzureAction } from "interfaces/reduxActions";
 
+/**
+ * Reduces the state of the user's authentication,  which is a
+ * map of their JFApiKey and Azure AD Token
+ */
 export default function authReducer(
   state: User = I.Map({ JFApiKey: "", AzureADToken: "" }),
   action: AuthAction | LogoutAction | AzureAction

@@ -3,6 +3,9 @@ import { List } from "immutable";
 import updateCollection from "utils/updateCollection";
 import { JotFormMetadata } from "interfaces/JotFormTypes";
 
+/**
+ * Reduces the list of user forms
+ */
 export default function formsReducer(
   state = List<JotFormMetadata>(),
   action: formsAction | FormsResetAction

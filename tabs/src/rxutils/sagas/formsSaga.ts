@@ -13,8 +13,7 @@ function* getUserForms(action: formsRequestAction): any {
   }
 }
 
-// Starts fetchUser on each dispatched USER_FETCH_REQUESTED action
-// Allows concurrent fetches of user
+// Intercepts fetch request for User's JotForm forms.
 export function* formsSaga() {
   yield takeEvery("FORMS_REQUEST", getUserForms);
 }

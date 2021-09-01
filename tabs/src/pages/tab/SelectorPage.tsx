@@ -10,6 +10,10 @@ import useNavigation from "hooks/useNavigation";
 import { useDispatch } from "react-redux";
 import { showInfo } from "utils/messaging";
 
+/**
+ * Form used to navigate between form builder
+ * and form sharing.
+ */
 export default function SelectorPage() {
   const navigateToForms = useNavigation("/tab/forms");
   const navigateToCreate = useNavigation("/tab/create");

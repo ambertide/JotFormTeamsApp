@@ -10,6 +10,10 @@ interface From {
   from: string;
 }
 
+/**
+ * Page used for users to Login to JotForm,
+ * also includes sign-up.
+ */
 export default function LoginPage() {
   const location = useLocation<From>();
   const isLoggedIn = useSelector(selectIsJFAuth);

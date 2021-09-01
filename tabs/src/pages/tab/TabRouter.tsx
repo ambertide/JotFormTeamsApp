@@ -3,6 +3,9 @@ import FormBuilderPage from "./FormBuilderPage";
 import FormsPage from "./FormsPage";
 import SelectorPage from "./SelectorPage";
 
+/**
+ * Routes to /tab routes.
+ */
 export default function TabRouter() {
   return (
     <Switch>

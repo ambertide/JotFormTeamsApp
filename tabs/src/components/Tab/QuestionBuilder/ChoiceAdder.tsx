@@ -14,6 +14,10 @@ interface ChoiceAdderProps {
    */
   setQuestionProperty: Dispatch<SetStateAction<I.Map<any, any>>>;
 }
+
+/**
+ * Used for creating new categories or choices.
+ */
 export default function ChoiceAdder(props: ChoiceAdderProps) {
   const { initialChoices, setQuestionProperty } = props;
   const [choices, setChoices] = useState(initialChoices);

@@ -8,6 +8,11 @@ import { FrequencyResponseObject } from "interfaces/PollAPITypes";
 import { FormAnswerDistribution } from "interfaces/ViewTypes";
 import { isPollType } from "./JFUtils";
 
+/**
+ * Convert the raw response from Proxy API containing the
+ * distributions of answers given to a question, convert
+ * it into a form more suitable for the app.
+ */
 export function processPollDistributions(
   distributions: FrequencyResponseObject
 ): FormAnswerDistribution {
@@ -19,6 +24,10 @@ export function processPollDistributions(
   );
 }
 
+/**
+ * Convert the raw response from API containing the
+ * list of questions to a more suitable format.
+ */
 export function processFormQuestions(questions: QuestionResponse[]) {
   return I.List(questions).reduce(
     (reduction, question) =>

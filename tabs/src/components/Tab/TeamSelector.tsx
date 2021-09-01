@@ -44,6 +44,9 @@ interface TeamSelectorProps {
   formName?: string;
 }
 
+/**
+ * Sliding panel used to show different Teams with built-in loading support.
+ */
 export default function TeamSelector({
   teams,
   styles,

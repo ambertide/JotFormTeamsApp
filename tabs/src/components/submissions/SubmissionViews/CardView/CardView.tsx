@@ -2,6 +2,9 @@ import { Flex } from "@fluentui/react-northstar";
 import { ViewerProps } from "interfaces/ViewTypes";
 import SubmissionCard from "./SubmissionCard";
 
+/**
+ * Used to display multiple submissions in a card view.
+ */
 export function CardView({ formQuestions, formTitle, submissions }: ViewerProps) {
   return (
     <Flex

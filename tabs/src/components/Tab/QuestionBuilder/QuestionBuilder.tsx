@@ -24,6 +24,10 @@ import getQuestionFragment, {
   questionTypesReverseLookup,
 } from "./ QuestionFragmentCommons";
 
+/**
+ * Used to build a single question using different
+ * widget types.
+ */
 export default function QuestionBuilder({
   onSaveQuestion,
   secondaryButtonTitle,

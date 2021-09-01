@@ -2,6 +2,9 @@ import { Route, Switch } from "react-router-dom";
 import PollPage from "./PollPage";
 import SubmittedPage from "./SubmittedPage";
 
+/**
+ * Routes to /poll routes.
+ */
 export default function PollRouter() {
   return (
     <Switch>

@@ -10,6 +10,9 @@ import { showSuccess } from "utils/messaging";
 import { selectJFApiKey } from "rxutils/selectors";
 import { MessageSegment } from "components/Extensions";
 
+/**
+ * Page used to host the form builder.
+ */
 export default function FormBuilderPage() {
   const navigateToMainPage = useNavigation("/tab");
   const dispatch = useDispatch();

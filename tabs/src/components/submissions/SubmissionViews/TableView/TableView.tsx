@@ -5,6 +5,9 @@ import { useState } from "react";
 import { useRef } from "react";
 import { useMemo } from "react";
 
+/**
+ * Used to show submissions in a table.
+ */
 export function TableView({ formQuestions, formTitle, submissions }: ViewerProps) {
   const header = useMemo(
     () => ({

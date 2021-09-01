@@ -12,6 +12,9 @@ import { selectIsAzureADAuth, selectJFApiKey } from "rxutils/selectors";
 import { Login } from "@microsoft/mgt-react";
 import useFormList from "hooks/useFormList";
 
+/**
+ * Page used to select a form to share.
+ */
 export default function FormsPage() {
   const { forms, ensureFormContinuity } = useFormList();
   const JFApiKey = useSelector(selectJFApiKey);

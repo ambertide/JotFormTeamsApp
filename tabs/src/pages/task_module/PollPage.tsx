@@ -11,6 +11,9 @@ import { useParams } from "react-router-dom";
 import { getPollQuestions, postSubmissionByProxy } from "api/JFPollApi";
 import { PollURLParams } from "interfaces/PageURLParams";
 
+/**
+ * Page used by external users to answera poll.
+ */
 export default function PollPage() {
   const { uuid, formName } = useParams<PollURLParams>();
   const navigateToSuccess = useNavigation(`/poll/${uuid}/${formName}/submitted/success`);

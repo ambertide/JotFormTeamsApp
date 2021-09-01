@@ -39,10 +39,6 @@ const GenerateQuestionField = (
   }
 };
 
-/**
- * Used by users to answer generated forms. Opened in a task module
- * which is like a modal.
- */
 function PollInner(props: PollProps) {
   const { questions, onSubmit } = props;
   const { isFormValid } = useFormValidation();
@@ -76,6 +72,10 @@ function PollInner(props: PollProps) {
   );
 }
 
+/**
+ * Used by users to answer generated forms. Opened in a task module
+ * which is like a modal.
+ */
 export default function Poll(props: PollProps) {
   const [invalidFields, setInvalidFields] = useState(I.Set<string>());
   return (

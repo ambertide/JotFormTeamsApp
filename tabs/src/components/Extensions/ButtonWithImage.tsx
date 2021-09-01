@@ -16,6 +16,10 @@ interface ButtonWithImageProps {
   onClick: () => void;
 }
 
+/**
+ * A simple extension component used to create buttons with
+ * integrated Icons.
+ */
 export default function ButtonWithImage(props: ButtonWithImageProps) {
   const { icon: Icon, buttonText, onClick } = props;
   return (

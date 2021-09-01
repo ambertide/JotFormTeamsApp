@@ -7,6 +7,9 @@ import { useCallback } from "react";
 import { getPollQuestions } from "api/JFPollApi";
 import { MessageSegment } from "components/Extensions";
 
+/**
+ * Shows the user the status of their submission.
+ */
 export default function SubmittedPage() {
   const { status } = useParams<{ status: "success" | "fail" | "error" }>();
   const { uuid, formName } = useParams<PollURLParams>();

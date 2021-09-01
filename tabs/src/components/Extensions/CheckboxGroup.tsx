@@ -67,6 +67,10 @@ function CheckboxGroupOther(props: {
   );
 }
 
+/**
+ * A group of checkboxes (or possibly toggles) that can also have a custom
+ * other option.
+ */
 export default function CheckboxGroup({
   items,
   onChange,

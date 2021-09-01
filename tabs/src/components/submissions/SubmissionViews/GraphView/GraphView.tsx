@@ -23,6 +23,9 @@ const colours = [
   "#943670",
 ];
 
+/**
+ * Used to show the aggregated submission data as a pie chart.
+ */
 export function GraphView({ formQuestions, distributions, isLoading }: ViewerProps) {
   const [questionID, setQuestionID] = useState(distributions?.keySeq().get(0));
 

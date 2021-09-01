@@ -8,6 +8,9 @@ import { useHistory } from "react-router-dom";
 import { selectJFApiKey } from "rxutils/selectors";
 import { showInfo } from "utils/messaging";
 
+/**
+ * Page used to select a Form to see its submissions.
+ */
 export default function SubmissionSelector() {
   const { forms, ensureFormContinuity } = useFormList();
   const apiKey = useSelector(selectJFApiKey);

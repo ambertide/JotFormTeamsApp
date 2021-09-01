@@ -8,13 +8,25 @@ import "../Components.css";
 type FullNameSubfields = keyof FullNameAnswer;
 
 interface FullNameInputGroupProps {
+  /** If set to true, there will be an input field for middle name. */
   showMiddleName?: boolean;
+  /** If set to true, there will be an input field for suffix. */
   showSuffix?: boolean;
+  /** If set to true, there will be an input field for prefix. */
   showPrefix?: boolean;
+  /**
+   * If given, and showPrefix is also set to true, the prefix field
+   * will consist of given options
+   */
   prefixList?: string[];
+  /** Callback to be called on input change. */
   onChange: (values: FullNameAnswer) => void;
 }
 
+/**
+ * Used to represent JotForm's Full Name widget in the Poll
+ * submission modals.
+ */
 export default function FullNameInputGroup(props: FullNameInputGroupProps) {
   const { showMiddleName, showSuffix, showPrefix, prefixList, onChange } = props;
   const [name, setName] = useState(I.Map<FullNameSubfields, string>());

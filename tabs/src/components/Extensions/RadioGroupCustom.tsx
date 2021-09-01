@@ -29,6 +29,10 @@ interface RadioGroupCustomProps {
   otherText?: string;
 }
 
+/**
+ * A group of radio butons that can also have a custom
+ * other option.
+ */
 export default function RadioGroupCustom(props: RadioGroupCustomProps) {
   const { options, onChangeCallback, qid, questionText, allowOther, otherText = "Other" } = props;
   const [selectableItems, setSelectableItems] = useState<any[]>();

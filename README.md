@@ -1,14 +1,22 @@
-# More Information
+# JotForm Polls for Microsoft Teams
 
-You have a new Teams project scaffolded! To understand more about the structure of the project, you can read the readme files listed below to get further information.
+[![Tests](https://github.com/ambertide/JotFormTeamsApp/actions/workflows/linter.yml/badge.svg)](https://github.com/ambertide/JotFormTeamsApp/actions/workflows/linter.yml)
 
-Microsoft Teams apps bring key information, common tools, and trusted processes to where people increasingly gather, learn, and work.Apps are how you extend Teams to fit your needs. Create something brand new for Teams or integrate an existing app.
+> a Poll is a a sort of form that supports a subset of JotForm’s full features that is easy to create, share and fill.
 
-There are multiple ways to extend Teams, so every app is unique. Some only have one capability, while others have more than one feature to give users various options. For example, your app can display data in a central location, that is, the tab and present that same information through a conversational interface, that is, the bot.
+JotForm Polls is a Microsoft Teams App that supports creating, sharing and viewing Polls. As a tab app, JotForm Polls is a web app built on React and React-Northstar and is embeded as an iframe to a Microsoft Teams Tab and/or to a task module.
 
-[What is Teams app capabilities](https://aka.ms/teamsfx-capabilities-overview)
+## Building
 
-## Capabilities scaffolded in this project
+Due to the nature of the app, you will have to build it twice.
 
-- Tab capabilities: [README](./tabs/README.md)
-- Bot capabilities: [README](./bot/README.md)
+```
+git clone https://github.com/ambertide/JotFormTeamsApp.git
+npm install
+cd tabs
+npm install
+```
+
+Furthermore, you will have to provide your own `.fx` directory.
+
+Keep in mind that this will also install a pre-commit hook that will run tests before committing.

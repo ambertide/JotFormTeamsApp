@@ -19,8 +19,8 @@
     "full": "This field is not used"
   },
   "description": {
-    "short": "An app where you can create polls.",
-    "full": "Create and share easy to use and quick to fill polls using JotForm Polls for Microsoft Teams."
+    "short": "Create and share polls and view your submissions.",
+    "full": "Create and share polls and view your submissions, share existing JotForm forms to your teams without leaving Microsoft Teams."
   },
   "accentColor": "#fa8900",
   "composeExtensions": [],

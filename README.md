@@ -17,6 +17,6 @@ cd tabs
 npm install
 ```
 
-Furthermore, you will have to provide your own `.fx` directory.
+Furthermore, you will have to provide your own `.fx` directory, as well as providing your own client ID in `index.tsx`.
 
 Keep in mind that this will also install a pre-commit hook that will run tests before committing.

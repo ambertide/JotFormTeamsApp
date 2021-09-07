@@ -22,7 +22,7 @@ if (process.env.REACT_APP_MSW === "true") {
 
 TeamsProvider.microsoftTeamsLib = teams;
 const config = {
-  clientId: "f33b568f-ba01-477c-a45a-bac73d5fffa4", //TODO: Possibly hide this.
+  clientId: "CLIENT ID", //TODO: Replace with your client ID for Azure.
   authPopupUrl: "index.html#/auth",
   scopes: [
     "Team.ReadBasic.All",
